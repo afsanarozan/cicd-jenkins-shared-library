@@ -11,6 +11,7 @@ def call() {
 
 def dockerBuild(Map args) {
   sh "docker build -t ${args.registry_url}/${args.image_name}:beta ."
+  sh 'docker images'
 }      
 
 
