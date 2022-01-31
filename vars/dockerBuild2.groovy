@@ -3,12 +3,10 @@ def call() {
   def envar = checkoutTagging()
   def setting = settings()
 
-            stage ("Build Container") {
-                    Container('Docker') {
+                    container('Docker') {
                         sh 'docker images'
                         sh 'docker login -u setting.token_registry -p setting.token_registry https://registry.digitalocean.com'
                         docker.build("setting.url_images_registry/config.service_name:beta")
                     }
-                }
 }
 
