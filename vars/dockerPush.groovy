@@ -6,7 +6,7 @@ def call() {
                     container('docker') {
                         echo "Running Docker Push"
                         docker.withRegistry("https://${setting.url_images_registry}", token_registry) {
-                        dockerPush ( registry_url: setting.url_images_registry, image_name: config.service_name, token: setting.token_registry)
+                        dockerPush(registry_url: setting.url_images_registry, image_name: config.service_name, token: setting.token_registry)
                     }
                 }        
 }
