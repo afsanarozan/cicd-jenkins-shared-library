@@ -14,13 +14,13 @@ def call() {
         envar.branch      = "main"
       }
       break;
-   case 'master': 
+   case 'dev': 
      if (gitlabActionType == 'TAG_PUSH') {
         echo "apalah"
         envar.branch      = env.gitlabSourceBranch
       }
       break;
-    case 'dev':
+    case 'master':
       if (gitlabActionType == 'PUSH') {
         echo "apalah"
         envar.branch      = env.gitlabSourceBranch
