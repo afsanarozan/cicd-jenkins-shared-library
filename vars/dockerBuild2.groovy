@@ -3,7 +3,7 @@ def call() {
   def envar = checkoutTagging()
   def setting = settings()
 
-                    container('Docker') {
+                    container('docker') {
                         sh 'docker images'
                         docker.build("setting.url_images_registry/config.service_name:beta")
                     }
