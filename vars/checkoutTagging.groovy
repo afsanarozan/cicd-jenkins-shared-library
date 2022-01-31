@@ -17,19 +17,19 @@ def call() {
    case 'dev': 
      if (gitlabActionType == 'TAG_PUSH') {
         echo "apalah"
-        envar.branch      = env.gitlabSourceBranch
+        envar.branch      = "dev"
       }
       break;
     case 'master':
       if (gitlabActionType == 'PUSH') {
         echo "apalah"
-        envar.branch      = env.gitlabSourceBranch
+        envar.branch      = "master"
       }
       break; 
     case 'sit':
       if (gitlabActionType == 'MERGE_REQUEST') {
         echo "apalah"
-        envar.branch      = env.gitlabTargetBranch
+        envar.branch      = "sit"
       }
       break; 
   }
