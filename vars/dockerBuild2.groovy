@@ -5,7 +5,7 @@ def call() {
 
                     container('docker') {
                         sh 'docker images'
-                        docker.build("setting.url_images_registry/config.service_name:beta")
+                        docker build -t ${setting.url_images_registry}/${config.service_name}:beta
                     }
 }
 
