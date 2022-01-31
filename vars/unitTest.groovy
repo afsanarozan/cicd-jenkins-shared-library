@@ -1,4 +1,5 @@
 def call() {
+  def envar = checkoutTagging()
   sh 'echo Runnning Unit Testing'
   sh 'ls'
 
