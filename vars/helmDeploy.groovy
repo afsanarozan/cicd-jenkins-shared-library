@@ -2,6 +2,8 @@ def call() {
   def envar = checkoutTagging()
   def setting = settings()
 
+    stage('Deploy to Kubernetes_1') {
+        steps {
             container('base'){
                 withKubeConfig([credentialsId: 'nonprod-cluster'])
                 script {
@@ -11,4 +13,6 @@ def call() {
                     """
                 }
             }        
+         }
+    }
 }
