@@ -3,7 +3,6 @@ def call() {
   def setting = settings()
 
     stage('Deploy to Kubernetes_1') {
-        steps {
             container('base'){
                 withKubeConfig([credentialsId: 'nonprod-cluster'])
                 script {
@@ -14,5 +13,5 @@ def call() {
                 }
             }        
          }
-    }
+    
 }
