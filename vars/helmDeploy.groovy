@@ -2,6 +2,7 @@ def call() {
   def envar = checkoutTagging()
   def setting = settings()
 
+            container('base'){
                 withKubeConfig([credentialsId: 'nonprod-cluster'])
                 script {
                     sh """
@@ -9,4 +10,5 @@ def call() {
                         kubectl get ns
                     """
                 }
+            }        
 }
