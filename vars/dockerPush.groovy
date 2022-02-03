@@ -1,14 +1,14 @@
-def call() {
-  def config = pipelineCfg()
-  def envar = checkoutTagging()
-  def setting = settings()
+def call(Map envar) {
+//   def config = pipelineCfg()
+//   def envar = checkoutTagging()
+//  def setting = settings()
 
                     container('docker') {
                         echo "Running Docker Push"
-                        echo "${setting.url_images_registry}"
-                        docker.withRegistry("https://${setting.url_images_registry}", setting.token) {
-                        echo "${setting.url_images_registry}"
-                        dockerPush(registry_url: setting.url_images_registry, image_name: config.service_name, token: setting.token_registry)
+                        echo "${envar.container_registry}"
+                        docker.withRegistry("https://${envar.container_registry}", token_registry) {
+                        echo "${setting.container_registry}"
+                        dockerPush(registry_url: envar.container_registry, image_name: envar.image_name, token: envar.token_registry)
                     }
                 }        
 }
