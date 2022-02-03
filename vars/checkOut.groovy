@@ -22,9 +22,9 @@ def call(Map args) {
 
     echo "checkout branch ${args.branch}"
     
-    if  (branches == "null") {
-        error "branch is null"
-    }  
+    // if  (args.branch == "null") {
+    //     error "branch is null"
+    // }  
     // branches.add([name: "${envar.branch}"])
     // sh "git config --global pager.branch false"
 
