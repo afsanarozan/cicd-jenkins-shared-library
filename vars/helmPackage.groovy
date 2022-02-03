@@ -4,7 +4,7 @@ def call(Map envar) {
     dir('helm') {
         checkout([$class: 'GitSCM', branches: [[name: "master"]], userRemoteConfigs: [[credentialsId: "6c8b6848-ca10-4862-b1a9-fe3e6d46da61", url: "${envar.helm_git}"]]])
         sh "ls"
-        helmLint(service_name: envar.service_name)
+        //helmLint(service_name: envar.service_name)
         helmPackage(service_name: envar.service_name)
     }
     sh "ls"
