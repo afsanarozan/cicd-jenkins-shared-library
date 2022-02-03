@@ -1,4 +1,4 @@
-def call() {
+def call(Map args) {
 //   def envar = checkoutTagging()
 //   def setting = settings()
     echo "Deploy to kubernetes "
@@ -7,10 +7,10 @@ def call() {
                 withKubeConfig([credentialsId: 'nonprod-cluster']) {
                 script {
                 sh """
-                    kubectl config use-context do-sgp1-labs-nonproduction  
                     kubectl config get-contexts
-                    cd cms-api
-                    helm upgrade cms-api . -f values.yaml -n ajaruji
+                    kubectl config use-context do-sgp1-labs-nonproduction  
+                    cd ${args.service_name}
+                    helm upgrade ${args.service_name} . -f values.yaml -n ${args.name_space}
                 """
                 }
             }
