@@ -1,20 +1,20 @@
 def call(Map envar) {
-    def setting = settings()
+//    def setting = settings()
 
-    if(envar.environment == 'sit' || envar.environment  == 'staging' || envar.environment  == 'production'){
+    //if(envar.environment == 'sit' || envar.environment  == 'staging' || envar.environment  == 'production'){
         container('docker'){
             echo "Running Docker Build"
-            dockerBuild(container_registry: setting.container_registry, image_name: envar.application_name, version: envar.version, build_number: envar.build_number)
-            dockerSave(container_registry: setting.container_registry, image_name: envar.application_name, version: envar.version, build_number: envar.build_number)
+            dockerBuild(container_registry: envar.container_registry, image_name: envar.image_name, version: envar.tag)
+            //dockerSave(container_registry: var.container_registry, image_name: envar.application_name, version: envar.version, build_number: envar.build_number)
         }
 
       //  publishBuildInfo(application_name: envar.application_name, build_number: envar.build_number)
-    }
+    //}
 
 } 
 
 def dockerBuild(Map args) {
-    sh "docker build -t ${args.container_registry}/${args.image_name}:${args.version}-${args.build_number} ."
+    sh "docker build -t ${args.container_registry}/${args.image_name}:${args.version} ."
 }
 
 def dockerSave(Map args) {
