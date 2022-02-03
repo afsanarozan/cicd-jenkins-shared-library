@@ -12,7 +12,7 @@ def call(Map envar) {
 }
 
 def dockerPush(Map args) {
-    sh 'docker push ${args.registry_url}/${args.image_name}:beta'
-    sh 'docker rmi ${args.registry_url}/${args.image_name}:beta'
+    sh "docker push ${args.registry_url}/${args.image_name}:beta"
+    sh "docker rmi ${args.registry_url}/${args.image_name}:beta"
 }
                         
