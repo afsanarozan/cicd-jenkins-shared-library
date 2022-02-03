@@ -7,7 +7,6 @@ def call(Map envar) {
 //     def sonar_src = "${args.sonarSrc}"
 
         echo "${envar.service_name}"
-        echo "${scanEnvar}"
         withSonarQubeEnv(credentialsId: "${envar.credential_sonarqube}", installationName: 'sonarqube') {
                 sonarScanGo(name_space: envar.name_space, service_name: envar.service_name, sonarSrc: envar.sonarSrc)
         }
