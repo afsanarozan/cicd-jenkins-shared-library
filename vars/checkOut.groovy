@@ -16,11 +16,11 @@
 //  [name: '*/development']], 
 //  extensions: [[$class: 'PreBuildMerge', options: [mergeRemote: 'development', mergeTarget: 'main']]],
 //   userRemoteConfigs: [[credentialsId: 'repository-access', url: 'https://gitlab.com/kds-platform/devsecops/golang-apps.git']]])
-def add(branches, credential, url) {
+def call(Map args) {
     // def ext = []
     // def branches = []
 
-    echo "checkout branch ${branches}"
+    echo "checkout branch ${args.branch}"
     
     if  (branches == "null") {
         error "branch is null"
@@ -50,7 +50,7 @@ def add(branches, credential, url) {
     // sh "git --no-pager log --decorate=short --pretty=oneline -n2"
     // //sh "cat pipeline.yaml"
     // sh "cat Jenkinsfile"
-    checkout([$class: 'GitSCM', branches: [[name: "${branches}"]], userRemoteConfigs: [[credentialsId: "${credential}", url: "${url}"]]])
+    checkout([$class: 'GitSCM', branches: [[name: "${args.branch}"]], userRemoteConfigs: [[credentialsId: "${args.credential}", url: "${args.repo_url}"]]])
     sh 'ls'
 }
 
