@@ -1,7 +1,7 @@
 def call() {
 //   def envar = checkoutTagging()
 //   def setting = settings()
-
+    echo "Deploy to kubernetes "
     stage('Deploy to Kubernetes_1') {
             container('base'){
                 withKubeConfig([credentialsId: 'nonprod-cluster'])
