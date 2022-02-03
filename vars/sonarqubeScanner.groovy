@@ -1,7 +1,7 @@
 def call(Map envar) {
     echo "Running Code Review With SonarQube"
-    def scanEnvar = [:]
-    def config = pipelineCfg()
+//     def scanEnvar = [:]
+//     def config = pipelineCfg()
 //     def service_name = "${args.service_name}"
 //     def name_space = "${args.name_space}"
 //     def sonar_src = "${args.sonarSrc}"
