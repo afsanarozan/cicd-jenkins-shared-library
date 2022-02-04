@@ -24,9 +24,10 @@ def call(Map var) {
 
 def helmUpgrade(Map args) {
     sh "ls"
-    sh "cd ${args.service_name}" 
-    sh "ls"
-    sh "helm upgrade ${args.service_name} . -f values.yaml -n ${args.name_space}"
+    sh """
+    cd ${args.service_name}
+    helm upgrade ${args.service_name} . -f values.yaml -n ${args.name_space}
+    """
 }
 
 def helmInstall(Map args) {
