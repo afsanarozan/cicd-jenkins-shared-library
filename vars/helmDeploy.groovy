@@ -15,9 +15,9 @@ def call(Map var) {
                    
                 // }
                     try {
-                        helmUpgrade(service_name: var.service_name, service_name: var.service_name)
+                        helmUpgrade(service_name: var.service_name, name_space: var.name_space)
                     } catch (e) {
-                        helmInstall(service_name: var.service_name, service_name: var.service_name)
+                        helmInstall(service_name: var.service_name, name_space: var.name_space)
                     }
             }
         }
