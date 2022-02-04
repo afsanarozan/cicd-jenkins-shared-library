@@ -1,7 +1,9 @@
 def call(Map var) {
     echo "Job Success"
-    notifications(telegram_url: var.telegram_url, telegram_chatid: var.telegram_chatid, job: var.job, job_numb: var.job_numb, job_url: var.job_url)
-    echo "${env.BUILD_URL}"
+    container('curl'){
+        notifications(telegram_url: var.telegram_url, telegram_chatid: var.telegram_chatid, job: var.job, job_numb: var.job_numb, job_url: var.job_url)
+        echo "${env.BUILD_URL}"
+    }
 }
 
 
