@@ -11,6 +11,7 @@ def call() {
 
   setting.recipient                         = "david.staliat@gmail.com"
   setting.token                             = "token_registry"
+  setting.credential                        = "nonprod-cluster"
 
   return setting
 }
