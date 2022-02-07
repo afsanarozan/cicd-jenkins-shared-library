@@ -13,6 +13,11 @@ public void generalTemplate(body) {
             containerTemplate(name: 'base', image: 'dgrlabs/base-runner:latest', command: 'cat', ttyEnabled: true),
             containerTemplate(name: 'golang', image: 'golang:1.17.0', command: 'cat', ttyEnabled: true),
             containerTemplate(
+              name: 's3cmd', 
+              image: 'd3fk/s3cmd', 
+              command: 'cat', 
+              ttyEnabled: true),
+            containerTemplate(
               name: 'jfrog-go', 
               image: 'releases-docker.jfrog.io/jfrog/jfrog-cli-full-v2', 
               envVars: [ envVar(key: 'JFROG_CLI_LOG_LEVEL', value: 'DEBUG')],

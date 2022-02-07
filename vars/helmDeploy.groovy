@@ -12,11 +12,11 @@ def call(Map var) {
                 """
                    
                 }
-                    try {
-                        helmUpgrade(service_name: var.service_name, name_space: var.name_space)
-                    } catch (e) {
-                        helmInstall(service_name: var.service_name, name_space: var.name_space)
-                    }
+                    // try {
+                    //     helmUpgrade(service_name: var.service_name, name_space: var.name_space)
+                    // } catch (e) {
+                    //     helmInstall(service_name: var.service_name, name_space: var.name_space)
+                    // }
             }
         }
     }       
