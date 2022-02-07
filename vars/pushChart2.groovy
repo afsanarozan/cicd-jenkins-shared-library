@@ -1,5 +1,6 @@
 def call(Map envar) {
     def config = pipelineCfg()
+    def envar = checkoutTagging()
     echo "Running Helm Push"
     
     dir('Charts') {
