@@ -1,12 +1,11 @@
 def call() {
    def config = pipelineCfg()
    def envar = checkoutTagging()
-   def setting = settings()
 
     container('docker') {
         echo "Running Docker Push"
         sh 'docker login registry.digitalocean.com -u d5436ff5c04a514a24a86ac0415b7758a0ee3449835ad496fc516b61b2504f0b -p d5436ff5c04a514a24a86ac0415b7758a0ee3449835ad496fc516b61b2504f0b'
-        dockerPush(registry_url: setting.url_images_registry, image_name: config.service_name)
+        dockerPush(registry_url: config.url_images_registry, image_name: config.service_name)
     }        
 }
 
