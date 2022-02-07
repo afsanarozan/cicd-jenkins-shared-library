@@ -1,6 +1,5 @@
 def call(Map envar) {
     echo "Running Helm Package"
-    echo "${envar.helm_git}"
     container('s3cmd'){
         sh "s3cmd ls"
     }
