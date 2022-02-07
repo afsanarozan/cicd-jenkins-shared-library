@@ -12,7 +12,7 @@ def call() {
   setting.recipient                         = "david.staliat@gmail.com"
   setting.token                             = "token_registry"
   setting.credential                        = "nonprod-cluster"
-  setting.DO_cluster                        = "do-sgp1-labs-nonproduction "
+  setting.DO_nonprod_cluster                = "do-sgp1-labs-nonproduction "
 
   return setting
 }
