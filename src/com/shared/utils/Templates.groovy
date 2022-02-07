@@ -13,10 +13,11 @@ public void generalTemplate(body) {
             containerTemplate(name: 'base', image: 'dgrlabs/base-runner:latest', command: 'cat', ttyEnabled: true),
             containerTemplate(name: 'golang', image: 'golang:1.17.0', command: 'cat', ttyEnabled: true),
             containerTemplate(
-              name: 's3cmd', 
-              image: 'hochzehn/s3cmd', 
-              envVars: [ envVar(key: 'aws_key', value: 'YFRP3PS4LIJEOZVRUMMK'),
-                         envVar(key: 'aws_secret', value: '0s4FQ470cF9AGDg7old5fLyvvhbhnqO99ooruvQdVOs')],
+              name: 'aws-cli', 
+              image: 'mesosphere/aws-cli', 
+              envVars: [ envVar(key: 'AWS_ACCESS_KEY_ID', value: 'YFRP3PS4LIJEOZVRUMMK'),
+                         envVar(key: 'AWS_SECRET_ACCESS_KEY', value: '0s4FQ470cF9AGDg7old5fLyvvhbhnqO99ooruvQdVOs'),
+                         envVar(key: 'AWS_DEFAULT_REGION', value: 'sgp1')],
               command: 'cat', 
               ttyEnabled: true),
             containerTemplate(
