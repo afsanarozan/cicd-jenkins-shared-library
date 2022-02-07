@@ -1,4 +1,4 @@
-def call(Map envar) {
+def call() {
     def config = pipelineCfg()
     def envar = checkoutTagging()
     echo "Running Helm Push"
