@@ -1,11 +1,10 @@
 def call() {
   def config = pipelineCfg()
   def envar = checkoutTagging()
-  def setting = settings()
 
                     container('docker') {
                         echo "Running Docker Build"
-                        dockerBuild(registry_url: setting.url_images_registry, image_name: config.service_name)
+                        dockerBuild(registry_url: config.url_images_registry, image_name: config.service_name)
                     }
 }
 
