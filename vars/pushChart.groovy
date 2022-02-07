@@ -4,10 +4,9 @@ def call(Map envar) {
     dir('Charts') {
         sh "ls"
             container('aws-cli'){
-            sh "aws-cli cms-api-0.1.0.tgz --endpoint-url https://labs-storage.sgp1.digitaloceanspaces.com s3://helm-charts/cms-api-0.1.0.tgz"
+            sh "aws s3 cp cms-api-0.1.0.tgz --endpoint-url https://labs-storage.sgp1.digitaloceanspaces.com s3://helm-charts/cms-api-0.1.0.tgz"
         }
     }
-    sh "ls"
 }
 
 def helmLint(Map args) {
