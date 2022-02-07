@@ -1,6 +1,6 @@
 def call() {
   def config = pipelineCfg()
-  def envar = checkoutCode()
+  def envar = checkoutTagging()
   def setting = settings()
 
 sh "printenv | sort"
@@ -17,9 +17,9 @@ switch(env.BRANCH_NAME) {
 }
 
 container('base'){
-      withKubeConfig([credentialsId: credential]) {
+      withKubeConfig([credentialsId: DOcredential]) {
               sh """
-                   kubectl config use-context ${eks_cluster}
+                   kubectl config use-context ${DO_cluster}
                    kubectl get ns
                """        
         }
