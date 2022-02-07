@@ -1,6 +1,6 @@
-def call() {
+def call(Map envar) {
   def config = pipelineCfg()
-  def envar = checkoutTagging()
+  def setting = checkoutTagging()
 
     echo "Running Code Review With SonarQube"
         echo "${config.service_name}"
