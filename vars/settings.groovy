@@ -16,7 +16,6 @@ def call() {
 
   //tools configuration
   setting.artifactory_url                   = "https://klikdevsecops.jfrog.io"
-  setting.container_registry                = "klikdevsecops.jfrog.io/klik-docker"
   setting.container_registry_url            = "https://klikdevsecops.jfrog.io/klik-docker"
   setting.registry_credential               = "jfrog-credential"
   setting.sonarqube_enterprise_url          = "https://sq.toolchain.klik.digital"
