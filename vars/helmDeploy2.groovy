@@ -1,14 +1,13 @@
 def call() {
   def config = pipelineCfg()
   def envar = checkoutTagging()
-  def setting = settings()
-
+  
 sh "printenv | sort"
 
 switch(env.BRANCH_NAME) {
     case 'master':
-      DOcredential = setting.credential
-      DO_cluster   = setting.DO_nonprod_cluster
+      DOcredential = config.credential
+      DO_cluster   = config.DO_nonprod_cluster
       namespace  = "ehrm"
       break;
     default: 
