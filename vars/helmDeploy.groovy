@@ -8,7 +8,6 @@ def call(Map var) {
                 script {
                 sh """
                     kubectl config get-contexts
-                    cd ${var.service_name}
                 """
                    
                 }
