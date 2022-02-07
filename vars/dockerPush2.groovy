@@ -10,6 +10,7 @@ def call() {
 }
 
 def dockerPush(Map args) {
+    sh "echo ${args.registry_url}"
     sh "docker push ${args.registry_url}/${args.image_name}:beta"
     sh "docker rmi ${args.registry_url}/${args.image_name}:beta"
 }
