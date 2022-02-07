@@ -14,7 +14,9 @@ public void generalTemplate(body) {
             containerTemplate(name: 'golang', image: 'golang:1.17.0', command: 'cat', ttyEnabled: true),
             containerTemplate(
               name: 's3cmd', 
-              image: 'd3fk/s3cmd', 
+              image: 'hochzehn/s3cmd', 
+              envVars: [ envVar(key: 'aws_key', value: 'YFRP3PS4LIJEOZVRUMMK'),
+                         envVar(key: 'aws_secret', value: '0s4FQ470cF9AGDg7old5fLyvvhbhnqO99ooruvQdVOs')],
               command: 'cat', 
               ttyEnabled: true),
             containerTemplate(
