@@ -1,9 +1,6 @@
 def call() {
   def config = pipelineCfg()
-  def setting = settings()
   def envar = [:]
-  def username
-  token = setting.tokenapi
   sh "printenv | sort"
   
   switch(env.BRANCH_NAME) {
