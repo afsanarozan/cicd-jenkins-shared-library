@@ -16,4 +16,13 @@ switch(env.BRANCH_NAME) {
       break;
 }
 
+container('base'){
+      withKubeConfig([credentialsId: credential]) {
+              sh """
+                   kubectl config use-context ${eks_cluster}
+                   kubectl get ns
+               """        
+        }
+    }                       
+}
 
