@@ -1,16 +1,8 @@
 def call(Map envar) {
-    echo "Running Code Review With SonarQube"
-//     def scanEnvar = [:]
-//     def config = pipelineCfg()
-//     def service_name = "${args.service_name}"
-//     def name_space = "${args.name_space}"
-//     def sonar_src = "${args.sonarSrc}"
-
-        echo "${envar.service_name}"
+        echo "Running Code Review With SonarQube"
         withSonarQubeEnv(credentialsId: "${envar.credential_sonarqube}", installationName: 'sonarqube') {
                 sonarScanGo(name_space: envar.name_space, service_name: envar.service_name, sonarSrc: envar.sonarSrc)
         }
-         
 }
 
 def sonarScanGo(Map args){

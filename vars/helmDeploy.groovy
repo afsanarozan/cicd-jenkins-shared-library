@@ -5,24 +5,17 @@ def call(Map var) {
     container('base'){
             dir('helm') {
                 withKubeConfig([credentialsId: 'nonprod-cluster']) {
-                script {
-                sh """
-                    kubectl config get-contexts
-                """
-                   
+                try {
+                    helmUpgrade(service_name: var.service_name, name_space: var.name_space)
+                } catch (e) {
+                    helmInstall(service_name: var.service_name, name_space: var.name_space)
                 }
-                    // try {
-                    //     helmUpgrade(service_name: var.service_name, name_space: var.name_space)
-                    // } catch (e) {
-                    //     helmInstall(service_name: var.service_name, name_space: var.name_space)
-                    // }
             }
         }
     }       
 }
 
 def helmUpgrade(Map args) {
-    sh "ls"
     sh """
     cd ${args.service_name}
     helm upgrade ${args.service_name} . -f values.yaml -n ${args.name_space}
