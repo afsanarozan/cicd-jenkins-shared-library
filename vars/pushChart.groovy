@@ -11,5 +11,5 @@ def call(Map envar) {
 
 def pushChart(Map args) {
     echo "Push Chart"
-    sh "aws s3 cp ${args.service_name}-*.tgz --endpoint-url ${args.spaces_url} s3://helm-charts/beta"
+    sh "aws s3 cp ${args.service_name}-*.tgz --endpoint-url ${args.spaces_url} s3://helm-charts/beta/"
 }
