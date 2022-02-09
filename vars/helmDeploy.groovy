@@ -3,15 +3,15 @@ def call(Map var) {
 //   def setting = settings()
     echo "Deploy to kubernetes "
     container('base'){
-            dir('helm') {
-                withKubeConfig([credentialsId: 'nonprod-cluster']) {
-                try {
-                    helmUpgrade(service_name: var.service_name, name_space: var.name_space)
-                } catch (e) {
-                    helmInstall(service_name: var.service_name, name_space: var.name_space)
+            dir('Charts') {
+                    withKubeConfig([credentialsId: 'nonprod-cluster']) {
+                    try {
+                        helmUpgrade(service_name: var.service_name, name_space: var.name_space)
+                    } catch (e) {
+                        helmInstall(service_name: var.service_name, name_space: var.name_space)
+                    }
                 }
             }
-        }
     }       
 }
 
@@ -23,5 +23,6 @@ def helmUpgrade(Map args) {
 }
 
 def helmInstall(Map args) {
+    sh "cd ${args.service_name}"
     sh "helm install ${args.service_name} . -f values.yaml -n ${args.name_space}"
 }
