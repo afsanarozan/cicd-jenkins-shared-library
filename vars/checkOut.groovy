@@ -22,7 +22,7 @@ def call(Map args) {
     // def branches = []
 
     echo "checkout branch ${config.branch}" 
-    checkout([$class: 'GitSCM', branches: [[name: "${config.branch}"]], userRemoteConfigs: [[credentialsId: "${config.credential}", url: "${config.repo_url}"]]])
+    checkout([$class: 'GitSCM', branches: [[name: "${config.branch}"]], userRemoteConfigs: [[credentialsId: "${config.credential}", url: "https://gitlab.com/kliklab/automation-platform/services-platform/${config.name_space}/${config.repo_name}.git"]]])
     sh 'ls'
 }
 
