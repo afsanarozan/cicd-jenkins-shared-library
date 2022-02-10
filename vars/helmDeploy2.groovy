@@ -4,11 +4,24 @@ def call() {
   
 sh "printenv | sort"
 
-switch(env.BRANCH_NAME) {
-    case 'master':
-      DOcredential = config.credential
-      DO_cluster   = config.DO_nonprod_cluster
+switch(envar.version) {
+    case 'release':
+      DOcredential = config.credential_prod
+      context   = config.DO_production_cluster
       namespace  = "ehrm"
+      env = "release"
+      break;
+    case 'beta':
+      DOcredential = config.credential
+      context   = config.DO_nonprod_cluster
+      namespace  = "ehrm"
+      env = "beta"
+      break;
+    case 'alpha':
+      DOcredential = config.credential_staging
+      context   = config.DO_staging_cluster
+      namespace  = "ehrm"
+      env = "alpha"
       break;
     default: 
       sh "exit 1"
