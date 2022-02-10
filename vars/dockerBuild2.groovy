@@ -1,16 +1,23 @@
 def call() {
   def config = pipelineCfg()
-  def envar = checkoutTagging()
-
+  def envar = checkoutCode()
+  print("ini :" + envar)
+  if(envar.environment == 'dev' || envar.environment  == 'staging' || envar.environment  == 'production'){
                     container('docker') {
                         echo "Running Docker Build"
-                        dockerBuild(registry_url: config.url_images_registry, image_name: config.service_name)
+                        dockerBuild(registry_url: config.url_images_registry, image_name: config.service_name, image_version: envar.version)
                     }
+          }else{
+            skip()
+          }        
 }
 
 def dockerBuild(Map args) {
-  sh "docker build -t ${args.registry_url}/${args.image_name}:beta ."
+  sh "docker build -t ${args.registry_url}/${args.image_name}::${args.image_version} ."
   sh 'docker images'
 }      
 
 
+def skip(){
+    sh "echo '=============== SKIP =============='"
+}
