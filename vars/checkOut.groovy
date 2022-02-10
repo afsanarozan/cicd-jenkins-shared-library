@@ -17,40 +17,12 @@
 //  extensions: [[$class: 'PreBuildMerge', options: [mergeRemote: 'development', mergeTarget: 'main']]],
 //   userRemoteConfigs: [[credentialsId: 'repository-access', url: 'https://gitlab.com/kds-platform/devsecops/golang-apps.git']]])
 def call(Map args) {
+    def config = pipelineCfg()
     // def ext = []
     // def branches = []
 
-    echo "checkout branch ${args.branch}"
-    
-    // if  (args.branch == "null") {
-    //     error "branch is null"
-    // }  
-    // branches.add([name: "${envar.branch}"])
-    // sh "git config --global pager.branch false"
-
-    // echo "target branch ${envar.target_branch}"
-    //  if  ((envar.target_branch != "null") && (envar.target_branch != envar.branch))  {
-        
-    //     branches.add([name: "${envar.target_branch}"])
-    //     ext.add(['$class': 'PreBuildMerge', options: [mergeRemote: "origin", mergeTarget: "${envar.branch}"]])
-
-    //     sh "git config --global user.email ${env.gitlabUserEmail}"
-    //     sh "git config --global user.name ${env.gitlabUserName}"
-    // }  
-
-    // checkout changelog: true, poll: true, scm: [
-    //   $class: 'GitSCM',
-    //   branches: branches,
-    //   extensions: ext,
-    //   userRemoteConfigs: [[credentialsId: 'gitlab-auth-token', url: "${envar.git_url}"]]
-    // ]
-    // sh "git config --global pager.branch false"
-    // sh "git branch"
-    // sh "git status"
-    // sh "git --no-pager log --decorate=short --pretty=oneline -n2"
-    // //sh "cat pipeline.yaml"
-    // sh "cat Jenkinsfile"
-    checkout([$class: 'GitSCM', branches: [[name: "${args.branch}"]], userRemoteConfigs: [[credentialsId: "${args.credential}", url: "${args.repo_url}"]]])
+    echo "checkout branch ${config.branch}" 
+    checkout([$class: 'GitSCM', branches: [[name: "${config.branch}"]], userRemoteConfigs: [[credentialsId: "${config.credential}", url: "${config.repo_url}"]]])
     sh 'ls'
 }
 

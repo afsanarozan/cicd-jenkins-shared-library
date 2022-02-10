@@ -1,7 +1,4 @@
 def call(Map envar) {
-//   def config = pipelineCfg()
-//   def envar = checkoutTagging()
-//  def setting = settings()
     container('docker') {
         echo "Running Docker Push"
         echo "${envar.container_registry}"
