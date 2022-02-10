@@ -1,10 +1,11 @@
 def call(Map envar) {
+    def config = pipelineCfg()
     echo "Running Helm Push"
     
     dir('Charts') {
         sh "ls"
             container('aws-cli'){
-            pushChart(service_name: envar.service_name, spaces_url: envar.spaces_url)
+            pushChart(service_name: config.service_name, spaces_url: config.spaces_url)
         }
     }
 }
