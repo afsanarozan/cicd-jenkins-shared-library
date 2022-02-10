@@ -2,7 +2,7 @@ def call(Map var) {
     def config = pipelineCfg()
     echo "Job Success"
     container('curl'){
-        notifications(telegram_url: config.telegram_url, telegram_chatid: config.telegram_chatid, job: config.job, job_numb: config.job_numb, job_url: config.job_url, job_status: config.job_status)
+        notifications(telegram_url: config.telegram_url, telegram_chatid: config.telegram_chatid, job: env.JOB_NAME, job_numb: env.JOB_NUMB, job_url: env.BUILD_URL, job_status: config.job_status)
         echo "${env.BUILD_URL}"
     }
 }

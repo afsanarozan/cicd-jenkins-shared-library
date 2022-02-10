@@ -1,6 +1,7 @@
 def call(Map var) {
 //   def envar = checkoutTagging()
 //   def setting = settings()
+    def config = pipelineCfg()
     echo "Deploy to kubernetes "
     container('base'){
             dir('Charts') {
