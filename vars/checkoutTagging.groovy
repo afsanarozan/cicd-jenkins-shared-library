@@ -22,6 +22,12 @@ def call() {
         echo "apalah"
         envar.branch      = "master"
       }
+      break;
+    case 'features1':
+      if (gitlabActionType == 'PUSH') {
+        echo "apalah"
+        envar.branch      = "features1"
+      }
       break; 
     case 'sit':
       if (gitlabActionType == 'MERGE_REQUEST') {
