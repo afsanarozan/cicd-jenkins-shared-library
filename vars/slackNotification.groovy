@@ -1,11 +1,3 @@
-credentials:
-  system:
-    domainCredentials:
-      - credentials:
-          - string:
-              scope: GLOBAL
-              id: jenkins-slack-integration
-
 unclassified:
   slackNotifier:
     teamDomain: jenkins # i.e. your-company (just the workspace name not the full url)
