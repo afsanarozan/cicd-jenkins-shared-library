@@ -1,8 +1,3 @@
-unclassified:
-  slackNotifier:
-    teamDomain: jenkins # i.e. your-company (just the workspace name not the full url)
-    tokenCredentialId: hYwdoJ8mV4NnspZScZgp1Jge
-
 def call(String buildResult) {
   if ( buildResult == "SUCCESS" ) {
     def slackResponse = slackSend(channel: "jenkins")
