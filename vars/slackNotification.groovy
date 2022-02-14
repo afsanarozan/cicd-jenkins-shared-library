@@ -4,6 +4,7 @@ def COLOR_MAP = [
 ]
 def doError = "0"
 
+def slackNotification.call(){
     if (doError == '1'){
         sh """
         echo "Failure :("
@@ -21,3 +22,4 @@ def doError = "0"
                 message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
         """
     }
+}
