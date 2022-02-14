@@ -30,7 +30,7 @@ def call() {
                     try{
                         junit './report.xml'
                     } catch(e) {
-                        sh "skipp"
+                        echo "skipp"
                     }
                 }
                 if(sts == 1){
