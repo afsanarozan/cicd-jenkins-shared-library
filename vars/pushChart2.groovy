@@ -1,22 +1,17 @@
 def call(Map envar) {
     def config = pipelineCfg()
-    def setting = checkoutTagging()
+    def setting = checkoutCode()
     echo "Running Helm Push"
     
     dir('Charts') {
         sh "ls"
             container('aws-cli'){
-            sh "aws s3 cp cms-api-0.1.0.tgz --endpoint-url https://labs-storage.sgp1.digitaloceanspaces.com s3://helm-charts/cms-api-0.1.0.tgz"
+            pushChart(service_name: config.service_name, spaces_url: config.spaces_url)
         }
     }
 }
 
-def helmLint(Map args) {
-    echo "Running helm lint"
-    sh "helm lint ${args.service_name}"
-}
-
-def helmPackage(Map args) {
-    echo "Running Helm Package"
-    sh "helm package ${args.service_name}"
+def pushChart(Map args) {
+    echo "Push Chart"
+    sh "aws s3 cp ${args.service_name}-*.tgz --endpoint-url ${args.spaces_url} s3://helm-charts/ajaruji/beta/"
 }
