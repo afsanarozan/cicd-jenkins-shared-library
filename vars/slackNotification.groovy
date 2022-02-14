@@ -4,6 +4,7 @@ def COLOR_MAP = [
     'FAILURE': 'danger',
 ]
 def doError = "0"
+channel = channel ?: '#jenkins'
 
     if (doError == '1'){
         sh """
