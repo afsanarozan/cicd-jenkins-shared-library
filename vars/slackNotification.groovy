@@ -9,16 +9,16 @@ def doError = "0"
         sh """
         echo "Failure :("
         error "Test failed on purpose, doError == str(1)"
-        slackSend(channel: channel,
+        slackSend channel: channel,
             color: COLOR_MAP[currentBuild.currentResult],
-                message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}")
+                message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
         """
     }else if (doError == '0'){
         sh """
         echo "Succes :"
-        slackSend(channel: channel,
+        slackSend channel: channel,
             color: COLOR_MAP[currentBuild.currentResult],
-                message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}")
+                message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
         """
     }
 }
