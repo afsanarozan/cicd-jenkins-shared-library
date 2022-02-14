@@ -6,7 +6,7 @@ def call() {
   switch(env.BRANCH_NAME) {
   
     case 'staging':
-      if (env.gitlabActionType == 'NOTE' && env.gitlabTriggerPhrase == 'approved' ) {
+      if (gitlabActionType == 'PUSH') {
         envar.branch      = "staging"
         envar.environment = 'staging'
         envar.version     = "beta"
