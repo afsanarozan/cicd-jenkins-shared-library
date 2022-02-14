@@ -1,10 +1,10 @@
+def call(){
 def COLOR_MAP = [
     'SUCCESS': 'good', 
     'FAILURE': 'danger',
 ]
 def doError = "0"
 
-def slackNotification.call(){
     if (doError == '1'){
         sh """
         echo "Failure :("
