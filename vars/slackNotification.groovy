@@ -16,7 +16,6 @@ def doError = "0"
     }else if (doError == '0'){
         sh """
         echo "Succes :"
-        error "Test failed on purpose, doError == str(1)"
         slackSend channel: '#jenkins',
             color: COLOR_MAP[currentBuild.currentResult],
                 message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
