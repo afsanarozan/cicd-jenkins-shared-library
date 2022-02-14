@@ -15,7 +15,7 @@ def call() {
                     returnStatus: true, 
                     script: '''
                     export PATH=$PATH:$(go env GOPATH)/bin
-                    CGO_ENABLED=0 go test ./... -v -coverprofile coverage.out 2>&1 | \
+                    CGO_ENABLED=0 go test . -v -coverprofile coverage.out 2>&1 | \
                         go-junit-report -set-exit-code > ./report.xml
                     echo $?
                     '''
