@@ -20,6 +20,7 @@ def call() {
                     echo $?
                     '''
                 )
+                sh "touch coverage.out"
                 sh "go tool cover -func coverage.out"
                 echo sts.toString()
             }
