@@ -51,6 +51,8 @@ def goEnv() {
         rm -rf cover.out
         rm -rf cover
 
+        go mod tidy -v
+
         export PATH=$PATH:$(go env GOPATH)/bin
         '''
     )
