@@ -11,6 +11,7 @@ def call() {
 
         def sts = 1
             try {
+                sh "CGO_ENABLED=0 go test . -v -coverprofile coverage.out"
                 sts = sh (
                     returnStatus: true, 
                     script: '''
