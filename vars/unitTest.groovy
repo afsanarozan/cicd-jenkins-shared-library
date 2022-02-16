@@ -11,22 +11,20 @@ def call() {
 
         def sts = 0
             try {
-                withKubeConfig([credentialsId: 'nonprod-cluster']) {
-                    sts = sh (
-                        returnStatus: true, 
-                        script: '''
-                        export PATH=$PATH:$(go env GOPATH)/bin
-                        CGO_ENABLED=0 go test . -v -coverprofile coverage.out 2>&1 | \
-                            go-junit-report -set-exit-code > ./report.xml
-                        echo $?
-                        '''
-                    )
-                    // sh "touch coverage.out"
-                    sh "cat report.xml"
-                    sh "cat coverage.out"
-                    sh "go tool cover -func coverage.out"
-                    echo sts.toString()
-                }
+                sts = sh (
+                    returnStatus: true, 
+                    script: '''
+                    export PATH=$PATH:$(go env GOPATH)/bin
+                    CGO_ENABLED=0 go test . -v -coverprofile coverage.out 2>&1 | \
+                        go-junit-report -set-exit-code > ./report.xml
+                    echo $?
+                    '''
+                )
+                // sh "touch coverage.out"
+                sh "cat report.xml"
+                sh "cat coverage.out"
+                sh "go tool cover -func coverage.out"
+                echo sts.toString()
             }
 
             // finally{
@@ -43,7 +41,7 @@ def call() {
             // }
 
             def unitTestGetValue = sh(returnStdout: true, script: 'go tool cover -func=coverage.out | grep total | sed "s/[[:blank:]]*$//;s/.*[[:blank:]]//"')
-            unitTest_score_controller = "Your score in directory controller is ${unitTestGetValue}"
+            def unitTest_score_controller = "Your score in directory controller is ${unitTestGetValue}"
             echo "${unitTest_score_controller}"
 
         }
