@@ -11,11 +11,8 @@ def call() {
 
         def sts = 1
             try {
-                container('kubectl'){
-                    withKubeConfig([credentialsId: 'nonprod-cluster']) {
-                        sh "kubectl config get-contexts"
-                        sh "CGO_ENABLED=0 go test . -v -coverprofile coverage.out"
-                    }
+                withKubeConfig([credentialsId: 'nonprod-cluster']) {
+                    sh "kubectl config get-contexts"
                 }
                 sts = sh (
                     returnStatus: true, 
