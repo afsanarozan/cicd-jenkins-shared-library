@@ -9,7 +9,7 @@ def call() {
         sh 'go version'
         goEnv()
 
-        def sts = 1
+        def sts = 0
             try {
                 withKubeConfig([credentialsId: 'nonprod-cluster']) {
                     sts = sh (
@@ -33,7 +33,6 @@ def call() {
                     try{
                         junit './report.xml'
                     } catch(e) {
-                        echo "skipp"
                     }
                 }
                 if(sts == 1){
