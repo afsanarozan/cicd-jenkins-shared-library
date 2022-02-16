@@ -29,18 +29,23 @@ def call() {
                 }
             }
 
-            finally{
-                if (fileExists('./report.xml')) { 
-                    echo 'junit report'
-                    try{
-                        junit './report.xml'
-                    } catch(e) {
-                    }
-                }
-                if(sts == 1){
-                    error('Unit testing Fail!!!!')
-                }
-            }
+            // finally{
+            //    if (fileExists('./report.xml')) { 
+            //        echo 'junit report'
+            //        try{
+            //            junit './report.xml'
+            //        } catch(e) {
+            //        }
+            //    }
+            //    if(sts == 1){
+            //        error('Unit testing Fail!!!!')
+            //    }
+            // }
+
+            def unitTestGetValue = sh(returnStdout: true, script: 'go tool cover -func=coverage.out | grep total | sed "s/[[:blank:]]*$//;s/.*[[:blank:]]//"')
+            unitTest_score_controller = "Your score in directory controller is ${unitTestGetValue}"
+            echo "${unitTest_score_controller}"
+
         }
 }
 
