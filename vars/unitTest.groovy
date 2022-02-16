@@ -12,20 +12,19 @@ def call() {
         def sts = 1
             try {
                 withKubeConfig([credentialsId: 'nonprod-cluster']) {
-                    sh "kubectl config get-contexts"
+                    sts = sh (
+                        returnStatus: true, 
+                        script: '''
+                        export PATH=$PATH:$(go env GOPATH)/bin
+                        CGO_ENABLED=0 go test . -v -coverprofile coverage.out 2>&1 | \
+                            go-junit-report -set-exit-code > ./report.xml
+                        echo $?
+                        '''
+                    )
+                    // sh "touch coverage.out"
+                    sh "go tool cover -func coverage.out"
+                    echo sts.toString()
                 }
-                sts = sh (
-                    returnStatus: true, 
-                    script: '''
-                    export PATH=$PATH:$(go env GOPATH)/bin
-                    CGO_ENABLED=0 go test . -v -coverprofile coverage.out 2>&1 | \
-                        go-junit-report -set-exit-code > ./report.xml
-                    echo $?
-                    '''
-                )
-                // sh "touch coverage.out"
-                sh "go tool cover -func coverage.out"
-                echo sts.toString()
             }
 
             finally{
