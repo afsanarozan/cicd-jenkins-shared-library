@@ -41,9 +41,9 @@ def call() {
              }
 
              def unitTestGetValue = sh(returnStdout: true, script: 'go tool cover -func=coverage.out | grep total | sed "s/[[:blank:]]*$//;s/.*[[:blank:]]//"')
-             def unitTest_score   = "Your score in directory controller is ${unitTestGetValue}"
+             def unitTest_score   = "Your score in ${config.name_space}/${config.image_name} is ${unitTestGetValue}"
              echo "${unitTest_score}"
-             export unitTest_score=${unitTest_score}
+             sh "export unitTest_score=${unitTest_score}"
         }
 }
 
