@@ -44,7 +44,7 @@ def call() {
              def unitTest_score   = "Your score is ${unitTestGetValue}"
              echo "${unitTest_score}"
              sh ''' 
-                export unitTest_score="${unitTest_score}"
+                export test_score="${unitTest_score}"
              '''
         }
 }
