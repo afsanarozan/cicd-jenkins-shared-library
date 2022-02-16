@@ -40,9 +40,9 @@ def call() {
             //    }
             // }
 
-            def unitTestGetValue = sh(returnStdout: true, script: 'go tool cover -func=coverage.out | grep total | sed "s/[[:blank:]]*$//;s/.*[[:blank:]]//"')
-            def unitTest_score_controller = "Your score in directory controller is ${unitTestGetValue}"
-            echo "${unitTest_score_controller}"
+            // def unitTestGetValue = sh(returnStdout: true, script: 'go tool cover -func=coverage.out | grep total | sed "s/[[:blank:]]*$//;s/.*[[:blank:]]//"')
+            // def unitTest_score_controller = "Your score in directory controller is ${unitTestGetValue}"
+            // echo "${unitTest_score_controller}"
 
         }
 }
