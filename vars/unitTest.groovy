@@ -45,6 +45,7 @@ def call() {
              echo "${unitTest_score}"
              sh ''' 
                 export test_score="${unitTest_score}"
+                echo ${test_score}
              '''
         }
 }
