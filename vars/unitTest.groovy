@@ -53,11 +53,15 @@ def goEnv() {
         rm -rf coverage.out
         rm -rf cover
 
-        go mod tidy -v
-        go get -u golang.org/x/lint/golint
-        go get -u github.com/jstemmer/go-junit-report
-
         export PATH=$PATH:$(go env GOPATH)/bin
+
+        go mod tidy -v
+
+        go get -u golang.org/x/lint/golint
+        golint -set_exit_status ./controller/...
+        
+        go get -u github.com/jstemmer/go-junit-report
+        go clean -testcache
         '''
     )
 }
