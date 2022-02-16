@@ -9,7 +9,7 @@ def call() {
         sh 'go version'
         goEnv()
 
-        def sts = 0
+        def sts = 1
             try {
                 sts = sh (
                     returnStatus: true, 
@@ -35,7 +35,7 @@ def call() {
                     } catch(e) {
                     }
                 }
-                if(sts == 1){
+                if(sts == 2){
                     error('Unit testing Fail!!!!')
                 }
              }
