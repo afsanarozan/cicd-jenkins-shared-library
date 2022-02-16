@@ -11,8 +11,11 @@ def call() {
 
         def sts = 1
             try {
-                withKubeConfig([credentialsId: 'nonprod-cluster']) {
-                    sh "CGO_ENABLED=0 go test . -v -coverprofile coverage.out"
+                container('base'){
+                    withKubeConfig([credentialsId: 'nonprod-cluster']) {
+                        sh "kubectl config get-contexts"
+                        sh "CGO_ENABLED=0 go test . -v -coverprofile coverage.out"
+                    }
                 }
                 sts = sh (
                     returnStatus: true, 
@@ -51,9 +54,12 @@ def goEnv() {
 
         rm -rf report.xml
         rm -rf cover.out
+        rm -rf coverage.out
         rm -rf cover
 
         go mod tidy -v
+        go get -u golang.org/x/lint/golint
+        go get -u github.com/jstemmer/go-junit-report
 
         export PATH=$PATH:$(go env GOPATH)/bin
         '''
