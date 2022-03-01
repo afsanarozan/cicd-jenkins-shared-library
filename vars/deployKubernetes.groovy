@@ -4,9 +4,9 @@ def call(Map var) {
     container('base'){
             withKubeConfig([credentialsId: 'nonprod-cluster']) {
             try {
-                kubectlApply(service_name: config.service_name, name_space: config.name_space)
+                kubectlInstall(service_name: config.service_name, name_space: config.name_space)
             } catch (e) {
-                helmInstall(service_name: config.service_name, name_space: config.name_space)
+                kubectlApply(service_name: config.service_name, name_space: config.name_space)
             }
         }
     }       
