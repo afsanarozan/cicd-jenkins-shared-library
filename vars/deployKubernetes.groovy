@@ -14,11 +14,10 @@ def call(Map var) {
 
 def kubectlApply(Map args) {
     sh """
-    kubectl apply -f Deployment/ -n testing
+    kubectl apply -f Deployment/ -n ${args.name_space}
     """
 }
 
-def helmInstall(Map args) {
-    sh "cd ${args.service_name}"
-    sh "helm install ${args.service_name} . -f values.yaml -n ${args.name_space}"
+def kubectlInstall(Map args) {
+    sh "kubectl install -f Deployment/ -n ${args.name_space}"
 }
