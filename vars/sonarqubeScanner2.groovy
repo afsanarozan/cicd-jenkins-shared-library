@@ -16,14 +16,9 @@ def sonarScanGo(Map args){
         -Dsonar.sources=${args.sonarSrc} \
         -Dsonar.qualitygate.wait=true \
         -Dsonar.language=go \
-        -Dsonar.go.file.suffixes=.go \
         -Dsonar.tests=. \
         -Dsonar.test.inclusions=**/**_test.go \
-        -Dsonar.test.exclusions=**/vendor/** \
         -Dsonar.sources.inclusions=**/**.go \
-        -Dsonar.exclusions=**/**.xml \
-        -Dsonar.go.exclusions=**/*_test.go,**/vendor/**,**/testdata \
-        -Dsonar.tests.reportPaths=report-tests.out \
-        -Dsonar.go.govet.reportPaths=report-vet.out \
+        -Dsonar.exclusions=**/**.xml, **/*_test.go \
         -Dsonar.go.coverage.reportPaths=coverage.out"
 }
