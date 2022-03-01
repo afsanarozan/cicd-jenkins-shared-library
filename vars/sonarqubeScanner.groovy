@@ -2,7 +2,7 @@ def call(Map envar) {
 def config = pipelineCfg()
         container('sonarscanner'){
         echo "Running Code Review With SonarQube"
-                withSonarQubeEnv(credentialsId: "${config.credential_sonarqube}", installationName: 'sonarqube') {
+                withSonarQubeEnv(credentialsId: "sonarqube-token", installationName: 'sonarqube') {
                 sonarScanGo(name_space: config.name_space, service_name: config.service_name, sonarSrc: config.sonarSrc)
                 }       
         }
@@ -14,14 +14,9 @@ def sonarScanGo(Map args){
         -Dsonar.sources=${args.sonarSrc} \
         -Dsonar.qualitygate.wait=true \
         -Dsonar.language=go \
-        -Dsonar.go.file.suffixes=.go \
         -Dsonar.tests=. \
         -Dsonar.test.inclusions=**/**_test.go \
-        -Dsonar.test.exclusions=**/vendor/** \
         -Dsonar.sources.inclusions=**/**.go \
-        -Dsonar.exclusions=**/**.xml \
-        -Dsonar.go.exclusions=**/*_test.go,**/vendor/**,**/testdata \
-        -Dsonar.tests.reportPaths=report-tests.out \
-        -Dsonar.go.govet.reportPaths=report-vet.out \
-        -Dsonar.go.coverage.reportPaths=coverage.out"
+        -Dsonar.exclusions=**/**.xml, **/*_test.go \
+        -Dsonar.go.coverage.reportPaths=coverage.out
 }
