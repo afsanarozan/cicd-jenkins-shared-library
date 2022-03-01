@@ -4,7 +4,7 @@ def call(Map envar) {
 
     echo "Running Code Review With SonarQube"
         echo "${config.service_name}"
-        withSonarQubeEnv(credentialsId: "${config.credential_sonarqube}", installationName: 'sonarqube') {
+        withSonarQubeEnv(credentialsId: "sonarqube-token", installationName: 'sonarqube') {
                 sonarScanGo(name_space: config.name_space, service_name: config.service_name, sonarSrc: config.sonarSrc)
         }
          
