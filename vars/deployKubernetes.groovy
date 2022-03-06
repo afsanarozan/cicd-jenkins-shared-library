@@ -17,7 +17,3 @@ def kubectlApply(Map args) {
     kubectl apply -f Deployment/ -n ${args.name_space}
     """
 }
-
-/**def kubectlInstall(Map args) {
-    sh "kubectl install -f Deployment/ -n ${args.name_space}"
-}*/
