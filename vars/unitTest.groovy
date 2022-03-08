@@ -62,10 +62,8 @@ def goEnv() {
 
         export PATH=$PATH:$(go env GOPATH)/bin
 
-        go mod tidy -v
 
         go get -u golang.org/x/lint/golint
-        golint -set_exit_status ./controller/...
         
         go get -u github.com/jstemmer/go-junit-report
         go clean -testcache
