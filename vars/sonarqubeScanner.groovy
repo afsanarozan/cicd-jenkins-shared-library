@@ -2,7 +2,7 @@ def call(Map envar) {
 def config = pipelineCfg()
         container('sonarscanner'){
         echo "Running Code Review With SonarQube"
-                withSonarQubeEnv(credentialsId: "sonarqube-token", installationName: 'sonarqube-ee') {
+                withSonarQubeEnv(credentialsId: "sonarqube-ee-token", installationName: 'sonarqube-ee') {
                 sonarScanGo(name_space: config.name_space, service_name: config.service_name, sonarSrc: config.sonarSrc)
                 }       
         }
