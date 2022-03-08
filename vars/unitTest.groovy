@@ -3,6 +3,7 @@ def call() {
 //  def envar = checkoutTagging()
   sh 'echo Runnning Unit Testing'
   sh 'ls'
+  checkout([$class: 'GitSCM', branches: [[name: "${config.branch}"]], userRemoteConfigs: [[credentialsId: "${config.credential}", url: "https://gitlab.com/kliklab/api-management-platform/api-gateway/reporting-service"]]])
 
   def root = tool type: 'go', name: 'Go'
   withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
