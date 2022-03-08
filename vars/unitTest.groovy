@@ -22,7 +22,7 @@ def call() {
                 )
                 // sh "touch coverage.out"
                 sh "cat report.xml"
-                sh "cat coverage.out"
+                sh "ls"
                 sh "go tool cover -func=coverage.out"
                 echo sts.toString()
             }
