@@ -8,7 +8,6 @@ def call() {
   withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
         sh 'go version'
         goEnv()
-        sh 'go test ./... -v -coverprofile coverage.out'
         def sts = 1
             try {
                 sts = sh (
@@ -58,6 +57,7 @@ def goEnv() {
 
         export PATH=$PATH:$(go env GOPATH)/bin
         git config --global url."https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kds-platform/plugin.git".insteadOf "https://gitlab.com/kds-platform/plugin.git"
+        
         go mod tidy -v
         
         go clean -testcache
