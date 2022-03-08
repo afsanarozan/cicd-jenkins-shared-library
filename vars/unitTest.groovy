@@ -61,9 +61,6 @@ def goEnv() {
         rm -rf cover
 
         export PATH=$PATH:$(go env GOPATH)/bin
-
-        
-        go get -u github.com/jstemmer/go-junit-report
         go clean -testcache
         '''
     )
