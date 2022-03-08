@@ -58,7 +58,7 @@ def goEnv() {
 
         export PATH=$PATH:$(go env GOPATH)/bin
         
-        sudo apt install golint
+        apt install golint
         go get -u golang.org/x/lint/golint
         golint -set_exit_status ./...
         
