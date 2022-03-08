@@ -57,6 +57,8 @@ def goEnv() {
         rm -rf cover
 
         export PATH=$PATH:$(go env GOPATH)/bin
+
+        go mod tidy -v
         
         go clean -testcache
         '''
