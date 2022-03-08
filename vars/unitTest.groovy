@@ -57,7 +57,7 @@ def goEnv() {
         rm -rf cover
 
         export PATH=$PATH:$(go env GOPATH)/bin
-
+        git config --global url."https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kds-platform/plugin.git".insteadOf "https://gitlab.com/kds-platform/plugin.git"
         go mod tidy -v
         
         go clean -testcache
