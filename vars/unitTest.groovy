@@ -8,7 +8,7 @@ def call() {
   withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
         sh 'go version'
         goEnv()
-
+        sh 'go test ./... -v -coverprofile coverage.out'
         def sts = 1
             try {
                 sts = sh (
