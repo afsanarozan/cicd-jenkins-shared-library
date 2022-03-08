@@ -15,7 +15,7 @@ def call() {
                     returnStatus: true, 
                     script: '''
                     export PATH=$PATH:$(go env GOPATH)/bin
-                    CGO_ENABLED=0 go test . -v -coverprofile coverage.out 2>&1 | \
+                    CGO_ENABLED=0 go test ./... -v -coverprofile coverage.out 2>&1 | \
                         go-junit-report -set-exit-code > ./report.xml
                     echo $?
                     '''
@@ -61,7 +61,7 @@ def goEnv() {
         rm -rf cover
 
         export PATH=$PATH:$(go env GOPATH)/bin
-        
+
         git config --global url."https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kds-platform/plugin.git".insteadOf "https://gitlab.com/kds-platform/plugin.git"
 
         go mod tidy -v
