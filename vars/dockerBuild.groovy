@@ -7,7 +7,6 @@ def call(Map envar) {
 } 
 
 def dockerBuild(Map args) {
-    sh "cat config.yaml"
     sh "docker build -t ${args.container_registry}/${args.image_name}:${args.version} ."
 }
 
