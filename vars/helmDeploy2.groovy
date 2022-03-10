@@ -8,19 +8,19 @@ switch(envar.version) {
     case 'release':
       DOcredential = config.credential_prod
       context   = config.DO_production_cluster
-      namespace  = "ehrm"
+      namespace  = config.name_space_prod
       env = "release"
       break;
     case 'beta':
       DOcredential = config.credential
       context   = config.DO_nonprod_cluster
-      namespace  = "ehrm"
+      namespace  = config.name_staging
       env = "beta"
       break;
     case 'alpha':
-      DOcredential = config.credential_staging
-      context   = config.DO_staging_cluster
-      namespace  = "ehrm"
+      DOcredential = config.credential
+      context   = config.DO_nonprod_cluster
+      namespace  = config.name_space_sit
       env = "alpha"
       break;
     default: 
@@ -30,7 +30,7 @@ switch(envar.version) {
 
 container('base'){
             dir('Charts') {
-                    withKubeConfig([credentialsId: 'nonprod-cluster']) {
+                    withKubeConfig([credentialsId: DOcredential]) {
                     try {
                         helmUpgrade(service_name: config.service_name, name_space: config.name_space)
                     } catch (e) {
