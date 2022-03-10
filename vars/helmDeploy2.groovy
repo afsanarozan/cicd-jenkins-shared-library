@@ -43,14 +43,14 @@ container('base'){
 
 def helmUpgrade(Map args) {
     sh """
-    cd ${args.service_name}/Charts/${args.service_name}
+    cd ${args.service_name}
     ls
 //    helm upgrade ${args.service_name} . -f values.yaml -n ${args.name_space}
     """
 }
 
 def helmInstall(Map args) {
-    sh "cd ${args.service_name}/Charts/${args.service_name}"
+    sh "cd ${args.service_name}"
     sh "ls"
 //    sh "helm install ${args.service_name} . -f values.yaml -n ${args.name_space}"
 }
