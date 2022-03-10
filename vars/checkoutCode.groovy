@@ -5,21 +5,21 @@ def call() {
   
   switch(env.BRANCH_NAME) {
   
-    case 'staging':
-      if (gitlabActionType == 'PUSH') {
-        envar.branch      = "staging"
+    case 'main':
+      if (env.gitlabActionType == 'NOTE' && env.gitlabTriggerPhrase == 'approved' ) {
+        envar.branch      = "main"
         envar.environment = 'staging'
         envar.version     = "beta"
       }
       break;
-   case 'master': 
-     if (gitlabActionType == 'TAG_PUSH') {
+    case 'main': 
+      if (gitlabActionType == 'TAG_PUSH') {
         envar.branch      = "master"
         envar.environment = 'production'
         envar.version     = "release"
       }
       break;
-    case 'dev':
+    case 'development':
       if (gitlabActionType == 'PUSH') {
         envar.branch      = "dev"
         envar.environment = 'dev'
