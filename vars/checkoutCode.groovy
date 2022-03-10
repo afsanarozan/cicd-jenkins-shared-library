@@ -21,7 +21,7 @@ def call() {
       break;
     case 'development':
       if (gitlabActionType == 'PUSH') {
-        envar.branch      = "dev"
+        envar.branch      = "development"
         envar.environment = 'dev'
         envar.version     = "alpha"
       }
