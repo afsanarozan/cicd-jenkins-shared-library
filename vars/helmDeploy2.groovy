@@ -51,7 +51,7 @@ def helmUpgrade(Map args) {
 
 def helmInstall(Map args) {
     sh """
-    cd ${args.service_name}"
+    cd ${args.service_name}
     ls
     helm install ${args.service_name} . -f values.yaml -n ${args.name_space}
     """
