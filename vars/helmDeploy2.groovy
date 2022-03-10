@@ -1,4 +1,4 @@
-def call() {
+ def call() {
   def config = pipelineCfg()
   def envar = checkoutCode()
   
@@ -44,13 +44,15 @@ container('base'){
 def helmUpgrade(Map args) {
     sh """
     cd ${args.service_name}/Charts/${args.service_name}
-    helm upgrade ${args.service_name} . -f values.yaml -n ${args.name_space}
+    ls
+//    helm upgrade ${args.service_name} . -f values.yaml -n ${args.name_space}
     """
 }
 
 def helmInstall(Map args) {
     sh "cd ${args.service_name}/Charts/${args.service_name}"
-    sh "helm install ${args.service_name} . -f values.yaml -n ${args.name_space}"
+    sh "ls"
+//    sh "helm install ${args.service_name} . -f values.yaml -n ${args.name_space}"
 }
 
 
