@@ -30,7 +30,7 @@ switch(envar.version) {
 
 container('base'){
             dir('Charts') {
-                    withKubeConfig([credentialsId: DOcredential]) {
+                    withKubeConfig([credentialsId: 'nonprod-cluster']) {
                     try {
                         helmUpgrade(service_name: config.service_name, name_space: config.name_space)
                     } catch (e) {
