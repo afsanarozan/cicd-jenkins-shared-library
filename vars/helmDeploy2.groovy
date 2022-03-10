@@ -8,19 +8,19 @@ switch(envar.version) {
     case 'release':
       DOcredential = config.credential_prod
       context   = config.DO_production_cluster
-      namespace  = config.name_space_prod
+      namespace  = config.name_space
       env = "release"
       break;
     case 'beta':
       DOcredential = config.credential
       context   = config.DO_nonprod_cluster
-      namespace  = config.name_staging
+      namespace  = config.name_space
       env = "beta"
       break;
     case 'alpha':
       DOcredential = config.credential
       context   = config.DO_nonprod_cluster
-      namespace  = config.name_space_sit
+      namespace  = config.name_space
       env = "alpha"
       break;
     default: 
