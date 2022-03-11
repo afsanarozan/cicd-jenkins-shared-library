@@ -7,8 +7,10 @@ def call(Map var) {
             dir('Charts') {
                     withKubeConfig([credentialsId: 'nonprod-cluster']) {
                     try {
+                        sh "ls"
                         helmUpgrade(service_name: config.service_name, name_space: config.name_space)
                     } catch (e) {
+                        sh "ls"
                         helmInstall(service_name: config.service_name, name_space: config.name_space)
                     }
                 }
