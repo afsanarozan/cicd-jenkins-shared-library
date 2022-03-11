@@ -4,13 +4,11 @@ def call(Map var) {
     def config = pipelineCfg()
     echo "Deploy to kubernetes "
     container('base'){
-            dir('Charts') {
+            dir('Charts/${args.service_name}') {
                     withKubeConfig([credentialsId: 'nonprod-cluster']) {
                     try {
-                        sh "ls"
                         helmUpgrade(service_name: config.service_name, name_space: config.name_space)
                     } catch (e) {
-                        sh "ls"
                         helmInstall(service_name: config.service_name, name_space: config.name_space)
                     }
                 }
@@ -26,9 +24,6 @@ def helmUpgrade(Map args) {
 }
 
 def helmInstall(Map args) {
-    sh "cd ${args.service_name}"
-    sh "ls"
-    sh "cd ${args.service_name}"
     sh "ls"
     sh "helm install ${args.service_name} . -f values.yaml -n ${args.name_space}"
 }
