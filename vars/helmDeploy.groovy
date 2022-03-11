@@ -4,7 +4,7 @@ def call(Map var) {
     def config = pipelineCfg()
     echo "Deploy to kubernetes "
     container('base'){
-            dir('Charts/${args.service_name}') {
+            dir("Charts/${args.service_name}") {
                     withKubeConfig([credentialsId: 'nonprod-cluster']) {
                     try {
                         helmUpgrade(service_name: config.service_name, name_space: config.name_space)
