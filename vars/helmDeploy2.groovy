@@ -1,4 +1,4 @@
-def call() {
+ def call() {
   def config = pipelineCfg()
   def envar = checkoutCode()
   
@@ -8,19 +8,19 @@ switch(envar.version) {
     case 'release':
       DOcredential = config.credential_prod
       context   = config.DO_production_cluster
-      namespace  = "ehrm"
+      namespace  = config.name_space
       env = "release"
       break;
     case 'beta':
       DOcredential = config.credential
       context   = config.DO_nonprod_cluster
-      namespace  = "ehrm"
+      namespace  = config.name_space
       env = "beta"
       break;
     case 'alpha':
-      DOcredential = config.credential_staging
-      context   = config.DO_staging_cluster
-      namespace  = "ehrm"
+      DOcredential = config.credential
+      context   = config.DO_nonprod_cluster
+      namespace  = config.name_space
       env = "alpha"
       break;
     default: 
@@ -44,13 +44,17 @@ container('base'){
 def helmUpgrade(Map args) {
     sh """
     cd ${args.service_name}
+    ls
     helm upgrade ${args.service_name} . -f values.yaml -n ${args.name_space}
     """
 }
 
 def helmInstall(Map args) {
-    sh "cd ${args.service_name}"
-    sh "helm install ${args.service_name} . -f values.yaml -n ${args.name_space}"
+    sh """
+    cd ${args.service_name}
+    ls
+    helm install ${args.service_name} . -f values.yaml -n ${args.name_space}
+    """
 }
 
 
