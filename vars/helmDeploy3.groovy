@@ -32,7 +32,6 @@ switch(envar.version) {
 }
 
 container('base'){
-            
                     withKubeConfig([credentialsId: 'nonprod-cluster']) {
                     try {
                         helmUpgrade(service_name: config.service_name, name_space: config.name_space)
@@ -40,7 +39,6 @@ container('base'){
                         helmInstall(service_name: config.service_name, name_space: config.name_space)
                     }
                 }
-            
     }       
 }
 
@@ -48,7 +46,7 @@ def helmUpgrade(Map args) {
     sh """
     cd ${args.service_name}
     ls
-    helm upgrade ${args.service_name} . -f ${values} -n ${args.name_space}
+    helm upgrade ${args.service_name} Charts/${args.service_name} . -f ${values} -n ${args.name_space}
     """
 }
 
@@ -56,7 +54,7 @@ def helmInstall(Map args) {
     sh """
     cd ${args.service_name}
     ls
-    helm install ${args.service_name} . -f values.yaml -n ${args.name_space}
+    helm install ${args.service_name} Charts/${args.service_name} . -f values.yaml -n ${args.name_space}
     """
 }
 
