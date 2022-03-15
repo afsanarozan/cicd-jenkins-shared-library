@@ -10,18 +10,21 @@ switch(envar.version) {
       context   = config.DO_production_cluster
       namespace  = config.name_space
       env = "release"
+      values = "values-beta.yaml"
       break;
     case 'beta':
       DOcredential = config.credential
       context   = config.DO_nonprod_cluster
       namespace  = config.name_space
       env = "beta"
+      values = "values-beta.yaml"
       break;
     case 'alpha':
       DOcredential = config.credential
       context   = config.DO_nonprod_cluster
       namespace  = config.name_space
       env = "alpha"
+      values = "values-alpha.yaml"
       break;
     default: 
       sh "exit 1"
@@ -45,7 +48,7 @@ def helmUpgrade(Map args) {
     sh """
     cd ${args.service_name}
     ls
-    helm upgrade ${args.service_name} . -f values.yaml -n ${args.name_space}
+    helm upgrade ${args.service_name} . -f ${values} -n ${args.name_space}
     """
 }
 
