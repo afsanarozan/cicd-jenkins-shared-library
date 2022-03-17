@@ -40,5 +40,6 @@ container('base'){
     helm upgrade ${args.service_name} --install Charts/${args.service_name} -f ${values} -n ${args.name_space} --set image.tag=${env}-${build_number_var}
     """
 }
+}
 
 
