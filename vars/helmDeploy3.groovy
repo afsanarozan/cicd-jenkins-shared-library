@@ -45,6 +45,7 @@ container('base'){
 def helmUpgrade(Map args) {
     sh """
     ls
+    echo ${values}
     helm upgrade ${args.service_name} Charts/${args.service_name} -f ${values} -n ${args.name_space}
     """
 }
