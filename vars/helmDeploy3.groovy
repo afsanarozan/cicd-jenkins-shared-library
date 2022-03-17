@@ -8,21 +8,21 @@ switch(envar.version) {
     case 'release':
       DOcredential = config.credential_prod
       context   = config.DO_production_cluster
-      namespace  = config.name_space
+      namespace  = config.name_space_release
       env = "release"
       values = "values-beta.yaml"
       break;
     case 'beta':
       DOcredential = config.credential
       context   = config.DO_nonprod_cluster
-      namespace  = config.name_space
+      namespace  = config.name_space_beta
       env = "beta"
       values = "values-beta.yaml"
       break;
     case 'alpha':
       DOcredential = config.credential
       context   = config.DO_nonprod_cluster
-      namespace  = config.name_space
+      namespace  = config.name_space_alpha
       env = "alpha"
       values = "values-alpha.yaml"
       break;
@@ -32,11 +32,11 @@ switch(envar.version) {
 }
 
 container('base'){
-                    withKubeConfig([credentialsId: 'nonprod-cluster']) {
+                    withKubeConfig([credentialsId: '${DOcredential}']) {
                     try {
-                        helmUpgrade(service_name: config.service_name, name_space: config.name_space)
+                        helmUpgrade(service_name: config.service_name, name_space: ${name_space})
                     } catch (e) {
-                        helmInstall(service_name: config.service_name, name_space: config.name_space)
+                        helmInstall(service_name: config.service_name, name_space: ${name_space})
                     }
                 }
     }       
