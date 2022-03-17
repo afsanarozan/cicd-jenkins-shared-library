@@ -34,9 +34,9 @@ switch(envar.version) {
 container('base'){
                     withKubeConfig([credentialsId: DOcredential]) {
                     try {
-                        helmUpgrade(service_name: config.service_name, name_space: ${name_space})
+                        helmUpgrade(service_name: config.service_name, name_space: ${namespace})
                     } catch (e) {
-                        helmInstall(service_name: config.service_name, name_space: ${name_space})
+                        helmInstall(service_name: config.service_name, name_space: ${namespace})
                     }
                 }
     }       
