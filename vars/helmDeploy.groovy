@@ -33,14 +33,22 @@ switch(envar.version) {
 }
 
 container('base'){
-  withKubeConfig([credentialsId: DOcredential]) {
+                    withKubeConfig([credentialsId: DOcredential]) {
+                    try {
+                        helmUpgrade(service_name: config.service_name, name_space: namespace)
+                    } catch (e) {
+                        helmInstall(service_name: config.service_name, name_space: namespace)
+                    }
+                }
+    }       
+}
+
+def helmUpgrade(Map args) {
     sh """
     ls
     kubectl get ns
     helm upgrade ${args.service_name} --install Charts/${args.service_name} -f ${values} -n ${args.name_space} --set image.tag=${env}-${build_number_var}
     """
-}
-}
 }
 
 
