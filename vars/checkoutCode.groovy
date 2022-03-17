@@ -10,13 +10,10 @@ def call() {
         envar.branch      = "main"
         envar.environment = 'staging'
         envar.version     = "beta"
-      }
-      break;
-    case 'main': 
-      if (gitlabActionType == 'TAG_PUSH') {
-        envar.branch      = "main"
+      }else if(gitlabActionType == 'TAG_PUSH') {
         envar.environment = 'production'
         envar.version     = "release"
+        envar.branch      = env.gitlabSourceBranch
       }
       break;
     case 'development':
