@@ -14,7 +14,7 @@ def call() {
       break;
     case 'main': 
       if (gitlabActionType == 'TAG_PUSH') {
-        envar.branch      = "master"
+        envar.branch      = "main"
         envar.environment = 'production'
         envar.version     = "release"
       }
