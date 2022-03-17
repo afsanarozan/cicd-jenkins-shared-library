@@ -45,6 +45,7 @@ container('base'){
 def helmUpgrade(Map args) {
     sh """
     ls
+    kubectl get ns
     helm upgrade ${args.service_name} Charts/${args.service_name} -f ${values} -n ${args.name_space}
     """
 }
@@ -52,6 +53,7 @@ def helmUpgrade(Map args) {
 def helmInstall(Map args) {
     sh """
     ls
+    kubectl get ns
     helm install ${args.service_name} Charts/${args.service_name} -f ${values} -n ${args.name_space}
     """
 }
