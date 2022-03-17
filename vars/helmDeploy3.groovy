@@ -10,7 +10,7 @@ switch(envar.version) {
       context   = config.DO_production_cluster
       namespace  = config.name_space_release
       env = "release"
-      values = "values-beta.yaml"
+      values = "values-release.yaml"
       break;
     case 'beta':
       DOcredential = config.credential
