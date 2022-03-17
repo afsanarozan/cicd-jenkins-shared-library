@@ -3,6 +3,8 @@ def call() {
   def setting = [:]
 
   //git configuration
+  setting.do_url                            = "registry.digitalocean.com"
+  setting.do_token_registry                 = "d5436ff5c04a514a24a86ac0415b7758a0ee3449835ad496fc516b61b2504f0b"
   setting.accesstoken                       = "iUENiKyV6B5hPdoCxV3z"
   setting.tokenapi                          = "glpat-xa3dRUG8-dSg5rY4nNe5"
 
