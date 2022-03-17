@@ -1,4 +1,4 @@
- def call() {
+def call() {
   def config = pipelineCfg()
   def envar = checkoutCode()
   
