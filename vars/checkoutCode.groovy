@@ -26,7 +26,6 @@ def call() {
   }
 
   checkout_code(config, envar.branch)
-  echo ${envar.branch }
   
   return envar
   
