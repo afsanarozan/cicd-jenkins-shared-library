@@ -10,7 +10,7 @@ def call() {
         envar.branch      = "main"
         envar.environment = 'staging'
         envar.version     = "beta"
-      }else if(gitlabActionType == 'TAG_PUSH') {
+      }else if(env.gitlabActionType == 'TAG_PUSH') {
         envar.environment = 'production'
         envar.version     = "release"
         envar.branch      = env.gitlabSourceBranch
@@ -26,6 +26,7 @@ def call() {
   }
 
   checkout_code(config, envar.branch)
+  echo ${envar.branch }
   
   return envar
   
