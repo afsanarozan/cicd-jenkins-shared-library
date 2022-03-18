@@ -55,7 +55,7 @@ def helmInstall(Map args) {
     sh """
     ls
     kubectl get ns
-    helm upgrade ${args.service_name} --install Charts/${args.service_name} -f ${values} -n ${args.name_space} --set image.tag=${args.dstVersion}-${BUILD_NUMBER}
+    helm upgrade ${args.service_name} --install Charts/${args.service_name} -f ${values} -n ${args.name_space} --set image.tag=${args.dstVersion}
     """
 }
 
