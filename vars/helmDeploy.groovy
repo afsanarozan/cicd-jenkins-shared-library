@@ -33,9 +33,10 @@ switch(envar.version) {
 
 container('base'){
                     withKubeConfig([credentialsId: DOcredential]) {
-                    try {
+                    if(envar.environment == 'dev' || envar.environment  == 'staging') {
                         helmUpgrade(service_name: config.service_name, name_space: namespace)
-                    } catch (e) {
+                    }
+                    if(envar.environment  == 'production"){
                         helmInstall(service_name: config.service_name, name_space: namespace)
                     }
                 }
@@ -54,7 +55,7 @@ def helmInstall(Map args) {
     sh """
     ls
     kubectl get ns
-    helm upgrade ${args.service_name} --install Charts/${args.service_name} -f ${values} -n ${args.name_space} --set image.tag=${env}-${BUILD_NUMBER}
+    helm upgrade ${args.service_name} --install Charts/${args.service_name} -f ${values} -n ${args.name_space} --set image.tag=${config.Tag}-${BUILD_NUMBER}
     """
 }
 
