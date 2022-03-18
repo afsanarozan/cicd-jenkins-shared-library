@@ -37,7 +37,7 @@ container('base'){
                         helmUpgrade(service_name: config.service_name, name_space: namespace)
                     }
                     if(envar.environment  == 'production'){
-                        helmInstall(service_name: config.service_name, name_space: namespace, dstVersion: "${config.Tag}-${BUILD_NUMBER})
+                        helmInstall(service_name: config.service_name, name_space: namespace, dstVersion: "${config.Tag}-${BUILD_NUMBER}")
                     }
                 }
     }       
