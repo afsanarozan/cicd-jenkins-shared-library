@@ -36,7 +36,7 @@ container('base'){
                     if(envar.environment == 'dev' || envar.environment  == 'staging') {
                         helmUpgrade(service_name: config.service_name, name_space: namespace)
                     }
-                    if(envar.environment  == 'production"){
+                    if(envar.environment  == 'production'){
                         helmInstall(service_name: config.service_name, name_space: namespace)
                     }
                 }
