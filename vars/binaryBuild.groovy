@@ -1,4 +1,5 @@
 def call(Map args){
+    def config = pipelineCfg()
     script {
         sshPublisher(
             publishers: [
@@ -8,7 +9,7 @@ def call(Map args){
                     transfers: [
                         sshTransfer(
                             remoteDirectory: "/home",
-                            execCommand: "whoami",
+                            execCommand: "git clone https://gitlab.com/kliklab/automation-platform/services-platform/example-service.git; cd example-service; git checkout binary-build-deployment; go build . ",
                             execTimeout: 60000
                         )
                     ]
