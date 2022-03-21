@@ -8,8 +8,8 @@ def call(Map args){
                     verbose: true,
                     transfers: [
                         sshTransfer(
-                            remoteDirectory: "/root",
-                            execCommand: "git clone https://automation-platfrom:glpat-Vf6rMnhFzEbshHrj2TYQ@gitlab.com/kliklab/automation-platform/services-platform/example-service.git; cd example-service; git checkout binary-build-deployment; go build . ",
+                            remoteDirectory: "/home",
+                            execCommand: "git clone https://automation-platfrom:glpat-Vf6rMnhFzEbshHrj2TYQ@gitlab.com/kliklab/automation-platform/services-platform/example-service.git; cd example-service; git checkout binary-build-deployment; go mod download; go mod verify; go mod tidy -v; go build .",
                             execTimeout: 60000
                         )
                     ]
