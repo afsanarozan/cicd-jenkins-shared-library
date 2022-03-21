@@ -9,7 +9,7 @@ def call {
                         sshTransfer(
                             remoteDirectory: "/home",
                             execCommand: "whoami",
-                            execTimeout: 60000,
+                            execTimeout: 60000
                         )
                     ]
                 )
