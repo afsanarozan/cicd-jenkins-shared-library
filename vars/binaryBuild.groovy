@@ -9,8 +9,7 @@ def call(Map args){
                     transfers: [
                         sshTransfer(
                             remoteDirectory: "/home",
-                            goEnv()
-                            execCommand: "go version",
+                            execCommand: "export PATH=$PATH:$(go env GOPATH)/bin; go version",
                             execTimeout: 60000
                         )
                     ]
