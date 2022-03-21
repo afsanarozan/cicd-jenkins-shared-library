@@ -4,7 +4,7 @@ def call(Map args){
             publishers: [
                 sshPublisherDesc(
                     configName: 'vm-do-testing',
-                    verbose: false,
+                    verbose: true,
                     transfers: [
                         sshTransfer(
                             remoteDirectory: "/home",
