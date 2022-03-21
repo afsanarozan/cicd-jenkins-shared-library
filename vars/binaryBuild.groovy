@@ -1,21 +1,21 @@
 def call(Map args){
-    // script {
-    //     sshPublisher(
-    //         publishers: [
-    //             sshPublisherDesc(
-    //                 configName: 'vm-do-testing',
-    //                 verbose: false,
-    //                 transfers: [
-    //                     sshTransfer(
-    //                         remoteDirectory: "/home",
-    //                         execCommand: "whoami",
-    //                         execTimeout: 60000
-    //                     )
-    //                 ]
-    //             )
-    //         ]
-    //     )
-    // }
+    script {
+        sshPublisher(
+            publishers: [
+                sshPublisherDesc(
+                    configName: 'vm-do-testing',
+                    verbose: false,
+                    transfers: [
+                        sshTransfer(
+                            remoteDirectory: "/home",
+                            execCommand: "whoami",
+                            execTimeout: 60000
+                        )
+                    ]
+                )
+            ]
+        )
+    }
     sh "echo binary build"
     //     def remote = [:]
     //         remote.name = 'vm-do-testing'
