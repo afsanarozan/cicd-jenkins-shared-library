@@ -16,16 +16,17 @@ def call {
     //         ]
     //     )
     // }
-    def remote = [:]
-        remote.name = 'vm-do-testing'
-        remote.host = '178.128.97.157'
-        remote.user = 'root'
-        remote.password = '2021klikLabs'
-        remote.allowAnyHosts = true
-    
-    sshDeploy(remote)
+    sh "echo binary build"
+    //     def remote = [:]
+    //         remote.name = 'vm-do-testing'
+    //         remote.host = '178.128.97.157'
+    //         remote.user = 'root'
+    //         remote.password = '2021klikLabs'
+    //         remote.allowAnyHosts = true
+        
+    //     sshDeploy(remote)
 }
 
-def sshDeploy(Map args){
-    sshCommand remote: remote, command: "ls -lrt"
-}
+// def sshDeploy(Map args){
+//     sshCommand remote: remote, command: "ls -lrt"
+// }
