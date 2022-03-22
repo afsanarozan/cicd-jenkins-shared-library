@@ -9,13 +9,15 @@ def call(Map args){
                     transfers: [
                         sshTransfer(
                             remoteDirectory: "/home",
+                            checkout([$class: 'GitSCM', branches: [[name: "binary-build-deployment"]], userRemoteConfigs: [[credentialsId: "${config.credential}", url: "${config.repo_url}"]]]),
                             execCommand: '''
-                            export PATH=$PATH:/usr/local/go/bin;
-                            git clone https://automation:glpat-Vf6rMnhFzEbshHrj2TYQ@gitlab.com/kliklab/automation-platform/services-platform/example-service.git;
-                            cd example-service;
-                            git checkout binary-build-deployment;
-                            go version; 
-                            go build .
+                            ls
+                            // export PATH=$PATH:/usr/local/go/bin;
+                            // git clone https://automation:glpat-Vf6rMnhFzEbshHrj2TYQ@gitlab.com/kliklab/automation-platform/services-platform/example-service.git;
+                            // cd example-service;
+                            // git checkout binary-build-deployment;
+                            // go version; 
+                            // go build .
                             ''',
                             execTimeout: 60000
                         )
