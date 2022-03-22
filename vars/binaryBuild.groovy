@@ -9,7 +9,6 @@ def call(Map args){
                     transfers: [
                         sshTransfer(
                             remoteDirectory: "/home",
-                            checkoutCode()
                             execCommand: '''
                             ls
                             // export PATH=$PATH:/usr/local/go/bin;
