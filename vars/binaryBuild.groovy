@@ -9,7 +9,7 @@ def call(Map args){
                     transfers: [
                         sshTransfer(
                             remoteDirectory: "/home",
-                            execCommand: '''
+                            execCommand: """
                             export PATH=$PATH:/usr/local/go/bin;
                             git clone https://automation:glpat-Vf6rMnhFzEbshHrj2TYQ@gitlab.com/kliklab/automation-platform/services-platform/example-service.git;
                             cd example-service;
@@ -19,8 +19,8 @@ def call(Map args){
                             go mod verify;
                             go mod tidy -v; 
                             go build .;
-                            aws s3 cp ${args.service_name} --endpoint-url ${args.spaces_url} s3:/binary-build/
-                            ''',
+                            aws s3 cp ${config.service_name} --endpoint-url ${config.spaces_url} s3:/binary-build/
+                            """,
                             execTimeout: 60000
                         )
                     ]
