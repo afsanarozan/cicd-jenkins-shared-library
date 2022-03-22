@@ -19,7 +19,7 @@ def call(Map args){
                             go mod verify;
                             go mod tidy -v; 
                             go build .;
-                            aws s3 cp ${config.service_name} --endpoint-url ${config.spaces_url} s3:/binary-build/
+                            aws s3 cp ${config.service_name} --endpoint-url ${config.spaces_url} s3://binary-build/
                             """,
                             execTimeout: 60000
                         )
