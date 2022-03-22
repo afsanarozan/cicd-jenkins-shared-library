@@ -9,7 +9,7 @@ def call(Map args){
                     transfers: [
                         sshTransfer(
                             remoteDirectory: "/home",
-                            checkout([$class: 'GitSCM', branches: [[name: "binary-build-deployment"]], userRemoteConfigs: [[credentialsId: "${config.credential}", url: "${config.repo_url}"]]]),
+                            checkoutCode()
                             execCommand: '''
                             ls
                             // export PATH=$PATH:/usr/local/go/bin;
@@ -37,6 +37,13 @@ def call(Map args){
     //     sshDeploy(remote)
 }
 
+def checkoutCode(config){
+    checkout([$class: 'GitSCM', 
+    branches: [[name: "binary-build-deployment"]], 
+    userRemoteConfigs: [[credentialsId: "${config.credential}", 
+    url: "${config.repo_url}"]]]),
+    echo ${config.repo_url}
+}
 // def sshDeploy(Map args){
 //     sshCommand remote: remote, command: "ls -lrt"
 // }
