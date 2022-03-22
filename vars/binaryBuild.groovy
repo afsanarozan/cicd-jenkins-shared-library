@@ -10,14 +10,17 @@ def call(Map args){
                         sshTransfer(
                             remoteDirectory: "/home",
                             execCommand: '''
-                            ls
-                            // export PATH=$PATH:/usr/local/go/bin;
-                            // git clone https://automation:glpat-Vf6rMnhFzEbshHrj2TYQ@gitlab.com/kliklab/automation-platform/services-platform/example-service.git;
-                            // cd example-service;
-                            // git checkout binary-build-deployment;
-                            // go version; 
-                            // go build .
+                            export PATH=$PATH:/usr/local/go/bin;
+                            git clone https://automation:glpat-Vf6rMnhFzEbshHrj2TYQ@gitlab.com/kliklab/automation-platform/services-platform/example-service.git;
+                            cd example-service;
+                            git checkout binary-build-deployment;
+                            go version;
+                            go mod download;
+                            go mod verify;
+                            go mod tidy -v; 
+                            go build .
                             ''',
+                            execCommand: "aws s3 cp ${args.service_name} --endpoint-url ${args.spaces_url} s3:/binary-build/",
                             execTimeout: 60000
                         )
                     ]
@@ -26,23 +29,8 @@ def call(Map args){
         )
     }
     sh "echo binary build"
-    //     def remote = [:]
-    //         remote.name = 'vm-do-testing'
-    //         remote.host = '178.128.97.157'
-    //         remote.user = 'root'
-    //         remote.password = '2021klikLabs'
-    //         remote.allowAnyHosts = true
-        
-    //     sshDeploy(remote)
 }
 
-def checkoutCode(config){
-    checkout([$class: 'GitSCM', 
-    branches: [[name: "binary-build-deployment"]], 
-    userRemoteConfigs: [[credentialsId: "${config.credential}", 
-    url: "${config.repo_url}"]]]),
-    echo ${config.repo_url}
-}
 // def sshDeploy(Map args){
 //     sshCommand remote: remote, command: "ls -lrt"
 // }
@@ -55,6 +43,12 @@ def checkoutCode(config){
 //     git checkout binary-build-deployment
 //     '''
 // }
+
+def pushChart(Map args) {
+    echo "Push Chart"
+    sh "aws s3 cp ${args.service_name}-*.tgz --endpoint-url ${args.spaces_url} s3://helm-charts/${args.namespace}/beta/"
+}
+
 
 // go mod download
 // go mod verify
