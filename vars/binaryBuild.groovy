@@ -11,6 +11,9 @@ def call(Map args){
                             remoteDirectory: "/home",
                             execCommand: """
                             export PATH=$PATH:/usr/local/go/bin;
+                            export AWS_ACCESS_KEY_ID=YFRP3PS4LIJEOZVRUMMK;
+                            export AWS_SECRET_ACCESS_KEY=0s4FQ470cF9AGDg7old5fLyvvhbhnqO99ooruvQdVOs;
+                            export AWS_DEFAULT_REGION=sgp1;
                             git clone https://automation:glpat-Vf6rMnhFzEbshHrj2TYQ@gitlab.com/kliklab/automation-platform/services-platform/example-service.git;
                             cd example-service;
                             git checkout binary-build-deployment;
