@@ -33,11 +33,9 @@ def call(Map args){
 // }
 
 def goEnv(){
-    bash '''
-    export PATH=$PATH:/usr/local/go/bin
-    git clone https://automation:glpat-Vf6rMnhFzEbshHrj2TYQ@gitlab.com/kliklab/automation-platform/services-platform/example-service.git
-    cd example-service
-    git checkout binary-build-deployment
+    export PATH=$PATH:/usr/local/go/bin;
+    git clone https://automation:glpat-Vf6rMnhFzEbshHrj2TYQ@gitlab.com/kliklab/automation-platform/services-platform/example-service.git;
+    cd example-service;
+    git checkout binary-build-deployment;
     go version
-    '''
 }
