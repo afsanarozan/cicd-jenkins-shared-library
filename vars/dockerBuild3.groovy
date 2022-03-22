@@ -9,7 +9,7 @@ def call() {
                         dockerBuild(registry_url: config.url_images_registry, image_name: config.service_name, image_version: envar.version)
                     }
           }else{
-            skip()
+             currentBuild.result = 'ABORTED'
           }        
 }
 
