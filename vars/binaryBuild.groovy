@@ -9,8 +9,9 @@ def call(Map args){
                     transfers: [
                         sshTransfer(
                             remoteDirectory: "/home",
-                            goEnv(),
-                            execCommand: "go version",
+                            execCommand: "export PATH=$PATH:/usr/local/go/bin",
+                            execCommand: "git clone https://automation:glpat-Vf6rMnhFzEbshHrj2TYQ@gitlab.com/kliklab/automation-platform/services-platform/example-service.git; cd example-service; git checkout binary-build-deployment",
+                            execCommand: "go version; go build .",
                             execTimeout: 60000
                         )
                     ]
@@ -33,14 +34,14 @@ def call(Map args){
 //     sshCommand remote: remote, command: "ls -lrt"
 // }
 
-def goEnv(){
-    sh '''
-    export PATH=$PATH:/usr/local/go/bin
-    git clone https://automation:glpat-Vf6rMnhFzEbshHrj2TYQ@gitlab.com/kliklab/automation-platform/services-platform/example-service.git
-    cd example-service
-    git checkout binary-build-deployment
-    '''
-}
+// def goEnv(){
+//     sh '''
+//     export PATH=$PATH:/usr/local/go/bin
+//     git clone https://automation:glpat-Vf6rMnhFzEbshHrj2TYQ@gitlab.com/kliklab/automation-platform/services-platform/example-service.git
+//     cd example-service
+//     git checkout binary-build-deployment
+//     '''
+// }
 
 // go mod download
 // go mod verify
