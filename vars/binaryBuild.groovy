@@ -23,7 +23,7 @@ def call(Map args){
                             go mod download;
                             go mod verify;
                             go mod tidy -v; 
-                            go build -o ${config.service_name}/${config.tag};
+                            go build -o ${config.service_name}-${config.tag};
 
                             aws s3 cp ${config.service_name} --endpoint-url ${config.spaces_url} s3://binary-build/beta
                             """,
