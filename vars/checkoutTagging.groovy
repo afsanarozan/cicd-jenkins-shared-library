@@ -3,38 +3,26 @@ def call() {
   def envar = [:]
   sh "printenv | sort"
   
-  switch(env.BRANCH_NAME) {
+  switch(env.branch) {
   
     case 'main':
       if (env.gitlabActionType == 'NOTE' && env.gitlabTriggerPhrase == 'approved' ) {
-        echo "apalah"
         envar.branch      = "main"
+        envar.environment = 'staging'
+        envar.version     = "beta"
+      }else if(gitlabActionType == 'TAG_PUSH') {
+        envar.environment = 'production'
+        envar.version     = "release"
+        envar.branch      = env.gitlabSourceBranch
       }
       break;
-   case 'dev': 
-     if (gitlabActionType == 'TAG_PUSH') {
-        echo "apalah"
-        envar.branch      = "dev"
-      }
-      break;
-    case 'master':
+    case 'development':
       if (gitlabActionType == 'PUSH') {
-        echo "apalah"
-        envar.branch      = "master"
+        envar.branch      = "development"
+        envar.environment = 'dev'
+        envar.version     = "alpha"
       }
-      break;
-    case 'features1':
-      if (gitlabActionType == 'PUSH') {
-        echo "apalah"
-        envar.branch      = "features1"
-      }
-      break; 
-    case 'sit':
-      if (gitlabActionType == 'MERGE_REQUEST') {
-        echo "apalah"
-        envar.branch      = "sit"
-      }
-      break; 
+      break;  
   }
 
   checkout_code(config, envar.branch)
@@ -51,13 +39,4 @@ def checkout_code (config, branch) {
       submoduleCfg: [],
       userRemoteConfigs: [[credentialsId: 'gitlab-auth-token', url: "${config.git_url}"]]
     ]
-}
-
-def check_approver(email)
-{
-   def approval = "adekurniawan1999"
-   if(approval.contains(email))
-    {
-      echo "email masuk"
-      return 1}
 }
