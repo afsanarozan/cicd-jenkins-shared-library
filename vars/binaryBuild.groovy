@@ -34,8 +34,6 @@ def call(Map args){
     //         ]
     //     )
     // }
-
-    steps{
         sshagent(credentials:['loadtest-server-ssh']){
             sh """ 
             ssh  -o StrictHostKeyChecking=no root@178.128.97.157 
