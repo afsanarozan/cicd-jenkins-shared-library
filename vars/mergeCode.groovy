@@ -30,11 +30,6 @@ def merge(source,target,repo){
                                     mergeTarget: "${target}"
                                 ]
                             ],
-                            [
-                                    $class: 'UserIdentity',
-                                    email: 'ysetiawan@xl.co.id',
-                                    name: 'ysetiawan'
-                                ]
                         ],
                                 
                         userRemoteConfigs: [[credentialsId: 'gitlab-auth-token', url: "${repo}"]]
@@ -42,8 +37,8 @@ def merge(source,target,repo){
 
 
                 withCredentials([usernamePassword(credentialsId: 'gitlab-auth-token', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    sh "git pull https://${USERNAME}:${PASSWORD}@${repository} master"
-                    sh "git remote set-url origin https://${USERNAME}:${PASSWORD}@${repository}; git push origin HEAD:master"
+                    sh "git pull https://${USERNAME}:${PASSWORD}@${repository} main"
+                    sh "git remote set-url origin https://${USERNAME}:${PASSWORD}@${repository}; git push origin HEAD:main"
    }
 }
 
