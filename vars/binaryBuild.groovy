@@ -6,7 +6,7 @@ def call(Map args){
         branches: [[name: "binary-build-deployment"]],
         doGenerateSubmoduleConfigurations: false,
         submoduleCfg: [],
-        userRemoteConfigs: [[credentialsId: '6c8b6848-ca10-4862-b1a9-fe3e6d46da61', url: "${config.git_url}"]]
+        userRemoteConfigs: [[credentialsId: '6c8b6848-ca10-4862-b1a9-fe3e6d46da61', url: "${config.repo_url}"]]
         ]
         sh 'ls'
     }
