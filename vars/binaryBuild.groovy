@@ -16,6 +16,8 @@ def call(Map args){
             export AWS_SECRET_ACCESS_KEY=0s4FQ470cF9AGDg7old5fLyvvhbhnqO99ooruvQdVOs
             export AWS_DEFAULT_REGION=sgp1
 
+            git config --global url."https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kds-platform/plugin.git".insteadOf "https://gitlab.com/kds-platform/plugin.git"
+
             go mod download
             go mod verify
             go mod tidy -v 
