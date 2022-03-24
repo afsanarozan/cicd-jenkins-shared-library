@@ -1,6 +1,6 @@
 def call(){
 
-    def envar = checkoutCode()
+    def envar = checkoutTagging()
     sh "printenv | sort"
 
      if(envar.environment == 'staging'){
