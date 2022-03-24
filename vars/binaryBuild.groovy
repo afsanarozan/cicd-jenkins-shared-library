@@ -9,6 +9,20 @@ def call(Map args){
         userRemoteConfigs: [[credentialsId: '6c8b6848-ca10-4862-b1a9-fe3e6d46da61', url: "${config.repo_url}"]]
         ]
         sh 'ls'
+        sh """
+            go version
+            export PATH=$PATH:/usr/local/go/bin
+            export AWS_ACCESS_KEY_ID=YFRP3PS4LIJEOZVRUMMK
+            export AWS_SECRET_ACCESS_KEY=0s4FQ470cF9AGDg7old5fLyvvhbhnqO99ooruvQdVOs
+            export AWS_DEFAULT_REGION=sgp1
+
+            go mod download
+            go mod verify
+            go mod tidy -v 
+            go build -o ${config.service_name}-${config.tag} 
+            ls -la
+            aws s3 cp ${config.service_name} --endpoint-url ${config.spaces_url} s3://binary-build/beta
+        """
     }
     // script {
     //     sshPublisher(
