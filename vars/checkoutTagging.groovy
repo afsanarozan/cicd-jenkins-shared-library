@@ -3,10 +3,10 @@ def call() {
   def envar = [:]
   sh "printenv | sort"
   
-  switch(env.branch) {
+  switch(env.BRANCH_NAME) {
   
     case 'main':
-      if (env.gitlabActionType == 'NOTE' && env.gitlabTriggerPhrase == 'approved' ) {
+      if (gitlabActionType == 'MERGE_REQUEST') {
         envar.branch      = "main"
         envar.environment = 'staging'
         envar.version     = "beta"
