@@ -10,11 +10,11 @@ def call(Map Args) {
         ls
         """
     }
+}
 
-    def installPlugin(){
-        sh """
-            helm plugin install --version master https://github.com/sonatype-nexus-community/helm-nexus-push.git
-            helm repo add helm-private-repo https://artifactory.finterlabs.com/repository/finterlabs-helm-local/ --username admin --password @klik123
-        """
-    }
+def installPlugin(Map Args){
+    sh """
+        helm plugin install --version master https://github.com/sonatype-nexus-community/helm-nexus-push.git
+        helm repo add helm-private-repo https://artifactory.finterlabs.com/repository/finterlabs-helm-local/ --username admin --password @klik123
+    """
 }
