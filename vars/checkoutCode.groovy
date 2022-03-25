@@ -17,9 +17,9 @@ def call() {
       }
       break;
     default:
-      if(env.gitlabSourceBranch == "development"){
-        envar.branch      = "*/${env.BRANCH_NAME}"
-        envar.environment = 'development'
+      if(env.gitlabSourceBranch == "*/development"){
+        envar.branch      = "*/development"
+        envar.environment = 'dev'
         envar.version     = "alpha"
       }else{
       envar.branch      = "*/${env.BRANCH_NAME}"
