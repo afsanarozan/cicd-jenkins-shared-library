@@ -33,7 +33,7 @@ switch(envar.version) {
 
 container('base'){
                     withKubeConfig([credentialsId: DOcredential]) {
-                    if(envar.branch == 'development' || envar.environment  == 'staging') {
+                    if(envar.branch == '*/development' || envar.environment  == 'staging') {
                         helmUpgrade(service_name: config.service_name, name_space: namespace)
                     }
                     if(envar.environment  == 'production'){
