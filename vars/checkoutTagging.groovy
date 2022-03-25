@@ -17,12 +17,14 @@ def call() {
       }
       break;
     case 'development':
-      if (env.gitlabActionType == 'PUSH') {
         envar.branch      = "development"
         envar.environment = 'dev'
         envar.version     = "alpha"
-      }
-      break;  
+        break;
+    default: 
+      envar.environment = 'dev'
+      envar.branch      = "*/${env.BRANCH_NAME}"
+      break;
   }
 
   checkout_code(config, envar.branch)
