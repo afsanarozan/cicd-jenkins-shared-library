@@ -1,8 +1,8 @@
- def call() {
+def call() {
   def config = pipelineCfg()
   def envar = checkoutCode()
   
-sh "printenv | sort"
+  sh "printenv | sort"
 
 switch(envar.version) {
     case 'release':
@@ -33,10 +33,11 @@ switch(envar.version) {
 
 container('base'){
                     withKubeConfig([credentialsId: DOcredential]) {
-                    try {
+                    if(envar.environment == 'dev' || envar.environment  == 'staging') {
                         helmUpgrade(service_name: config.service_name, name_space: namespace)
-                    } catch (e) {
-                        helmInstall(service_name: config.service_name, name_space: namespace)
+                    }
+                    if(envar.environment  == 'production'){
+                        helmInstall(service_name: config.service_name, name_space: namespace, dstVersion: "${config.Tag}-${BUILD_NUMBER}")
                     }
                 }
     }       
@@ -46,27 +47,15 @@ def helmUpgrade(Map args) {
     sh """
     ls
     kubectl get ns
-    helm upgrade ${args.service_name} --install Charts/${args.service_name} -f ${values} -n ${args.name_space}
+    helm upgrade ${args.service_name} --install Charts/${args.service_name} -f ${values} -n ${args.name_space} --set image.tag=${env}-${BUILD_NUMBER}
     """
 }
 
-//def helmInstall(Map args) {
-//    sh """
-//    ls
-//    kubectl get ns
-//    helm install ${args.service_name} --install Charts/${args.service_name} -f ${values} -n $//..///{args.name_space}
-//    """
-//}
-
-
-//container('base'){
-//      withKubeConfig([credentialsId: DOcredential]) {
-//              sh """
-//                  kubectl config use-context ${context}
-//                   kubectl get ns
-//                   kubectl get pod -n ${namespace}
-//               """        
-//        }
-//    }                       
-//}
+def helmInstall(Map args) {
+    sh """
+    ls
+    kubectl get ns
+    helm upgrade ${args.service_name} --install Charts/${args.service_name} -f ${values} -n ${args.name_space} --set image.tag=${args.dstVersion}
+    """
+}
 
