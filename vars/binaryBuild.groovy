@@ -29,11 +29,12 @@ def call(Map args){
             apt install zip
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip awscliv2.zip
-            sudo ./aws/install
+            ./aws/install
 
             aws s3 cp ${config.service_name} --endpoint-url ${config.spaces_url} s3://binary-build/beta
         """
     }
+    sh "cd /var/run; ls"
     // script {
     //     sshPublisher(
     //         publishers: [
