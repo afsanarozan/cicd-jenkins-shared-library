@@ -3,7 +3,7 @@ def call() {
   def envar = [:]
   sh "printenv | sort"
   
-  switch(config.BRANCH_NAME) {
+  switch(env.BRANCH_NAME) {
   
     case 'main':
       if(env.gitlabActionType == 'MERGE_REQUEST') {
