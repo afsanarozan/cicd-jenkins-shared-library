@@ -5,7 +5,7 @@ def call() {
   if(envar.branch == '*/development' || envar.environment  == 'staging'){
                     container('docker') {
                         echo "Running Docker Build"
-                        dockerBuild(registry_url: config.url_images_registry, image_name: config.service_name, image_version: envar.version)
+                        dockerBuild(registry_url: config.url_images_registry, image_name: config.service_name, image_version: "${envar.version}-${BUILD_NUMBER}")
                     }
           }
   if(envar.environment  == 'production'){
