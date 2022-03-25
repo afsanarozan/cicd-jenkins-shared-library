@@ -22,7 +22,7 @@ def call() {
         envar.environment = 'dev'
         envar.version     = "alpha"
       }else{
-      envar.branch      = "*/${env.BRANCH_NAME}"
+      envar.branch      = "{env.BRANCH_NAME}"
       }
       break;
   }
