@@ -2,7 +2,7 @@ def call() {
   def config = pipelineCfg()
   def envar = checkoutCode()
   print("ini :" + envar)
-  if(envar.environment == 'development' || envar.environment  == 'staging'){
+  if(envar.branch == '*/development' || envar.environment  == 'staging'){
                     container('docker') {
                         echo "Running Docker Build"
                         dockerBuild(registry_url: config.url_images_registry, image_name: config.service_name, image_version: envar.version)
