@@ -14,7 +14,8 @@ def call() {
                         dockerBuild2(registry_url: config.url_images_registry, image_name: config.service_name, dstVersion: "${config.Tag}-${BUILD_NUMBER}")
                     }
           }else{
-            skip()
+            sh "exit 1"
+            error "Unstable, exiting now..."                    
           }        
 }
 
