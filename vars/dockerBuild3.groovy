@@ -14,7 +14,7 @@ def call() {
                         dockerBuild2(registry_url: config.url_images_registry, image_name: config.service_name, dstVersion: "${config.Tag}-${BUILD_NUMBER}")
                     }
           }else{
-            currentBuild.result = 'ABORTED'                  
+            skip()           
           }        
 }
 
