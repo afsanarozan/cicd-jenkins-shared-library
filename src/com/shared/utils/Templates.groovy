@@ -27,8 +27,7 @@ public void generalTemplate(body) {
               command: 'cat', 
               ttyEnabled: true),
             containerTemplate(name: 'base', image: 'dgrlabs/base-runner:latest', command: 'cat', ttyEnabled: true)],
-            volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')], 
-            volumes: [hostPathVolume(hostPath: '/root', mountPath: '/var/local/')]) {
+            volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]) {
     echo "agent finish"
     body.call()
   }
