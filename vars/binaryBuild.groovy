@@ -15,18 +15,12 @@ def call(Map args){
     }
 
     container('aws-cli'){
-        sh "aws s3 cp ${config.service_name} --endpoint-url ${config.spaces_url} s3://binary-build/beta"
+        pushBinary(service_name: config.service_name, spaces_url: config.spaces_url, namespace: config:name_space)
+        sh "aws s3 cp ${config.service_name} --endpoint-url ${config.spaces_url} s3://binary-build/beta/"
     }
 }
 
-
-def pushChart(Map args) {
+def pushBinary(Map args) {
     echo "Push Chart"
-    sh "aws s3 cp ${args.service_name}-*.tgz --endpoint-url ${args.spaces_url} s3://helm-charts/${args.namespace}/beta/"
-    
+    sh "aws s3 cp ${args.service_name}-*.tgz --endpoint-url ${args.spaces_url} s3://binary-build/${args.namespace}/"
 }
-
-
-// go mod download
-// go mod verify
-// go mod tidy -v 
