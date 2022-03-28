@@ -15,8 +15,7 @@ def call(Map args){
     }
 
     container('aws-cli'){
-        pushBinary(service_name: config.service_name, spaces_url: config.spaces_url, namespace: config:name_space)
-        sh "aws s3 cp ${config.service_name} --endpoint-url ${config.spaces_url} s3://binary-build/beta/"
+        pushBinary(service_name: config.service_name, spaces_url: config.spaces_url, namespace: config.name_space)
     }
 }
 
