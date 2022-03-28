@@ -20,7 +20,7 @@ def call() {
                     echo $?
                     '''
                 )
-                // sh "touch coverage.out"
+                sh "touch coverage.out"
                 sh "cat report.xml"
                 sh "cat coverage.out"
                 sh "go tool cover -func=coverage.out"
