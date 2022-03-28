@@ -11,7 +11,7 @@ public void generalTemplate(body) {
             containerTemplate(name: 'kubectl', image: 'dtzar/helm-kubectl', command: 'cat', ttyEnabled: true),
             containerTemplate(name: 'sonarscanner', image: 'sonarscannerbuildkite/sonarscanner:0.1.1', command: 'cat', ttyEnabled: true),
             containerTemplate(name: 'base', image: 'dgrlabs/base-runner:latest', command: 'cat', ttyEnabled: true),
-            containerTemplate(name: 'golang', image: 'golang:latest', command: 'cat', ttyEnabled: true),
+            containerTemplate(name: 'golang', image: 'golang', command: 'cat', ttyEnabled: true),
             containerTemplate(
               name: 'aws-cli', 
               image: 'mesosphere/aws-cli', 

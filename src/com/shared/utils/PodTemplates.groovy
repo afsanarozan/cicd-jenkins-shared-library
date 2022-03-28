@@ -9,7 +9,7 @@ public void generalTemplate(body) {
         containerTemplate(name: 'sonarscanner', image: 'sonarscannerbuildkite/sonarscanner:0.1.1', command: 'cat', ttyEnabled: true),
         containerTemplate(name: 'aws', image: 'amazon/aws-cli', command: 'cat', ttyEnabled: true),
         containerTemplate(name: 'kubectl', image: 'dtzar/helm-kubectl', command: 'cat', ttyEnabled: true),
-        containerTemplate(name: 'golang', image: 'golang:1.15', command: 'cat', ttyEnabled: true),
+        containerTemplate(name: 'golang', image: 'golang:1.17.8-alpine', command: 'cat', ttyEnabled: true),
         containerTemplate(
               name: 'aws-cli', 
               image: 'mesosphere/aws-cli', 
