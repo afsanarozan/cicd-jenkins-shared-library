@@ -22,7 +22,10 @@ def call(Map args){
             ls -la
         """
     }
-    sh "cd /var/run; ls"
+
+    container('aws-cli'){
+        sh "aws s3 cp ${config.service_name} --endpoint-url ${config.spaces_url} s3://binary-build/beta"
+    }
     // script {
     //     sshPublisher(
     //         publishers: [
@@ -64,7 +67,7 @@ def call(Map args){
 def pushChart(Map args) {
     echo "Push Chart"
     sh "aws s3 cp ${args.service_name}-*.tgz --endpoint-url ${args.spaces_url} s3://helm-charts/${args.namespace}/beta/"
-    sh "aws s3 cp ${config.service_name} --endpoint-url ${config.spaces_url} s3://binary-build/beta"
+    
 }
 
 
