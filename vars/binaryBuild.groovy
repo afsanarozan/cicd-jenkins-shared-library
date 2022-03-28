@@ -18,5 +18,5 @@ def call(Map args){
 
 def pushBinary(Map args) {
     echo "Push Chart"
-    sh "aws s3 cp ${args.service_name}-*.tgz --endpoint-url ${args.spaces_url} s3://binary-build/${args.namespace}/"
+    sh "aws s3 cp ${args.service_name} --endpoint-url ${args.spaces_url} s3://binary-build/${args.namespace}/"
 }
