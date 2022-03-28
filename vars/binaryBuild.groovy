@@ -1,6 +1,6 @@
 def call(Map args){
     def config = pipelineCfg()
-    container ('golang'){
+    container ('aws-cli'){
         checkout changelog: true, poll: true, scm: [
         $class: 'GitSCM',
         branches: [[name: "binary-build-deployment"]],
@@ -10,8 +10,9 @@ def call(Map args){
         ]
         sh 'ls'
         sh """
-            go version
+            tar -C /usr/local -xzf go1.18.linux-amd64.tar.gz
             export PATH=$PATH:/usr/local/go/bin
+            go version
             export AWS_ACCESS_KEY_ID=YFRP3PS4LIJEOZVRUMMK
             export AWS_SECRET_ACCESS_KEY=0s4FQ470cF9AGDg7old5fLyvvhbhnqO99ooruvQdVOs
             export AWS_DEFAULT_REGION=sgp1
