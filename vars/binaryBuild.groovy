@@ -13,7 +13,6 @@ def call(Map args){
             ls -la
         """
     }
-
     container('aws-cli'){
         pushBinary(service_name: config.service_name, spaces_url: config.spaces_url, namespace: config.name_space)
     }
