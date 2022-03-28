@@ -6,6 +6,8 @@ def call(Map args){
         sh """
             go version
             git config --global url."https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kds-platform/plugin.git".insteadOf "https://gitlab.com/kds-platform/plugin.git"
+            go mod download
+            go mod verify
             go mod tidy -v 
             go build -o ${config.service_name}  
             ls -la
