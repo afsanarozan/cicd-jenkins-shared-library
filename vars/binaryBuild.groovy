@@ -1,19 +1,26 @@
 def call(Map args){
     def config = pipelineCfg()
+    def envar = checkoutCode()
     sh "echo binary build"
-    container ('golang'){
+    if(envar.environment == 'dev' || envar.environment  == 'staging'){
+        container ('golang'){
         sh 'ls'
-        sh """
-            go version
-            go mod verify
-            go mod tidy -v 
-            go build -o ${config.service_name}  
-            ls -la
-        """
+            buildBinary(service_name: config.service_name, version: envar.version)
+        }
+        container('aws-cli'){
+            pushBinary(service_name: config.service_name, spaces_url: config.spaces_url, namespace: config.name_space)
+        }
     }
-    container('aws-cli'){
-        pushBinary(service_name: config.service_name, spaces_url: config.spaces_url, namespace: config.name_space)
-    }
+}
+
+def buildBinary(Map args) {
+    sh """
+        go version
+        go mod verify
+        go mod tidy -v 
+        go build -o ${args.service_name}  
+        ls -la
+    """
 }
 
 def pushBinary(Map args) {
