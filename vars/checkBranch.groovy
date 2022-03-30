@@ -17,5 +17,5 @@ def call() {
 }
 
 def skip(){
-    sh "error 'This pipeline stops here!'"
+    def envar = slackNotification()
 }
