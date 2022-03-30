@@ -2,9 +2,10 @@ def call() {
   def config = pipelineCfg()
   def envar = checkoutCode()
   print("ini :" + envar)
-  if(env.gitlabSourceBranch == 'development'){
+  try (env.gitlabSourceBranch == 'development'){
         echo "passed"
-    } else {
+    } catch (e) {
+        echo "job success"
         skip()
     }
 
