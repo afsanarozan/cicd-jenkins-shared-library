@@ -11,7 +11,8 @@ def call() {
                     container('docker') {
                         echo "Running Docker Build"
                     }
-          }else if{
+          }
+  if(envar.branch == '!*/development' || envar.environment  == '!staging' || envar.environment  == '!production'){
             skip()          
           }        
 }
