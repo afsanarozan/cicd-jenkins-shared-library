@@ -11,7 +11,7 @@ def call() {
                     container('docker') {
                         echo "Running Docker Build"
                     }
-          }else{
+          }else if{
             skip()          
           }        
 }
