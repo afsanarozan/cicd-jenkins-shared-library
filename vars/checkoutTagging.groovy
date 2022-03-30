@@ -6,7 +6,7 @@ def call() {
   switch(env.BRANCH_NAME) {
   
     case 'main':
-      if(env.gitlabActionType == 'MERGE_REQUEST') {
+      if(env.gitlabActionType == 'MERGE') {
         envar.branch      = "main"
         envar.environment = 'staging'
         envar.version     = "beta"
