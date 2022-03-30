@@ -33,6 +33,11 @@ def merge(source,target,repo){
                                     mergeTarget: "${target}"
                                 ]
                             ],
+                                     [
+                                    $class: 'UserIdentity',
+                                    email: 'adekuniawan1999@gmail.com',
+                                    name: 'adekurniawan1999'
+                                ]
                         ],
                                 
                         userRemoteConfigs: [[credentialsId: 'gitlab-auth-token', url: "${repo}"]]
