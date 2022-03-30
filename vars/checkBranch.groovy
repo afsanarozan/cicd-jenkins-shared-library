@@ -13,7 +13,9 @@ def call() {
                     }
           }
   if(envar.branch != '*/development' || envar.environment  != 'staging' || envar.environment  != 'production'){
-            skip()          
+             container('docker') {
+            skip()
+             }
           }        
 }
 
