@@ -12,7 +12,7 @@ def call() {
                         echo "Running Docker Build"
                     }
           }
-  if(envar.branch == '!*/development' || envar.environment  == '!staging' || envar.environment  == '!production'){
+  if(envar.branch != '*/development' || envar.environment  != 'staging' || envar.environment  != 'production'){
             skip()          
           }        
 }
