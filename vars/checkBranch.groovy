@@ -12,6 +12,10 @@ def call() {
                         echo "Running Docker Build"
                     }
           }else{
-            error "This pipeline stops here!"          
+            skip()          
           }        
+}
+
+def skip(){
+    sh "error 'This pipeline stops here!'"
 }
