@@ -9,7 +9,7 @@ def call(){
        repo = "${env.gitlabSourceRepoHttpUrl}"
        echo "source : ${env.gitlabSourceBranch}"
        echo "target  : ${env.gitlabTargetBranch}"
-       echo "repo " ${env.gitlabSourceRepoHttpUrl}"
+       echo "repo : ${env.gitlabSourceRepoHttpUrl}"
        merge(source,target,repo)
      
      }else{
