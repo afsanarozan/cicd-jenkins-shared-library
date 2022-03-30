@@ -2,11 +2,12 @@ def call() {
   def config = pipelineCfg()
   def envar = checkoutCode()
   print("ini :" + envar)
-  try (env.gitlabSourceBranch == 'development'){
+    if (env.gitlabSourceBranch == 'development'){
         echo "passed"
-    } catch (e) {
+    } else {
         echo "job success"
         skip()
+        error "This pipeline stops here!"
     }
 
 //   if(envar.branch == '*/development' || envar.environment  == 'staging'){
