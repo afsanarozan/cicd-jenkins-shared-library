@@ -20,7 +20,7 @@ def call(String currentBuild.result) {
   } else if (currentBuild.result == 'SUCCESS') {
     color = 'GREEN'
     colorCode = '#00FF00'
-  } else if (currentBuild.result == 'FALSE'){
+  } else if (currentBuild.result == 'FAILED'){
     color = 'RED'
     colorCode = '#FF0000'
   }
