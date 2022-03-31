@@ -6,7 +6,7 @@ def call() {
 
 switch(envar.version) {
     case 'release':
-      DOcredential = config.credential_prod
+      DOcredential = config.credential_prod_monitoring
       context   = config.DO_production_cluster
       namespace  = config.name_space_release
       env = "release"
