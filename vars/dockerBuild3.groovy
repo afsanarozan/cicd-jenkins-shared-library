@@ -1,6 +1,6 @@
 def call() {
   def config = pipelineCfg()
-  def envar = checkoutCode()
+  def envar = checkoutTagging()
   print("ini :" + envar)
   if( envar.environment  == 'dev' || envar.environment  == 'staging'){
                     container('docker') {
