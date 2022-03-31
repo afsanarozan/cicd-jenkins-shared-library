@@ -16,7 +16,7 @@ def call(String buildStatus = 'FAILED') {
     <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>"""
 
   // Override default values based on build status
-  if (buildStatus == 'FAILED) {
+  if (buildStatus == 'FAILED') {
     color = 'YELLOW'
     colorCode = '#FFFF00'
   } else if (buildStatus == 'SUCCESS') {
