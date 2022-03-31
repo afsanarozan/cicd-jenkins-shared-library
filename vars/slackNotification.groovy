@@ -3,7 +3,7 @@
 /**
  * Send notifications based on build status string
  */
-def call(String buildStatus = 'STARTED') {
+def call(String buildStatus = 'FAILED') {
   // build status of null means successful
   buildStatus = buildStatus ?: 'SUCCESS'
 
@@ -16,13 +16,13 @@ def call(String buildStatus = 'STARTED') {
     <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>"""
 
   // Override default values based on build status
-  if (buildStatus == 'STARTED') {
+  if (buildStatus == 'FAILED) {
     color = 'YELLOW'
     colorCode = '#FFFF00'
   } else if (buildStatus == 'SUCCESS') {
     color = 'GREEN'
     colorCode = '#00FF00'
-  } else if (buildStatus == 'FAILED'){
+  } else {
     color = 'RED'
     colorCode = '#FF0000'
   }
