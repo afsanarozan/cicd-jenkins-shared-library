@@ -19,7 +19,7 @@ def call() {
 }
 }
 def dockerPush(Map args) {
-    sh "docker tag ${args.registry_url}/${args.image_name}:${args.srcVersion} ${args.registry_url}/${args.image_name}:${args.dstVersion}"
+    sh "docker tag ${args.registry_url}/${args.image_name}:${args.dstVersion} ${args.registry_url}/${args.image_name}:${args.dstVersion}"
     sh "docker push ${args.registry_url}/${args.image_name}:${args.dstVersion}"
     sh "docker rmi ${args.registry_url}/${args.image_name}:${args.dstVersion}"
 }
