@@ -1,6 +1,6 @@
 def call() {
   def config = pipelineCfg()
-  def envar = checkoutTagging()
+  def envar = checkoutCode()
   print("ini :" + envar)
     if (envar.branch == '*/development'){
         echo "passed"
