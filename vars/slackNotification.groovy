@@ -3,9 +3,9 @@
 /**
  * Send notifications based on build status string
  */
-def call(String currentBuild.result) {
+def call() {
   // build status of null means successful
-  buildStatus = buildStatus ?: 'SUCCESS'
+  //buildStatus = buildStatus ?: 'SUCCESS'
 
   // Default values
   def colorName = 'RED'
