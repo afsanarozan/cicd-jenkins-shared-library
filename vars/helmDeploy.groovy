@@ -33,7 +33,7 @@ switch(envar.version) {
 
 container('base'){
                     withKubeConfig([credentialsId: DOcredential]) {
-                    if(envar.environment == 'dev' || envar.environment  == 'staging') {
+                    if(envar.branch == '*/development' || envar.environment  == 'staging') {
                         helmUpgrade(service_name: config.service_name, name_space: namespace)
                     }
                     if(envar.environment  == 'production'){
@@ -58,6 +58,4 @@ def helmInstall(Map args) {
     helm upgrade ${args.service_name} --install Charts/${args.service_name} -f ${values} -n ${args.name_space} --set image.tag=${args.dstVersion}
     """
 }
-
-
 
