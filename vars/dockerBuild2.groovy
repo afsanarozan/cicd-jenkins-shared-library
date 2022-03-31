@@ -7,6 +7,7 @@ def call() {
                         echo "Running Docker Build"
                         dockerBuild(registry_url: config.url_images_registry, image_name: config.service_name, image_version: envar.version)
                     }
+  }
           }
   if(envar.environment  == 'production'){
                     container('docker') {
