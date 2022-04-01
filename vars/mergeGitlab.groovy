@@ -2,6 +2,7 @@ def call() {
     echo "actionType: ${env.gitlabActionType}"
     echo "projectId: ${env.gitlabMergeRequestTargetProjectId}"
     echo "MergerequestIid: ${env.gitlabMergeRequestIid}"
+    echo "LastCommitID :${env.gitlabMergeRequestLastCommit}"
 
     if(env.gitlabActionType == "MERGE") {
 
