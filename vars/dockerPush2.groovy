@@ -13,7 +13,7 @@ def call() {
 }
 
 def dockerPush2(Map args) {
-    sh "docker pull ${args.registry_url}/${args.image_name}:${args.dstVersion2}"
+    sh "docker pull ${args.registry_url}/${args.image_name}:latest"
     sh "docker images"
     //sh "docker tag ${args.registry_url}/${args.image_name}:${args.dstVersion2} ${args.registry_url}/${args.image_name}:${args.dstVersion2}"
     //sh "docker push ${args.registry_url}/${args.image_name}:${args.dstVersion2}"
