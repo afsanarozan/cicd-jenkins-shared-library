@@ -19,9 +19,9 @@ def call() {
 }
 
 def dockerBuild(Map args) {
-  sh "docker build -t ${args.registry_url}/${args.image_namee2}:${args.image_version} ."
+  sh "docker build -t ${args.registry_url}/${args.image_name}:${args.image_version} ."
   sh 'docker images'
-}      
+  }      }
 
 def dockerBuild2(Map args) {
   sh "docker build -t ${args.registry_url}/${args.image_name}:${args.dstVersion} ."
