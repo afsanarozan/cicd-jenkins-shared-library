@@ -3,7 +3,7 @@ def call() {
   def envar = checkoutCode()
   
   sh "printenv | sort"
-  envar.tag = sh(script: 'git tag | head -1 ', returnStdout: true)
+  envar.tag = sh(script: 'git tag | tail -1 ', returnStdout: true)
   echo "test ${envar.tag}"
 
 switch(envar.version) {
@@ -53,7 +53,7 @@ def helm-nonprod(Map args) {
     """
 }
 
-def helmprod(Map args) {
+def helm-prod(Map args) {
     sh """
     ls
     kubectl get ns
