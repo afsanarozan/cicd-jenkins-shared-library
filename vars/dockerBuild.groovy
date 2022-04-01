@@ -5,13 +5,13 @@ def call() {
   if( envar.environment  == 'dev' || envar.environment  == 'staging'){
                     container('docker') {
                         echo "Running Docker Build"
-                        dockerBuild(registry_url: config.url_images_registry, image_name: config.service_name, image_version: "${envar.version}-${BUILD_NUMBER}")
+                        dockerBuild(registry_url: config.url_images_registry, image_name: config.service_name, image_version: "${envar.version}")
                     }
           }
   if(envar.environment  == 'production'){
                     container('docker') {
                         echo "Running Docker Build"
-                        dockerBuild2(registry_url: config.url_images_registry, image_name: config.service_name, dstVersion: "${config.Tag}-${BUILD_NUMBER}")
+                        dockerBuild2(registry_url: config.url_images_registry, image_name: config.service_name, dstVersion: "${config.Tag}")
                     }
           }else{
             skip()           
