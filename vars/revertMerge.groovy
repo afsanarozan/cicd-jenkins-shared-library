@@ -47,7 +47,7 @@ def merge(source,target,repo){
 
 
                 withCredentials([usernamePassword(credentialsId: 'gitlab-auth-token', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    sh "git revert ${LastCommitID} https://${USERNAME}:${PASSWORD}@${repository} main"
+                    sh "git revert ${env.gitlabMergeRequestLastCommit} https://${USERNAME}:${PASSWORD}@${repository} main"
                     sh "git remote set-url origin https://${USERNAME}:${PASSWORD}@${repository}; git push origin HEAD:main"
    }
 }
