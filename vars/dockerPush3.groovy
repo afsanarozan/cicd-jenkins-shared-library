@@ -15,7 +15,9 @@ def call() {
             dockerPush2(registry_url: config.url_images_registry, image_name: config.service_name, srcVersion: envar.version, dstVersion2: "${config.Tag}-${BUILD_NUMBER}")
         }
     }else{
+    currentBuild.result = "FAILURE"
     skip()
+    
 }
 }
 def dockerPush(Map args) {
