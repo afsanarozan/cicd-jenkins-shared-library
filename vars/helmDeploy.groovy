@@ -36,16 +36,16 @@ switch(envar.version) {
 container('base'){
                     withKubeConfig([credentialsId: DOcredential]) {
                     if(envar.branch == '*/development' || envar.environment  == 'staging') {
-                        helm-nonprod(service_name: config.service_name, name_space: namespace)
+                        helmnonprod(service_name: config.service_name, name_space: namespace)
                     }
                     if(envar.environment  == 'production'){
-                        helm-prod(service_name: config.service_name, name_space: namespace, dstVersion: envar.tag)
+                        helmprod(service_name: config.service_name, name_space: namespace, dstVersion: envar.tag)
                     }
                 }
     }       
 }
 
-def helm-nonprod(Map args) {
+def helmnonprod(Map args) {
     sh """
     ls
     kubectl get ns
@@ -53,7 +53,7 @@ def helm-nonprod(Map args) {
     """
 }
 
-def helm-prod(Map args) {
+def helmprod(Map args) {
     sh """
     ls
     kubectl get ns
