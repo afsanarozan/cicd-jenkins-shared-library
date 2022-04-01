@@ -3,6 +3,8 @@ def call() {
   def envar = checkoutCode()
   
   sh "printenv | sort"
+  envar.tag = sh(script: 'git tag | head -1 ', returnStdout: true)
+  echo "test ${envar.tag}"
 
 switch(envar.version) {
     case 'release':
@@ -34,16 +36,16 @@ switch(envar.version) {
 container('base'){
                     withKubeConfig([credentialsId: DOcredential]) {
                     if(envar.branch == '*/development' || envar.environment  == 'staging') {
-                        helmUpgrade(service_name: config.service_name, name_space: namespace)
+                        helm-nonprod(service_name: config.service_name, name_space: namespace)
                     }
                     if(envar.environment  == 'production'){
-                        helmInstall(service_name: config.service_name, name_space: namespace, dstVersion: "${config.Tag}-${BUILD_NUMBER}")
+                        helm-prod(service_name: config.service_name, name_space: namespace, dstVersion: envar.tag}")
                     }
                 }
     }       
 }
 
-def helmUpgrade(Map args) {
+def helm-nonprod(Map args) {
     sh """
     ls
     kubectl get ns
@@ -51,7 +53,7 @@ def helmUpgrade(Map args) {
     """
 }
 
-def helmInstall(Map args) {
+def helm-prod(Map args) {
     sh """
     ls
     kubectl get ns
