@@ -7,7 +7,7 @@ def call(){
        source = "${env.gitlabSourceBranch}"
        target   = "${env.gitlabTargetBranch}"
        repo = "${env.gitlabSourceRepoHttpUrl}"
-       LastCommitID :${env.gitlabMergeRequestLastCommit}"
+       LastCommitID :"${env.gitlabMergeRequestLastCommit}"
        echo "source : ${env.gitlabSourceBranch}"
        echo "target  : ${env.gitlabTargetBranch}"
        echo "repo : ${env.gitlabSourceRepoHttpUrl}"
