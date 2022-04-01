@@ -39,7 +39,7 @@ container('base'){
                         helm-nonprod(service_name: config.service_name, name_space: namespace)
                     }
                     if(envar.environment  == 'production'){
-                        helm-prod(service_name: config.service_name, name_space: namespace, dstVersion: envar.tag}")
+                        helm-prod(service_name: config.service_name, name_space: namespace, dstVersion: envar.tag)
                     }
                 }
     }       
@@ -53,7 +53,7 @@ def helm-nonprod(Map args) {
     """
 }
 
-def helm-prod(Map args) {
+def helmprod(Map args) {
     sh """
     ls
     kubectl get ns
