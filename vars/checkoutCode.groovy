@@ -6,7 +6,7 @@ def call() {
   switch(env.BRANCH_NAME) {
   
     case 'main':
-      if(env.gitlabBranch == "refs/tags/*-demo" ) {
+      if(env.gitlabBranch = "refs/tags/*-demo" ) {
         envar.environment = 'production'
         envar.version     = "release-demo"
         envar.branch      = env.gitlabSourceBranch
