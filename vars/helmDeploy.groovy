@@ -14,6 +14,13 @@ switch(envar.version) {
       env = "release"
       values = "values-release.yaml"
       break;
+    case 'release-demo':
+      DOcredential = config.credential_prod_demo
+      context   = config.DO_production_cluster
+      namespace  = config.name_space_release
+      env = "release"
+      values = "values-release.yaml"
+      break;
     case 'beta':
       DOcredential = config.credential
       context   = config.DO_nonprod_cluster
