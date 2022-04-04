@@ -65,8 +65,8 @@ def goEnv() {
         git config --global url."https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kds-platform/plugin.git".insteadOf "https://gitlab.com/kds-platform/plugin.git"
 
         git config --global url."https://gitlab+notification:_ZKN6ZaauMYPcks4-zyk@gitlab.com/kds-platform/apim/notification-service".insteadOf "https://gitlab.com/kds-platform/apim/notification-service.git"
-        
-        git config --global url."https://automation-labs:glpat-qKs5QLHTUN3dbYi3yUki@gitlab.com/kliklab/jose-ported.git".insteadOf "https://gitlab.com/kliklab/jose-ported.git"
+
+        git config --global url."https://taupiknr26:glpat-M6cKV4dERVTxVwHLse9M@gitlab.com/kliklab/jose-ported.git".insteadOf "https://gitlab.com/kliklab/jose-ported.git"
 
         go mod tidy -v
 
