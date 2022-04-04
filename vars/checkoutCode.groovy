@@ -16,6 +16,13 @@ def call() {
         envar.branch      = env.gitlabSourceBranch
       }
       break;
+    case 'demo':
+      if(env.gitlabActionType == 'TAG_PUSH') {
+        envar.environment = 'production'
+        envar.version     = "release-demo"
+        envar.branch      = env.gitlabSourceBranch
+      }
+      break;
     default:
         envar.branch      = "*/${env.BRANCH_NAME}"
         envar.environment = 'dev'
