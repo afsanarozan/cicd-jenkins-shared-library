@@ -64,6 +64,9 @@ def goEnv() {
 
         git config --global url."https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kds-platform/plugin.git".insteadOf "https://gitlab.com/kds-platform/plugin.git"
 
+        git config --global url."https://gitlab+notification:_ZKN6ZaauMYPcks4-zyk@gitlab.com/kds-platform/apim/notification-service".insteadOf "https://gitlab.com/kds-platform/apim/notification-service.git"
+
+
         go mod tidy -v
 
         go get -u golang.org/x/lint/golint
