@@ -42,6 +42,6 @@ def checkout_code (config, branch) {
       branches: [[name: "${branch}"]],
       doGenerateSubmoduleConfigurations: false,
       submoduleCfg: [],
-      userRemoteConfigs: [[credentialsId: 'gitlab-auth-token', url: "${config.git_url}"]]
+      userRemoteConfigs: [[credentialsId: 'automation-auth-token', url: "${config.git_url}"]]
     ]
 }
