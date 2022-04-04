@@ -63,11 +63,14 @@ def goEnv() {
         export PATH=$PATH:$(go env GOPATH)/bin
 
         git config --global url."https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kds-platform/plugin.git".insteadOf "https://gitlab.com/kds-platform/plugin.git"
+        git config --global url."https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kds-platform/library".insteadOf "https://gitlab.com/kds-platform/library"
+        
+        git config --global url."https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kds-platform/apim/notification-service".insteadOf "https://gitlab.com/kds-platform/apim/notification-service.git"
 
-        git config --global url."https://gitlab+notification:_ZKN6ZaauMYPcks4-zyk@gitlab.com/kds-platform/apim/notification-service".insteadOf "https://gitlab.com/kds-platform/apim/notification-service.git"
+        git config --global url."https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kliklab/jose-ported.git".insteadOf "https://gitlab.com/kliklab/jose-ported.git"
 
-        git config --global url."https://taupiknr26:glpat-M6cKV4dERVTxVwHLse9M@gitlab.com/kliklab/jose-ported.git".insteadOf "https://gitlab.com/kliklab/jose-ported.git"
-
+        git config --global url."https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kliklab/libs.git".insteadOf "https://gitlab.com/kliklab/libs.git"
+        
         go mod tidy -v
 
         go get -u golang.org/x/lint/golint
