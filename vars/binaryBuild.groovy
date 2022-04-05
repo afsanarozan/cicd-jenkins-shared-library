@@ -16,7 +16,6 @@ def call(Map args){
 def buildBinary(Map args) {
     sh """
         go version
-        yum
         go mod verify
         go mod tidy -v 
         go build -o ${args.service_name}  
