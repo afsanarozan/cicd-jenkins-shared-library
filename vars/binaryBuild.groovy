@@ -16,8 +16,6 @@ def call(Map args){
 def buildBinary(Map args) {
     sh """
         go version
-        apt install git
-        git config --global url.https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kds-platform/plugin.git.insteadOf https://gitlab.com/kds-platform/plugin.git
         go mod verify
         go mod tidy -v 
         go build -o ${args.service_name}  

@@ -37,7 +37,6 @@ def call() {
 }
 def checkout_code (config, branch) {
     echo "checkout branch ${branch}"
-    sh "git"
     checkout changelog: true, poll: true, scm: [
       $class: 'GitSCM',
       branches: [[name: "${branch}"]],
@@ -45,4 +44,5 @@ def checkout_code (config, branch) {
       submoduleCfg: [],
       userRemoteConfigs: [[credentialsId: 'automation-auth-token', url: "${config.git_url}"]]
     ]
+    sh "git config --global url.https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kds-platform/plugin.git.insteadOf https://gitlab.com/kds-platform/plugin.git"
 }
