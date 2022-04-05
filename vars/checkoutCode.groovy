@@ -44,5 +44,4 @@ def checkout_code (config, branch) {
       submoduleCfg: [],
       userRemoteConfigs: [[credentialsId: 'automation-auth-token', url: "${config.git_url}"]]
     ]
-    sh "git config --global url.https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kds-platform/plugin.git.insteadOf https://gitlab.com/kds-platform/plugin.git"
 }
