@@ -37,6 +37,7 @@ def call() {
 }
 def checkout_code (config, branch) {
     echo "checkout branch ${branch}"
+    sh "git"
     checkout changelog: true, poll: true, scm: [
       $class: 'GitSCM',
       branches: [[name: "${branch}"]],
