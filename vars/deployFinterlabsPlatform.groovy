@@ -17,7 +17,7 @@ def helmFinterlabs(Map args) {
     kubectl get ns
     helm repo add helm-finterlabs https://artifactory.finterlabs.com/repository/finterlabs-helm-local/ --username admin --password @klik123
     helm repo update
-    helm upgrade --install ${args.platform} helm-finterlabs/${args.platform} -f values/${args.platform}.yaml -n testing
+    helm upgrade --install ${env.platform} helm-finterlabs/${env.platform} -f values/${env.platform}.yaml -n testing
     """
 }
 
