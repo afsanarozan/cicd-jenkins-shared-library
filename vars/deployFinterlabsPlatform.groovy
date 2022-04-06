@@ -4,8 +4,8 @@ def call() {
   echo "Let's Deploy Platform"
 
     container('base'){
-        withKubeConfig([credentialsId: DOcredential]) {
-            helmFinterlabs(service_name: config.service_name, name_space: namespace)
+        withKubeConfig([credentialsId: credential_tapera_dev_ali]) {
+            helmFinterlabs()
         }
     }       
 
