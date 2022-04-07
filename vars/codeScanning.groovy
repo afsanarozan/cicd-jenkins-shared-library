@@ -3,6 +3,7 @@ def call(Map envar) {
   echo "Running Code Review with SonarQube"
   def scanEnvar = [:]
   echo "environment is ${envar.environment}"
+  echo "${envar.language}"
   
   scanEnvar.scannerHome = tool "sonarscanner"
     if(envar.environment == 'sit' || envar.environment  == 'staging' || envar.environment  == 'production'){
