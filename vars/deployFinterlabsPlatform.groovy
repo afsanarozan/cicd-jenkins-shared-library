@@ -6,6 +6,8 @@ def call() {
         withKubeConfig([credentialsId: "credential_tapera_dev_ali"]) {
             installCli()
             dir("script") {
+            echo "${KUBECONFIG}"
+            sh "echo ${KUBECONFIG}"
             sh "cat deploy-platform.sh"
             sh "./deploy-platform.sh"
             sh "kubectl get ns"
