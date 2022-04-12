@@ -7,11 +7,8 @@ def call() {
             installCli()
             dir("script") {
             sh "./deploy-platform.sh"
+            sh "kubectl get ns"
             }
-            sh "echo testing"
-            sh "cat $KUBECONFIG"
-            sh "helm version"
-            sh "yq --version"
         }
     }
 }
