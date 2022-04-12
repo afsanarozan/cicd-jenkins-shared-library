@@ -23,9 +23,9 @@ def installCli(){
         apt-get upgrade
         apt-get update 
         apt-get install curl -y
-        curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
+        curl https://baltocdn.com/helm/signing.asc | apt-key add -
         apt-get install apt-transport-https --yes
-        echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+        echo "deb https://baltocdn.com/helm/stable/debian/ all main" | tee /etc/apt/sources.list.d/helm-stable-debian.list
         apt-get update
         apt-get install helm -y
         snap install yq
