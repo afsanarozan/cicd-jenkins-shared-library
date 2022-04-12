@@ -21,6 +21,7 @@ def installCli(){
         whoami
         apt-get upgrade
         apt-get update 
+        apt-get install curl -y 
         apt-get install wget -y
         apt-get install tar -y
         apt-get install snapd -y
