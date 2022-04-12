@@ -5,10 +5,9 @@ def call() {
   sh ""
     container('ubuntu') {
         installCli()
-        
         withKubeConfig([credentialsId: "credential_tapera_dev_ali"]) {
-            // helmFinterlabs()
-            sh "cat ${credentialsId}"
+            sh "echo testing"
+            sh "echo ${credentialsId}"
         }
     }
     // container('base'){
