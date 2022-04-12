@@ -2,7 +2,7 @@ def call() {
   
   sh "printenv | sort"
   echo "Let's Deploy Platform"
-    container('ubuntu') {
+    container('base') {
         withKubeConfig([credentialsId: "credential_tapera_dev_ali"]) {
             installCli()
             dir("script") {
@@ -10,11 +10,11 @@ def call() {
             }
         }
     }
-    container('base') {
-        withKubeConfig([credentialsId: "credential_tapera_dev_ali"]) {
-            sh "kubectl get ns"
-        }
-    }
+    // container('base') {
+    //     withKubeConfig([credentialsId: "credential_tapera_dev_ali"]) {
+    //         sh "kubectl get ns"
+    //     }
+    // }
 }
 
 def installCli(){
