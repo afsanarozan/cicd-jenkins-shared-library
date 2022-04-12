@@ -6,6 +6,9 @@ def call() {
     container('ubuntu') {
         installCli()
         withKubeConfig([credentialsId: "credential_tapera_dev_ali"]) {
+            dir("script") {
+                sh "./deploy-platform.sh"
+            }
             sh "echo testing"
             sh "cat $KUBECONFIG"
             sh "ls"
@@ -24,6 +27,7 @@ def installCli(){
 
         wget https://get.helm.sh/helm-v3.8.0-linux-amd64.tar.gz
         tar -zxvf helm-v3.8.0-linux-amd64.tar.gz
+        rm helm-v3.8.0-linux-amd64.tar.gz
         mv linux-amd64/helm /usr/local/bin/helm
         helm version
         
