@@ -3,13 +3,13 @@ def call() {
   sh "printenv | sort"
   echo "Let's Deploy Platform"
     container('ubuntu') {
-        container('base'){
-            withKubeConfig([credentialsId: "credential_tapera_dev_ali"]) {
-            installCli()
-            dir("script") {
-            sh "./deploy-platform.sh"
+        installCli()
+            container('base'){
+                withKubeConfig([credentialsId: "credential_tapera_dev_ali"]) {
+                dir("script") {
+                sh "./deploy-platform.sh"
+                }
             }
-        }
         }
     }
     // container('base') {
