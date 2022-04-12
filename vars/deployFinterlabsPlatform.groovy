@@ -7,8 +7,7 @@ def call() {
         installCli()
         withKubeConfig([credentialsId: "credential_tapera_dev_ali"]) {
             sh "echo testing"
-            sh "echo $KUBECONFIG"
-            sh "cat ~/.kube/config"
+            sh "cat $KUBECONFIG"
         }
     }
     // container('base'){
