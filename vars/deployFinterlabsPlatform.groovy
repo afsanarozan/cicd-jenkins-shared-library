@@ -7,7 +7,6 @@ def call() {
             installCli()
             dir("script") {
             deployApp()
-            sh "kubectl get ns"
             }
         }
     }
