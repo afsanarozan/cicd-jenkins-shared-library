@@ -22,9 +22,9 @@ def installCli(){
         whoami
         apt-get upgrade
         apt-get update 
-        apt-get install wget
-        apt-get install tar
-        
+        apt-get install wget -y
+        apt-get install tar -y
+
         wget https://get.helm.sh/helm-v3.8.0-linux-amd64.tar.gz
         tar -zxvf helm-v3.8.0-linux-amd64.tar.gz
         mv linux-amd64/helm /usr/local/bin/helm
