@@ -20,12 +20,12 @@ def call() {
 def installCli(){
     sh """
         whoami
-        apt-get upgrade
-        apt-get update 
-        apt-get install curl -y 
-        apt-get install wget -y
-        apt-get install tar -y
-        apt-get install snapd -y
+        yum upgrade
+        yum update 
+        yum install curl -y 
+        yum install wget -y
+        yum install tar -y
+        yum install snapd -y
 
         wget https://get.helm.sh/helm-v3.8.0-linux-amd64.tar.gz
         tar -zxvf helm-v3.8.0-linux-amd64.tar.gz
