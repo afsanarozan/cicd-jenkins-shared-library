@@ -11,6 +11,11 @@ def call() {
             }
         }
     }
+    container('base') {
+        withKubeConfig([credentialsId: "credential_tapera_dev_ali"]) {
+            sh "kubectl get ns"
+        }
+    }
 }
 
 def installCli(){
