@@ -21,6 +21,7 @@ def installCli(){
     sh """
         whoami
         apt-get upgrade
+        apt-get update
         apt-get install curl
         curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
         apt-get install apt-transport-https --yes
