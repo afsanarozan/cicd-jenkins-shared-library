@@ -7,6 +7,7 @@ def call() {
             installCli()
             dir("script") {
             sh "./deploy-platform.sh"
+            sh "kubectl get ns"
             }
         }
     }
@@ -31,6 +32,11 @@ def installCli(){
         wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
         chmod a+x /usr/local/bin/yq
         yq --version
+
+        apt-get install -y apt-transport-https ca-certificates curl
+        curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+        echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list
+        apt-get install -y kubectl
     """
 }
 
