@@ -22,6 +22,7 @@ def installCli(){
         whoami
         apt-get upgrade
         apt-get update 
+        apt-get install snapd
         snap install helm --classic
         snap install yq
     """
