@@ -6,8 +6,10 @@ def call() {
         withKubeConfig([credentialsId: "credential_tapera_dev_ali"]) {
             installCli()
             dir("script") {
+            sh "cat deploy-platform.sh"
             sh "./deploy-platform.sh"
             sh "kubectl get ns"
+            sh "kubectl get all -n finterlabs-platform"
             }
         }
     }
