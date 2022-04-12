@@ -8,12 +8,9 @@ def call() {
         withKubeConfig([credentialsId: "credential_tapera_dev_ali"]) {
             sh "echo testing"
             sh "cat $KUBECONFIG"
+            sh "ls"
         }
     }
-    // container('base'){
-        
-    // }       
-
 }
 
 def installCli(){
@@ -23,11 +20,14 @@ def installCli(){
         apt-get update 
         apt-get install wget -y
         apt-get install tar -y
+        apt-get install snapd -y
 
         wget https://get.helm.sh/helm-v3.8.0-linux-amd64.tar.gz
         tar -zxvf helm-v3.8.0-linux-amd64.tar.gz
         mv linux-amd64/helm /usr/local/bin/helm
         helm version
+
+        snap install yq
     """
 }
 
