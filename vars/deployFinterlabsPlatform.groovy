@@ -10,7 +10,8 @@ def call() {
             }
             sh "echo testing"
             sh "cat $KUBECONFIG"
-            sh "ls"
+            sh "helm version"
+            sh "yq --version"
         }
     }
 }
