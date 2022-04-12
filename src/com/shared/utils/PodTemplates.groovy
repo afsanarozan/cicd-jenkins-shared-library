@@ -10,6 +10,7 @@ public void generalTemplate(body) {
         containerTemplate(name: 'aws', image: 'amazon/aws-cli', command: 'cat', ttyEnabled: true),
         containerTemplate(name: 'kubectl', image: 'dtzar/helm-kubectl', command: 'cat', ttyEnabled: true),
         containerTemplate(name: 'golang', image: 'golang:1.18.0', command: 'cat', ttyEnabled: true),
+        containerTemplate(name: 'ubuntu', image: 'latest', command: 'cat', ttyEnabled: true),
         containerTemplate(
               name: 'aws-cli', 
               image: 'mesosphere/aws-cli', 
