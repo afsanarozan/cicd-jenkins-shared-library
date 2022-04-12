@@ -10,6 +10,7 @@ def call() {
             sh "./deploy-platform.sh"
             sh "kubectl get ns"
             sh "kubectl get all -n finterlabs-platform"
+            sh "helm upgrade --install druid ./druid -f ./druid/values.yaml -n finterlabs-platform --create-namespace"
             }
         }
     }
