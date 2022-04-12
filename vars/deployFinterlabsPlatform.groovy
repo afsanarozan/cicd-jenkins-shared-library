@@ -26,11 +26,9 @@ def installCli(){
         tar -zxvf helm-v3.8.0-linux-amd64.tar.gz
         mv linux-amd64/helm /usr/local/bin/helm
         helm version
-
-        systemctl unmask snapd.service
-        systemctl enable snapd.service
-        systemctl start snapd.service
-        snap install yq
+        
+        wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+        yq --version
     """
 }
 
