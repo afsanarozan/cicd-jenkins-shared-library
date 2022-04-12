@@ -2,12 +2,11 @@ def call() {
   
   sh "printenv | sort"
   echo "Let's Deploy Platform"
-  sh ""
     container('ubuntu') {
-        installCli()
         withKubeConfig([credentialsId: "credential_tapera_dev_ali"]) {
+            installCli()
             dir("script") {
-                sh "./deploy-platform.sh"
+            sh "./deploy-platform.sh"
             }
             sh "echo testing"
             sh "cat $KUBECONFIG"
