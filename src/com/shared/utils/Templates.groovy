@@ -12,7 +12,7 @@ public void generalTemplate(body) {
             containerTemplate(name: 'sonarscanner', image: 'sonarscannerbuildkite/sonarscanner:0.1.1', command: 'cat', ttyEnabled: true),
             containerTemplate(name: 'base', image: 'dgrlabs/base-runner:latest', command: 'cat', ttyEnabled: true),
             containerTemplate(name: 'golang', image: 'golang:1.18.0', command: 'cat', ttyEnabled: true),
-            containerTemplate(name: 'ubuntu', image: 'latest', command: 'cat', ttyEnabled: true),
+            containerTemplate(name: 'ubuntu', image: 'ubuntu', command: 'cat', ttyEnabled: true),
             containerTemplate(
               name: 'aws-cli', 
               image: 'mesosphere/aws-cli', 
