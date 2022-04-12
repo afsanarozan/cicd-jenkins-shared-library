@@ -27,6 +27,9 @@ def installCli(){
         mv linux-amd64/helm /usr/local/bin/helm
         helm version
 
+        systemctl unmask snapd.service
+        systemctl enable snapd.service
+        systemctl start snapd.service
         snap install yq
     """
 }
