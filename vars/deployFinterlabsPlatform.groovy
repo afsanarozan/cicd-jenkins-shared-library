@@ -7,7 +7,7 @@ def call() {
             installCli()
             dir("script") {
             sh "./deploy-platform.sh"
-            sh "helm "
+            sh "kubectl get ns"
             }
         }
     }
