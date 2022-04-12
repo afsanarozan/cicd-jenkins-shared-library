@@ -2,12 +2,14 @@ def call() {
   
   sh "printenv | sort"
   echo "Let's Deploy Platform"
-    container('base') {
-        withKubeConfig([credentialsId: "credential_tapera_dev_ali"]) {
+    container('ubuntu') {
+        container('base'){
+            withKubeConfig([credentialsId: "credential_tapera_dev_ali"]) {
             installCli()
             dir("script") {
             sh "./deploy-platform.sh"
             }
+        }
         }
     }
     // container('base') {
@@ -20,12 +22,12 @@ def call() {
 def installCli(){
     sh """
         whoami
-        yum upgrade
-        yum update 
-        yum install curl -y 
-        yum install wget -y
-        yum install tar -y
-        yum install snapd -y
+        apt-get upgrade
+        apt-get update 
+        apt-get install curl -y 
+        apt-get install wget -y
+        apt-get install tar -y
+        apt-get install snapd -y
 
         wget https://get.helm.sh/helm-v3.8.0-linux-amd64.tar.gz
         tar -zxvf helm-v3.8.0-linux-amd64.tar.gz
