@@ -11,7 +11,7 @@ def call() {
                 }
             } 
         } else {
-            echo "skip"
+            echo "${env.platform}"
         } 
     }
 }
