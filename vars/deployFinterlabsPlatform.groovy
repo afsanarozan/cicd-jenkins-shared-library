@@ -10,6 +10,7 @@ def call() {
                 }
             } else {
                 echo "let's install ${env.platform}"
+                installCli()
                 deployPlatform()
             }   
         } 
