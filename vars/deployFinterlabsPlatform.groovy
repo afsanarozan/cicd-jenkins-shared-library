@@ -47,6 +47,10 @@ def installCli(){
 def deployPlatform() {
     sh """
         ls
+        . config/finterlabs-env.sh
+        helm repo add helm-finterlabs https://artifactory.finterlabs.com/repository/finterlabs-helm-local/ --username ${HELM_USER} --password ${HELM_PASSWORD}
+        helm repo update
+        helm upgrade --install ${env.platform} helm-finterlabs/${env.platform} -n finterlabs-platform
     """
 }
 
