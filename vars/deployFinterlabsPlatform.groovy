@@ -44,7 +44,7 @@ def installCli(){
     """
 }
 
-def deployPlatform(Map args) {
+def deployPlatform() {
     sh """
     ls
     #helm repo add helm-finterlabs https://artifactory.finterlabs.com/repository/finterlabs-helm-local/ --username ${HELM_USER} --password ${HELM_PASSWORD}
