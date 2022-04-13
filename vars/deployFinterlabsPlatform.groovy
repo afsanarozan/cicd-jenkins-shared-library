@@ -51,7 +51,7 @@ def deployPlatform(Map args) {
         . config/finterlabs-env.sh
         helm repo add helm-finterlabs https://artifactory.finterlabs.com/repository/finterlabs-helm-local/ --username admin --password @klik123
         helm repo update
-        helm upgrade --install ${env.platform} helm-finterlabs/${env.pLat_form} -n finterlabs-platform
+        helm upgrade --install ${env.platform} helm-finterlabs/${env.platform} -n finterlabs-platform
     """
     sh "echo  ${args.HELM_USER}"
     echo "${HELM_USER}"
