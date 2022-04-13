@@ -1,5 +1,4 @@
 def call() {
-  
     sh "printenv | sort"
     echo "Let's Deploy Platform"
     container('ubuntu') {
@@ -10,7 +9,8 @@ def call() {
                 sh "./deploy-platform.sh"
                 }
             } else {
-                echo "install ${env.platform}"
+                echo "let's install ${env.platform}"
+                deployPlatform()
             }   
         } 
     }
@@ -44,12 +44,13 @@ def installCli(){
     """
 }
 
-def helmFinterlabs(Map args) {
+def deployPlatform(Map args) {
     sh """
     ls
-    helm repo add helm-finterlabs https://artifactory.finterlabs.com/repository/finterlabs-helm-local/ --username admin --password @klik123
+    ./config/finterlabs-env.sh  
+    helm repo add helm-finterlabs https://artifactory.finterlabs.com/repository/finterlabs-helm-local/ --username ${HELM_USER} --password ${HELM_PASSWORD}
     helm repo update
-    helm upgrade --install ${env.platform} helm-finterlabs/${env.platform} -f values/${env.platform}.yaml -n testing
+    helm upgrade --install ${env.platform} helm-finterlabs/${env.platform} -n finterlabs-platform
     """
 }
 
