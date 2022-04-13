@@ -1,18 +1,17 @@
 def call() {
+  
     sh "printenv | sort"
     echo "Let's Deploy Platform"
     container('ubuntu') {
-        withKubeConfig([credentialsId: "credential_tapera_dev_ali"]) {
-            if (env.platform == "----------all platform enabled----------") {
+        if (env.platform == "----------all platform enabled----------"){
+           withKubeConfig([credentialsId: "credential_tapera_dev_ali"]) {
                 installCli()
                 dir("script") {
                 sh "./deploy-platform.sh"
                 }
-            } else {
-                echo "let's install ${env.platform}"
-                installCli()
-                deployPlatform()
-            }   
+            } 
+        } else {
+            echo "let's install ${env.platform}"
         } 
     }
 }
@@ -45,16 +44,14 @@ def installCli(){
     """
 }
 
-def deployPlatform(Map args) {
+def helmFinterlabs(Map args) {
     sh """
-        ls
-        . config/finterlabs-env.sh
-        helm repo add helm-finterlabs https://artifactory.finterlabs.com/repository/finterlabs-helm-local/ --username admin --password @klik123
-        helm repo update
-        helm upgrade --install ${env.platform} helm-finterlabs/${env.platform} -n finterlabs-platform
+    ls
+    kubectl get ns
+    helm repo add helm-finterlabs https://artifactory.finterlabs.com/repository/finterlabs-helm-local/ --username admin --password @klik123
+    helm repo update
+    helm upgrade --install ${env.platform} helm-finterlabs/${env.platform} -f values/${env.platform}.yaml -n testing
     """
-    sh "echo  ${args.HELM_USER}"
-    echo "${HELM_USER}"
 }
 
 
