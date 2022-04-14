@@ -12,6 +12,7 @@ def call() {
             } 
         } else {
             echo "let's install ${env.platform}"
+            deploy()
         } 
     }
 }
@@ -44,13 +45,29 @@ def installCli(){
     """
 }
 
-def helmFinterlabs(Map args) {
+def deploy(Map args) {
     sh """
     ls
     kubectl get ns
     helm repo add helm-finterlabs https://artifactory.finterlabs.com/repository/finterlabs-helm-local/ --username admin --password @klik123
     helm repo update
-    helm upgrade --install ${env.platform} helm-finterlabs/${env.platform} -f values/${env.platform}.yaml -n testing
+    helm pull helm-finterlabs/${env.platform}
+
+    tar -zxvf ${env.platform}*.tgz
+
+    if [ -f "../helm-chart/${env.platform}.yaml" ]; then
+      echo Merge HELM chart default and custom ${env.platform} : ../helm-chart/${env.platform}.yaml '->' ./${env.platform}/values.yaml
+      echo ---------------------------------------------------------------------------------------------------------------
+      yq eval-all "select(fileIndex == 0) *+ select(fileIndex == 1)"  ./${env.platform}/values.yaml ../helm-chart/${env.platform}.yaml >  ./${env.platform}/values.yaml.new
+      mv ./${env.platform}/values.yaml.new ./${env.platform}/values.yaml
+
+      #Replace DOMAIN for ingress
+      sed -i.bak  -e 's/${DOMAIN}/'${DOMAIN}'/g' \
+                  -e 's/${PROJECT}/'${PROJECT}'/g' ./${env.platform}/values.yaml 
+   fi
+
+    cat ./${env.platform}/values.yaml 
+    helm upgrade --install ${env.platform} helm-finterlabs/${env.platform} -f values/${env.platform}.yaml -n finterlabs-platform --create-namespace
     """
 }
 
