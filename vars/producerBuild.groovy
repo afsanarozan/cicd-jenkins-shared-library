@@ -11,7 +11,7 @@ def call() {
                 }
 
         files.each {f ->
-            if (f.directory) {
+            if (f.directory && !f.directory.is('.git')) {
                 dir(f.name) {
                     sh 'pwd'
                     String name = "${env.DOCKER_FLABS}/${env.GROUP_IMAGE}/${env.GROUP_NAME}-${f.name}:${env.IMAGE_TAG}"
