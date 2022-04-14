@@ -1,5 +1,6 @@
 def call() {
-    def files = findFiles()
+    def shOutput = sh( returnStdout: true, script: 'find * -maxdepth 0 -type d' )
+    def directories = shOutput.trim().split('\r?\n')
 
     container('docker') {
         withCredentials(
@@ -10,15 +11,13 @@ def call() {
                 sh 'docker login $DOCKER_FLABS -u $USERNAME -p $PASSWORD'
                 }
 
-        files.each {f ->
-            if (f.directory && !f.directory.is('.git')) {
-                dir(f.name) {
+            for (f in directories) {
+            dir(f) {
                     sh 'pwd'
-                    String name = "${env.DOCKER_FLABS}/${env.GROUP_IMAGE}/${env.GROUP_NAME}-${f.name}:${env.IMAGE_TAG}"
+                    String name = "${env.DOCKER_FLABS}/${env.GROUP_IMAGE}/${env.GROUP_NAME}-${f}:${env.IMAGE_TAG}"
                     dockerBuilder(name)
-                }
             }
-        }
+            }
     }
 }
 
