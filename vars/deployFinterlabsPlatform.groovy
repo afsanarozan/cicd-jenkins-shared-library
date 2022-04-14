@@ -62,7 +62,7 @@ def deployApp(Map args) {
         yq eval-all "select(fileIndex == 0) *+ select(fileIndex == 1)"  ./${args.platform}/values.yaml helm-chart/${args.platform}.yaml >  ./${args.platform}/values.yaml.new
         mv ./${args.platform}/values.yaml.new ./${args.platform}/values.yaml
 
-        cat ${args.DOMAIN}
+        echo ${args.DOMAIN}
     fi 
 
          cat ./${args.platform}/values.yaml
