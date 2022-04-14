@@ -8,7 +8,14 @@ def call(String service) {
 
 def dockerBuilder(String name) {
     container('docker') {
+        withCredentials(
+            [usernamePassword(
+                credentialsId: 'artifactory-finterlabs',
+                usernameVariable: 'USERNAME',
+                passwordVariable: 'PASSWORD')]) {
+                sh "docker login ${env.DOCKER_FLABS} -u ${USERNAME} -p ${PASSWORD}"
+         }
         sh "docker build -t ${name} ."
-        sh "docker push ${name} -u admin -p @klik123 "
+        sh "docker push ${name}"
     }
 }
