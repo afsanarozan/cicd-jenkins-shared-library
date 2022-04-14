@@ -1,5 +1,4 @@
 def call() {
-  
     sh "printenv | sort"
     echo "Let's Deploy Platform"
     container('ubuntu') {
@@ -12,7 +11,9 @@ def call() {
             } 
         } else {
             echo "let's install ${env.platform}"
-            deploy()
+            withKubeConfig([credentialsId: "credential_tapera_dev_ali"]) {
+                deployApp()
+            }
         } 
     }
 }
@@ -45,7 +46,7 @@ def installCli(){
     """
 }
 
-def deploy(Map args) {
+def deployApp() {
     sh """
     ls
     kubectl get ns
