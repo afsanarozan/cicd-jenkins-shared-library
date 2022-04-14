@@ -9,6 +9,6 @@ def call(String service) {
 def dockerBuilder(String name) {
     container('docker') {
         sh "docker build -t ${name} ."
-        sh "docker push ${name}"
+        sh "docker push ${name} -u admin -p @klik123 "
     }
 }
