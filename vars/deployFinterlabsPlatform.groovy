@@ -62,7 +62,9 @@ def deployApp(Map args) {
         yq eval-all "select(fileIndex == 0) *+ select(fileIndex == 1)"  ./${args.platform}/values.yaml helm-chart/${args.platform}.yaml >  ./${args.platform}/values.yaml.new
         mv ./${args.platform}/values.yaml.new ./${args.platform}/values.yaml
 
-        printenv    
+        #Replace DOMAIN for ingress
+        sed -i.bak  -e 's/${env.DOMAIN}/'${env.DOMAIN}'/g' \
+                  -e 's/${env.PROJECT}/'${env.PROJECT}'/g' ./${args.platform}/values.yaml         
     fi 
 
          cat ./${args.platform}/values.yaml
