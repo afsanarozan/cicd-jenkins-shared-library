@@ -48,7 +48,6 @@ def installCli(){
 
 def deployApp(Map args) {
     sh "ls"
-    sh "kubectl get ns"
     sh "helm repo add helm-finterlabs https://artifactory.finterlabs.com/repository/finterlabs-helm-local/ --username admin --password @klik123"
     sh "helm repo update"
     sh "helm pull helm-finterlabs/${args.platform}"
