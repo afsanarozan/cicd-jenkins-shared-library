@@ -16,6 +16,6 @@ def dockerBuilder(String name) {
                 sh "docker login ${env.DOCKER_FLABS} -u ${USERNAME} -p ${PASSWORD}"
          }
         sh "docker build -t ${name} ."
-        sh "docker push ${name} -u admin -p @klik123 "
+        sh "docker push ${name}"
     }
 }
