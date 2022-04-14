@@ -12,6 +12,7 @@ def call() {
         } else {
             echo "let's install ${env.platform}"
             withKubeConfig([credentialsId: "credential_tapera_dev_ali"]) {
+                installCli()
                 deployApp(platform: env.platform)
             }
         } 
