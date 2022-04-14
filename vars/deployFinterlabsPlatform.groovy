@@ -46,7 +46,7 @@ def installCli(){
     """
 }
 
-def deployApp() {
+def deployApp(Map args) {
     sh """
     ls
     kubectl get ns
