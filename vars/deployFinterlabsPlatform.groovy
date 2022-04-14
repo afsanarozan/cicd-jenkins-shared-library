@@ -13,7 +13,8 @@ def call() {
             echo "let's install ${env.platform}"
             withKubeConfig([credentialsId: "credential_tapera_dev_ali"]) {
                 installCli()
-                deployApp(platform: env.platform)
+                sh " . ./config/finterlabs-env.sh"
+                deployApp(platform: env.platform, domain: env.DOMAIN, project: env.PROJECT)
             }
         } 
     }
@@ -55,16 +56,14 @@ def deployApp(Map args) {
     sh "tar -xf ${args.platform}*.tgz"
     sh """ 
     if [ -f "helm-chart/${args.platform}.yaml" ]; then 
-        
-        . ./config/finterlabs-env.sh
         echo Merge HELM chart default and custom ${args.platform} : helm-chart/${args.platform}.yaml '->' ./${args.platform}/values.yaml
         echo ---------------------------------------------------------------------------------------------------------------
         yq eval-all "select(fileIndex == 0) *+ select(fileIndex == 1)"  ./${args.platform}/values.yaml helm-chart/${args.platform}.yaml >  ./${args.platform}/values.yaml.new
         mv ./${args.platform}/values.yaml.new ./${args.platform}/values.yaml
 
         #Replace DOMAIN for ingress
-        sed -i.bak  -e 's/${env.DOMAIN}/'${env.DOMAIN}'/g' \
-                  -e 's/${env.PROJECT}/'${env.PROJECT}'/g' ./${args.platform}/values.yaml         
+        sed -i.bak  -e 's/${args.domain}/'${args.domain}'/g' \
+                  -e 's/${args.project}/'${args.domain}'/g' ./${args.platform}/values.yaml         
     fi 
 
          cat ./${args.platform}/values.yaml
