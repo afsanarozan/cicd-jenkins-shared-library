@@ -57,20 +57,17 @@ def deployApp(Map args) {
     if [ -f "helm-chart/${args.platform}.yaml" ]; then 
         
         . ./config/finterlabs-env.sh
-        cat helm-chart/${args.platform}.yaml
         echo Merge HELM chart default and custom ${args.platform} : helm-chart/${args.platform}.yaml '->' ./${args.platform}/values.yaml
         echo ---------------------------------------------------------------------------------------------------------------
         yq eval-all "select(fileIndex == 0) *+ select(fileIndex == 1)"  ./${args.platform}/values.yaml helm-chart/${args.platform}.yaml >  ./${args.platform}/values.yaml.new
         mv ./${args.platform}/values.yaml.new ./${args.platform}/values.yaml
-        
-        cat ./${args.platform}/values.yaml
 
         #Replace DOMAIN for ingress
         sed -i.bak  -e 's/${DOMAIN}/'${DOMAIN}'/g' \
-                  -e 's/${PROJECT}/'${PROJECT}'/g' ./${args.platform}/values.yaml 
-
+                  -e 's/${PROJECT}/'${PROJECT}'/g' ./${args.platform}/values.yaml         
     fi 
-    
+
+         cat ./${args.platform}/values.yaml
     """ 
 }
 
