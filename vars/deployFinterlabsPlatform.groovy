@@ -52,6 +52,15 @@ def deployApp(Map args) {
     sh "helm repo add helm-finterlabs https://artifactory.finterlabs.com/repository/finterlabs-helm-local/ --username admin --password @klik123"
     sh "helm repo update"
     sh "helm pull helm-finterlabs/${args.platform}"
+    sh "tar -xf ${args.platform}*.tgz"
+    sh """ 
+    if [ -f "helm-chart/${args.platform}.yaml" ]; then 
+        
+        cat helm-chart/${args.platform}.yaml
+
+    fi 
+    
+    """ 
 }
 
 
