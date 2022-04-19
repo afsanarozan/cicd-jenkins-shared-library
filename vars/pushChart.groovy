@@ -1,6 +1,6 @@
 def call(Map envar) {
     def config = pipelineCfg()
-    def setting = checkoutCode()
+    def envar = checkoutCode()
     echo "Running Helm Push"
 
     if (envar.environment  == 'production') {
