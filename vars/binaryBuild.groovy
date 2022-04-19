@@ -4,7 +4,7 @@ def call(Map args){
     sh "echo binary build"
 
     if (envar.environment  == 'production') {
-        envar.environment = 'alpha'
+        envar.environment = 'release'
     } else if (envar.environment  == 'staging') {
         envar.environment = 'beta' 
     } else {
@@ -12,14 +12,14 @@ def call(Map args){
     }
 
     echo "${envar.environment}"
-    
+
     if(envar.environment == 'alpha' || envar.environment  == 'beta'){
         container ('golang'){
         sh 'ls'
             buildBinary(service_name: config.service_name, version: envar.version, )
         }
         container('aws-cli'){
-            pushBinary(service_name: config.service_name, spaces_url: config.spaces_url, environment: envar.environment)
+            pushBinary(service_name: config.service_name, spaces_url: config.spaces_url, environment: envar.environment, application_name: envar.application_name)
         }
     }
 }
@@ -37,5 +37,5 @@ def buildBinary(Map args) {
 
 def pushBinary(Map args) {
     echo "Push Chart"
-    sh "aws s3 cp ${args.service_name} --endpoint-url ${args.spaces_url} s3://binary-build/${args.environment}/"
+    sh "aws s3 cp ${args.service_name} --endpoint-url ${args.spaces_url} s3://binary-build/${args.application_name}/${args.environment}/"
 }
