@@ -6,7 +6,7 @@ def call() {
            withKubeConfig([credentialsId: "credential_tapera_dev_ali"]) {
                 installCli()
                 dir("script") {
-                bash "deploy-platform.sh"
+                sh "bash deploy-platform.sh"
                 }
             } 
         } else {
