@@ -2,10 +2,21 @@ def call(Map args){
     def config = pipelineCfg()
     def envar = checkoutCode()
     sh "echo binary build"
-    if(envar.environment == 'dev' || envar.environment  == 'staging'){
+
+    if (envar.environment  == 'production') {
+        envar.environment = 'alpha'
+    } else if (envar.environment  == 'staging') {
+        envar.environment = 'beta' 
+    } else {
+        envar.environment = 'alpha'
+    }
+
+    echo "${envar.environment}"
+    
+    if(envar.environment == 'alpha' || envar.environment  == 'beta'){
         container ('golang'){
         sh 'ls'
-            buildBinary(service_name: config.service_name, version: envar.version)
+            buildBinary(service_name: config.service_name, version: envar.version, )
         }
         container('aws-cli'){
             pushBinary(service_name: config.service_name, spaces_url: config.spaces_url, environment: envar.environment)
