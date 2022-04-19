@@ -2,6 +2,14 @@ def call(Map envar) {
     def config = pipelineCfg()
     def setting = checkoutCode()
     echo "Running Helm Push"
+
+    if (envar.environment  == 'production') {
+        envar.environment = 'release'
+    } else if (envar.environment  == 'staging') {
+        envar.environment = 'beta' 
+    } else {
+        envar.environment = 'alpha'
+    }
     
     dir('Charts') {
         sh "ls"
@@ -13,6 +21,6 @@ def call(Map envar) {
 
 def pushChart(Map args) {
     echo "Push Chart"
-    sh "aws s3 cp ${args.service_name}-*.tgz --endpoint-url ${args.spaces_url} s3://helm-charts/${args.namespace}/beta/${args.service_name}-${args.dstVersion}.tgz"
+    sh "aws s3 cp ${args.service_name}-*.tgz --endpoint-url ${args.spaces_url} s3://helm-charts/${args.namespace}/${envar.environment}/${args.service_name}-${args.dstVersion}.tgz"
     // sh "aws s3 cp s3://helm-charts/${args.namespace}/beta/${args.service_name}-*.tgz s3://helm-charts/${args.namespace}/beta/${args.service_name}-${args.dstVersion}.tgz"
 }
