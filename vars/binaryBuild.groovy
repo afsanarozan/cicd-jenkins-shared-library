@@ -37,6 +37,6 @@ def buildBinary(Map args) {
 
 def pushBinary(Map args) {
     echo "Push Chart"
-    //sh "aws s3 cp s3://binary-build/${args.application_name}/${args.environment}/${args.service_name} --endpoint-url ${args.spaces_url} s3://binary-build/${args.application_name}/${args.environment}/${args.service_name}-${args.dstVersion}"
+    sh "aws s3 cp s3://binary-build/${args.application_name}/${args.environment}/${args.service_name} --endpoint-url ${args.spaces_url} s3://binary-build/${args.application_name}/${args.environment}/${args.service_name}-${args.dstVersion}"
     sh "aws s3 cp ${args.service_name} --endpoint-url ${args.spaces_url} s3://binary-build/${args.application_name}/${args.environment}/${args.service_name}"
 }
