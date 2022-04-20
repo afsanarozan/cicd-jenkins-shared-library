@@ -56,7 +56,7 @@ def helmnonprod(Map args) {
     sh """
     ls
     kubectl get ns
-    helm upgrade ${args.service_name} --install Charts/${args.service_name} -f ${values} -n ${args.name_space} --set image.tag=${env}-${BUILD_NUMBER} --create-namespace
+    helm upgrade ${args.service_name} --install Charts/${args.service_name} -f ${values} -n ${args.name_space} --create-namespace --set image.tag=${env}-${BUILD_NUMBER} 
     """
 }
 
@@ -64,7 +64,7 @@ def helmprod(Map args) {
     sh """
     ls
     kubectl get ns
-    helm upgrade ${args.service_name} --install Charts/${args.service_name} -f ${values} -n ${args.name_space} --set image.tag=${args.dstVersion} --create-namespace
+    helm upgrade ${args.service_name} --install Charts/${args.service_name} -f ${values} -n ${args.name_space} --create-namespace --set image.tag=${args.dstVersion} 
     """
 }
 
