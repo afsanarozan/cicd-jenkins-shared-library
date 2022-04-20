@@ -71,7 +71,7 @@ def goEnv() {
         git config --global url."https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kliklab/libs.git".insteadOf "https://gitlab.com/kliklab/libs.git"
         
         rm -rdf /home/jenkins/go/pkg/mod/github.com/hashicorp/vault@v0.11.5/api
-        go mod tidy -v
+        go mod tidy -e
 
         go get -u golang.org/x/lint/golint
         golint -set_exit_status ./controller/...
