@@ -70,6 +70,7 @@ def goEnv() {
 
         git config --global url."https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kliklab/libs.git".insteadOf "https://gitlab.com/kliklab/libs.git"
         
+        go mod tidy -v
 
         go get -u golang.org/x/lint/golint
         golint -set_exit_status ./controller/...
