@@ -28,8 +28,9 @@ def buildBinary(Map args) {
     sh """
         go version
         git config --global url.https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kds-platform/plugin.git.insteadOf https://gitlab.com/kds-platform/plugin.git
+        git config --global url."https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kliklab/jose-ported.git".insteadOf "https://gitlab.com/kliklab/jose-ported.git"
         go mod verify
-        go mod tidy -v 
+        go mod tidy -e 
         go build -o ${args.service_name}  
         ls -la
     """
