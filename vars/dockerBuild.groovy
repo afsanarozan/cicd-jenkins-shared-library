@@ -19,13 +19,11 @@ def call() {
 }
 
 def dockerBuild(Map args) {
-  sh "docker rmi -f $(docker images -aq)"
   sh "docker build -t ${args.registry_url}/${args.image_name}:${args.image_version} ."
   sh 'docker images'
 }      
 
 def dockerBuild2(Map args) {
-  sh "docker rmi -f $(docker images -aq)"
   sh "docker build -t ${args.registry_url}/${args.image_name}:${args.dstVersion} ."
   sh 'docker images'
 }
