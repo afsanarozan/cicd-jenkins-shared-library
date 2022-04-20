@@ -70,10 +70,6 @@ def goEnv() {
 
         git config --global url."https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kliklab/libs.git".insteadOf "https://gitlab.com/kliklab/libs.git"
         
-        go get -u github.com/hashicorp/vault/api@v1.5.0
-        go build -mod=mod
-        go mod vendor
-        go mod tidy -v
 
         go get -u golang.org/x/lint/golint
         golint -set_exit_status ./controller/...
