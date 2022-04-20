@@ -1,5 +1,5 @@
 def call() {
-//  def config = pipelineCfg()
+    def config = pipelineCfg()
 //  def envar = checkoutTagging()
   sh 'echo Runnning Unit Testing'
   sh 'ls'
