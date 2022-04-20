@@ -71,6 +71,8 @@ def goEnv() {
 
         git config --global url."https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kliklab/libs.git".insteadOf "https://gitlab.com/kliklab/libs.git"
         
+        go get github.com/hashicorp/vault/api
+        
         go mod tidy -e
         go mod tidy -v
 
