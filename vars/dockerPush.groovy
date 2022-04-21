@@ -1,7 +1,7 @@
 def call() {
    def config = pipelineCfg()
    def envar = checkoutCode()
-    envar.tag = sh(script: 'git tag | tail -1 ', returnStdout: true)
+    envar.tag = sh(script: 'git tag | grep $(date +%d%m%y) | tail -1', returnStdout: true)
     echo "image-tag ${envar.tag}"
     if(envar.branch == '*/development' || envar.environment  == 'staging'){
         container('docker') {

@@ -3,7 +3,7 @@ def call() {
   def envar = checkoutCode()
   
   sh "printenv | sort"
-  envar.tag = sh(script: 'git tag | tail -1 ', returnStdout: true)
+  envar.tag = sh(script: 'git tag | grep $(date +%d%m%y) | tail -1', returnStdout: true)
   echo "test ${envar.tag}"
 
 switch(envar.version) {
