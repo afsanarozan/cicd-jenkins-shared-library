@@ -1,6 +1,8 @@
 def call() {
-    def shOutput = sh( returnStdout: true, script: 'find * -maxdepth 0 -type d' )
-    def directories = shOutput.trim().split('\r?\n')
+    def directories = sh(
+            returnStdout: true,
+            script: 'find * -maxdepth 0 -type d')
+            .trim().split('\r?\n')
 
     container('docker') {
         withCredentials(
