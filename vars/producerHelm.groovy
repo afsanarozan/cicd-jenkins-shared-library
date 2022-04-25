@@ -6,7 +6,7 @@ def call() {
 
      echo "list dir ${chartdir}"
 
-     container('helm') {
+     container('base') {
         sh 'helm plugin install --version master $NEXUS_PLUGIN'
         withCredentials(
             [usernamePassword(
