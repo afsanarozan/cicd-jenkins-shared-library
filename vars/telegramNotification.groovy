@@ -12,7 +12,7 @@ def call(String buildStatus = 'STARTED') {
             notificationsStarted(subject: subject, summary: summary, telegram_chatid: telegram_chatid, telegram_url:telegram_url)
         } else if (buildStatus == 'SUCCESS') {
             notifications(telegram_url: config.telegram_url, telegram_chatid: config.telegram_chatid, job: env.JOB_NAME, job_numb: env.BUILD_NUMBER, job_url: env.BUILD_URL)
-        } else {
+        } else if (buildStatus == 'FAILURE'){
             echo "passed"
         }
         // notifications(telegram_url: config.telegram_url, telegram_chatid: config.telegram_chatid, job: env.JOB_NAME, job_numb: env.BUILD_NUMBER, job_url: env.BUILD_URL)
