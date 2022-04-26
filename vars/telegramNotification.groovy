@@ -5,6 +5,7 @@ def call(String buildStatus) {
     def telegram_url    = "https://api.telegram.org/bot5117336515:AAFGksphWynQnpMlsF9dbqruHgFGRiM9-pw/sendMessage"
 
     echo "Job Success"
+    echo "${buildStatus}"
     container('curl'){  
         if (buildStatus == 'STARTED') {
             notificationsStarted(buildStatus: buildStatus, telegram_chatid: telegram_chatid, telegram_url:telegram_url, JOB_NAME:env.JOB_NAME, BUILD_NUMBER:env.BUILD_NUMBER, BUILD_URL:env.BUILD_URL)
