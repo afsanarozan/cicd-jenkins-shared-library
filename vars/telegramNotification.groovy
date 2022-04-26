@@ -1,5 +1,8 @@
 def call(String buildStatus) {
-    def config = pipelineCfg()
+    // build status of null means successful
+    buildStatus = buildStatus ?: 'SUCCESS'
+
+    def config = pipelineCfg() 
 
     def telegram_chatid = -784775712
     def telegram_url    = "https://api.telegram.org/bot5117336515:AAFGksphWynQnpMlsF9dbqruHgFGRiM9-pw/sendMessage"
@@ -9,11 +12,11 @@ def call(String buildStatus) {
     container('curl'){  
         if (buildStatus == 'STARTED') {
             notificationsStarted(buildStatus: buildStatus, telegram_chatid: telegram_chatid, telegram_url:telegram_url, JOB_NAME:env.JOB_NAME, BUILD_NUMBER:env.BUILD_NUMBER, BUILD_URL:env.BUILD_URL)
-        } else if (buildStatus == 'FAILED'){
+        } else if (buildStatus == 'SUCCESS'){
             echo "${buildStatus}"
             notifications(buildStatus: buildStatus, telegram_chatid: telegram_chatid, telegram_url:telegram_url, JOB_NAME:env.JOB_NAME, BUILD_NUMBER:env.BUILD_NUMBER, BUILD_URL:env.BUILD_URL)
         }   else {
-            notifications(buildStatus: "SUCCESS", telegram_chatid: telegram_chatid, telegram_url:telegram_url, JOB_NAME:env.JOB_NAME, BUILD_NUMBER:env.BUILD_NUMBER, BUILD_URL:env.BUILD_URL)
+            notifications(buildStatus: buildStatus, telegram_chatid: telegram_chatid, telegram_url:telegram_url, JOB_NAME:env.JOB_NAME, BUILD_NUMBER:env.BUILD_NUMBER, BUILD_URL:env.BUILD_URL)
         }
         // notifications(telegram_url: config.telegram_url, telegram_chatid: config.telegram_chatid, job: env.JOB_NAME, job_numb: env.BUILD_NUMBER, job_url: env.BUILD_URL)
         // echo "${env.BUILD_URL}"
