@@ -3,13 +3,11 @@ def call(String buildStatus = 'STARTED') {
 
     def telegram_chatid = -784775712
     def telegram_url    = "https://api.telegram.org/bot5117336515:AAFGksphWynQnpMlsF9dbqruHgFGRiM9-pw/sendMessage"
-    def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
-    def summary = "${subject} (${env.BUILD_URL})"
 
     echo "Job Success"
     container('curl'){  
         if (buildStatus == 'STARTED') {
-            notificationsStarted(subject: subject, summary: summary, telegram_chatid: telegram_chatid, telegram_url:telegram_url)
+            notificationsStarted(buildStatus: buildStatus, telegram_chatid: telegram_chatid, telegram_url:telegram_url, JOB_NAME:env.JOB_NAME, BUILD_NUMBER:env.BUILD_NUMBER, BUILD_URL:env.BUILD_URL)
             echo "${buildStatus}"
         } else if (buildStatus == 'SUCCESS') {
             notifications(telegram_url: config.telegram_url, telegram_chatid: config.telegram_chatid, job: env.JOB_NAME, job_numb: env.BUILD_NUMBER, job_url: env.BUILD_URL)
@@ -24,7 +22,10 @@ def call(String buildStatus = 'STARTED') {
 }
 
 def notificationsStarted (Map args) {
+    def subject = "${args.buildStatus}: Job '${args.JOB_NAME} [${args.BUILD_NUMBER}]'"
+    def summary = "${subject} (${args.BUILD_URL})"
     def message = "${args.summary}"
+
     sh "curl -s -X POST ${args.telegram_url} -d chat_id=${args.telegram_chatid} -d text='${message}'"
 }
 def notifications(Map args) {
