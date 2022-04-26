@@ -22,8 +22,8 @@ def call(String buildStatus = 'STARTED') {
 }
 
 def notificationsStarted (Map args) {
-    def subject = "${args.buildStatus}: Job '${args.JOB_NAME} [${args.BUILD_NUMBER}]'"
-    def message = "${subject} (${args.BUILD_URL})"
+    def subject = "${args.buildStatus}: Job '${args.JOB_NAME} ${args.BUILD_NUMBER}'"
+    def message = "${subject} ${args.BUILD_URL}"
 
     sh "curl -s -X POST ${args.telegram_url} -d chat_id=${args.telegram_chatid} -d text='${message}'"
 }
