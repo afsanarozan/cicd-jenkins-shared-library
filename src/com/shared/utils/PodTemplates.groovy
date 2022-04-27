@@ -11,7 +11,16 @@ public void generalTemplate(body) {
         containerTemplate(name: 'kubectl', image: 'dtzar/helm-kubectl', command: 'cat', ttyEnabled: true),
         containerTemplate(name: 'golang', image: 'golang:1.18.0', command: 'cat', ttyEnabled: true),
         containerTemplate(name: 'ubuntu', image: 'ubuntu', command: 'cat', ttyEnabled: true),
-        containerTemplate(name: 's3cmd', image: 's3cmd/s3cmd', command: 'cat', ttyEnabled: true),
+        containerTemplate(
+          name: 's3cmd', 
+          image: 's3cmd/s3cmd',
+          envVars: [ envVar(key: 'access_key', value: 'YFRP3PS4LIJEOZVRUMMK'),
+                     envVar(key: 'secret_key', value: '0s4FQ470cF9AGDg7old5fLyvvhbhnqO99ooruvQdVOs'),
+                     envVar(key: 'region', value: 'sgp1'),
+                     envVar(key: 'host', value: 'sgp1.digitaloceanspaces.com'),
+                     envVar(key: 'host-bucket', value: '%(bucket)s.sgp1.digitaloceanspaces.com')], 
+          command: 'cat', 
+          ttyEnabled: true),
         containerTemplate(
               name: 'aws-cli', 
               image: 'mesosphere/aws-cli', 
