@@ -13,7 +13,8 @@ def call(Map args) {
     dir('Charts') {
         sh "ls -lah"
         container('s3cmd'){
-            sh "s3cmd --configure --access_key=YFRP3PS4LIJEOZVRUMMK --secret_key=0s4FQ470cF9AGDg7old5fLyvvhbhnqO99ooruvQdVOs --region=sgp1 --host=sgp1.digitaloceanspaces.com -s --no-encrypt --dump-config 2>&1 | tee .s3cfg"
+            sh "s3cmd"
+            sh "cat .s3cfg"
             sh "ls -la"
         }
     }
