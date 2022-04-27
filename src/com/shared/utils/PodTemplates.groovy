@@ -11,6 +11,7 @@ public void generalTemplate(body) {
         containerTemplate(name: 'kubectl', image: 'dtzar/helm-kubectl', command: 'cat', ttyEnabled: true),
         containerTemplate(name: 'golang', image: 'golang:1.18.0', command: 'cat', ttyEnabled: true),
         containerTemplate(name: 'ubuntu', image: 'ubuntu', command: 'cat', ttyEnabled: true),
+        containerTemplate(name: 's3cmd', image: 's3cmd/s3cmd', command: 'cat', ttyEnabled: true),
         containerTemplate(
               name: 'aws-cli', 
               image: 'mesosphere/aws-cli', 
