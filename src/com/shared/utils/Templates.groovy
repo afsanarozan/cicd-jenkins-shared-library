@@ -13,6 +13,16 @@ public void generalTemplate(body) {
             containerTemplate(name: 'base', image: 'dgrlabs/base-runner:latest', command: 'cat', ttyEnabled: true),
             containerTemplate(name: 'golang', image: 'golang:1.18.0', command: 'cat', ttyEnabled: true),
             containerTemplate(name: 'ubuntu', image: 'ubuntu', command: 'cat', ttyEnabled: true),
+            containerTemplate(name: 's3cmd', image: 's3cmd/s3cmd', command: 'cat', ttyEnabled: true),
+            // containerTemplate(
+            //   name: "s3cmd", 
+            //   image: 'hochzehn/s3cmd',
+            //   envVars: [ envVar(key: 'aws_key', value: 'YFRP3PS4LIJEOZVRUMMK'),
+            //              envVar(key: 'aws_secret', value: '0s4FQ470cF9AGDg7old5fLyvvhbhnqO99ooruvQdVOs'),
+            //              envVar(key: 'DEST_S3', value: 's3://labs-storage/')
+            //   ] 
+            //   command: 'cat', 
+            //   ttyEnabled: true)
             containerTemplate(
               name: 'aws-cli', 
               image: 'mesosphere/aws-cli', 

@@ -10,13 +10,20 @@ def call(Map args) {
     } else {
         envar.environment = 'alpha'
     }
-    
     dir('Charts') {
-        sh "ls"
-            container('aws-cli'){
-            pushChart(service_name: config.service_name, spaces_url: config.spaces_url, application_name: config.application_name, environment: envar.environment, dstVersion: "${BUILD_NUMBER}")
+        sh "ls -lah"
+        container('s3cmd'){
+            sh "s3cmd --configure --access_key=YFRP3PS4LIJEOZVRUMMK --secret_key=0s4FQ470cF9AGDg7old5fLyvvhbhnqO99ooruvQdVOs --region=sgp1 --host=sgp1.digitaloceanspaces.com -s --no-encrypt --dump-config 2>&1 | tee .s3cfg"
+            sh "ls -la"
         }
     }
+    
+    // dir('Charts') {
+    //     sh "ls"
+    //         container('aws-cli'){
+    //         pushChart(service_name: config.service_name, spaces_url: config.spaces_url, application_name: config.application_name, environment: envar.environment, dstVersion: "${BUILD_NUMBER}")
+    //     }
+    // }
 }
 
 def pushChart(Map args) {
