@@ -13,8 +13,8 @@ def call(Map args) {
     dir('Charts') {
         sh "ls -lah"
         container('s3cmd'){
-            sh "echo ${AWS_ACCESS_KEY_ID}"
-            sh "s3cmd --configure --access_key=${AWS_ACCESS_KEY_ID} --secret_key=${AWS_SECRET_ACCESS_KEY} --region=sgp1 --host=sgp1.digitaloceanspaces.com -s --no-encrypt --dump-config 2>&1 | tee /root/.s3cfg"
+            sh "echo ${args.AWS_ACCESS_KEY_ID}"
+            sh "s3cmd --configure --access_key=${args.AWS_ACCESS_KEY_ID} --secret_key=${args.AWS_SECRET_ACCESS_KEY} --region=sgp1 --host=sgp1.digitaloceanspaces.com -s --no-encrypt --dump-config 2>&1 | tee /root/.s3cfg"
             sh "s3cmd get s3://labs-storage/helm-charts/api-gateway/alpha/reporting-service-0.1.0.tgz" 
             sh "ls -la"
         }
