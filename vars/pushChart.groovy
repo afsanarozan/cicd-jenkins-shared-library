@@ -10,22 +10,22 @@ def call(Map args) {
     } else {
         envar.environment = 'alpha'
     }
-    // dir('Charts') {
-    //     sh "ls -lah"
-    //     container('s3cmd'){
-    //         // sh "s3cmd --configure --access_key=YFRP3PS4LIJEOZVRUMMK --secret_key=0s4FQ470cF9AGDg7old5fLyvvhbhnqO99ooruvQdVOs --region=sgp1 --host=sgp1.digitaloceanspaces.com --host-bucket=%(bucket)s.sgp1.digitaloceanspaces.com -s --no-encrypt --dump-config 2>&1 | tee /root/.s3cfg"
-    //         sh "cat /root/.s3cfg"
-    //         sh "s3cmd get s3://labs-storage/helm-charts/api-gateway/alpha/user-service-0.1.0.tgz" 
-    //         sh "ls -la"
-    //     }
-    // }
-    
     dir('Charts') {
-        sh "ls"
-            container('aws-cli'){
-            pushChart(service_name: config.service_name, spaces_url: config.spaces_url, application_name: config.application_name, environment: envar.environment, dstVersion: "${BUILD_NUMBER}")
+        sh "ls -lah"
+        container('s3cmd'){
+            // sh "s3cmd --configure --access_key=YFRP3PS4LIJEOZVRUMMK --secret_key=0s4FQ470cF9AGDg7old5fLyvvhbhnqO99ooruvQdVOs --region=sgp1 --host=sgp1.digitaloceanspaces.com --host-bucket=%(bucket)s.sgp1.digitaloceanspaces.com -s --no-encrypt --dump-config 2>&1 | tee /root/.s3cfg"
+            // sh "cat /root/.s3cfg"
+            // sh "s3cmd get s3://labs-storage/helm-charts/api-gateway/alpha/user-service-0.1.0.tgz" 
+            sh "s3cmd ls"
         }
     }
+    
+    // dir('Charts') {
+    //     sh "ls"
+    //         container('aws-cli'){
+    //         pushChart(service_name: config.service_name, spaces_url: config.spaces_url, application_name: config.application_name, environment: envar.environment, dstVersion: "${BUILD_NUMBER}")
+    //     }
+    // }
 }
 
 def pushChart(Map args) {
