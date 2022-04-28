@@ -24,7 +24,7 @@ def pushChart(Map args) {
     try {
         sh "aws s3 cp --endpoint-url ${args.spaces_url} s3://helm-charts/${args.application_name}/${args.environment}/${args.service_name}-latest.tgz ./"
         sh "aws s3 cp --endpoint-url ${args.spaces_url} ./${args.service_name}-latest.tgz s3://helm-charts/${args.application_name}/${args.environment}/${args.service_name}-${dstVersion}.tgz"
-    } catch {
+    } catch (e) {
         sh "aws s3 cp ${args.service_name}-*.tgz --endpoint-url ${args.spaces_url} s3://helm-charts/${args.application_name}/${args.environment}/${args.service_name}-latest.tgz"
     }   
     // sh "aws s3 cp s3://helm-charts/${args.namespace}/beta/${args.service_name}-*.tgz s3://helm-charts/${args.namespace}/beta/${args.service_name}-${args.dstVersion}.tgz"
