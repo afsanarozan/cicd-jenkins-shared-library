@@ -21,6 +21,11 @@ def call(Map args) {
 
 def pushChart(Map args) {
     echo "Push Chart"
+    sh """ 
+        aws s3 cp --endpoint-url ${args.spaces_url} s3://helm-charts/${args.application_name}/${args.environment}/${args.service_name}-latest.tgz ./${args.service_name}-${dstVersion}.tgz"
+        aws s3 cp --endpoint-url ${args.spaces_url} ./${args.service_name}-${dstVersion}.tgz s3://helm-charts/${args.application_name}/${args.environment}/
+        rm ${args.service_name}-${dstVersion}.tgz
+    """
     try {
         sh """ 
         aws s3 cp --endpoint-url ${args.spaces_url} s3://helm-charts/${args.application_name}/${args.environment}/${args.service_name}-latest.tgz ./${args.service_name}-${dstVersion}.tgz"
