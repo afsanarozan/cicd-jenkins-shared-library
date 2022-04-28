@@ -46,6 +46,7 @@ def call() {
                 export test_score="${unitTest_score}"
                 echo ${test_score}
              """
+             return unitTest_score 
         }
 }
 
