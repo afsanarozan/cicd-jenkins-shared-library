@@ -9,7 +9,6 @@ def call(String buildStatus) {
 
     echo "Job Success"
     echo "${buildStatus}"
-    echo "${unitTest_score}"
     container('curl'){  
         if (buildStatus == 'STARTED') {
             notificationsStarted(buildStatus: buildStatus, telegram_chatid: telegram_chatid, telegram_url:telegram_url, JOB_NAME:env.JOB_NAME, BUILD_NUMBER:env.BUILD_NUMBER, BUILD_URL:env.BUILD_URL)
