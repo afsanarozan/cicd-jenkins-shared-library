@@ -28,6 +28,7 @@ def pushChart(Map args) {
         rm ${args.service_name}-${dstVersion}.tgz
         """
     } catch (e) {
+        return e;
         echo "first time push for helm chart service"
     } finally {
         sh "aws s3 cp ${args.service_name}-*.tgz --endpoint-url ${args.spaces_url} s3://helm-charts/${args.application_name}/${args.environment}/${args.service_name}-latest.tgz"
