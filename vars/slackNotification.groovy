@@ -40,6 +40,6 @@ def call(String buildStatus = 'STARTED') {
       }
 
       // Send notifications
-      slackSend (color: colorCode, message: "${summary} unit-test : ${score}", sendAsText: true)
+      slackSend (color: colorCode, message: summary, sendAsText: true)
     }
 }
