@@ -1,4 +1,4 @@
-def call(String buildStatus, score) {
+def call(String buildStatus, String score) {
     // build status of null means successful
     buildStatus = buildStatus ?: 'SUCCESS'
 
