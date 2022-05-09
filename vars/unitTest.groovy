@@ -2,7 +2,6 @@ def call() {
 //  def envar = checkoutTagging()
   sh 'echo Runnning Unit Testing'
   sh 'ls'
-  def test = [:]
   def root = tool type: 'go', name: 'Go'
   withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
         sh 'go version'
