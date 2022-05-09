@@ -13,9 +13,6 @@ def call(Map args){
 
     echo "${envar.environment}"
 
-    def testing = ${BUILD_NUMBER} - 1
-    echo "${testing}"
-
     if(envar.environment == 'alpha' || envar.environment  == 'beta'){
         container ('golang'){
         sh 'ls'
