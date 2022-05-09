@@ -1,6 +1,7 @@
-def call(String buildStatus) {
+def call(String buildStatus, score) {
     // build status of null means successful
     buildStatus = buildStatus ?: 'SUCCESS'
+    echo "${score}"
 
     def config = pipelineCfg() 
     // def testing = unitTest()
