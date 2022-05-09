@@ -12,15 +12,15 @@ def call(String buildStatus = 'STARTED') {
     withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
       try {
         sh "go tool cover -func=coverage.out"
-        def unitTestGetValue = sh(returnStdout: true, script: 'go tool cover -func=coverage.out | grep total | sed "s/[[:blank:]]*$//;s/.*[[:blank:]]//"')
+        def score = sh(returnStdout: true, script: 'go tool cover -func=coverage.out | grep total | sed "s/[[:blank:]]*$//;s/.*[[:blank:]]//"')
       } catch (e) {
-        def unitTestGetValue = "0.0%"
-        echo "${unitTestGetValue}"
+        def score = "0.0%"
+        echo "${score}"
       } 
         // Default values
         def colorName = 'RED'
         def colorCode = '#FF0000'
-        def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' unit-testing : 0.0%"
+        def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' unit-testing : ${score}"
         def summary = "${subject} (${env.BUILD_URL}) "
         def details = """<p>${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
           <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>"""
