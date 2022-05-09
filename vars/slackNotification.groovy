@@ -16,6 +16,7 @@ def call(String buildStatus = 'STARTED') {
       } catch (e) {
         def unitTestGetValue = "0.0%"
         echo "${unitTestGetValue}"
+        def score = "${unitTestGetValue}"
       } 
         // Default values
         def colorName = 'RED'
@@ -38,6 +39,6 @@ def call(String buildStatus = 'STARTED') {
       }
 
       // Send notifications
-      slackSend (color: colorCode, message: summary)
+      slackSend (color: colorCode, message: score)
     }
 }
