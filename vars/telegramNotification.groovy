@@ -3,8 +3,8 @@ def call(String buildStatus) {
     buildStatus = buildStatus ?: 'SUCCESS'
 
     def config = pipelineCfg() 
-    def testing = unitTest()
-    sh "echo ${testing.score}"
+    // def testing = unitTest()
+    // sh "echo ${testing.score}"
 
     def telegram_chatid = -784775712
     def telegram_url    = "https://api.telegram.org/bot5117336515:AAFGksphWynQnpMlsF9dbqruHgFGRiM9-pw/sendMessage"
