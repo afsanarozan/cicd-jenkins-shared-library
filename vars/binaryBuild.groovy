@@ -42,5 +42,14 @@ def buildBinary(Map args) {
 def pushBinary(Map args) {
     echo "Push Chart"
     //sh "aws s3 --recursive mv s3://binary-build/${args.application_name}/${args.environment}/${args.service_name} --endpoint-url ${args.spaces_url} s3://binary-build/${args.application_name}/${args.environment}/${args.service_name}-${args.dstVersion}"
-    sh "aws s3 cp ${args.service_name} --endpoint-url ${args.spaces_url} s3://binary-build/${args.application_name}/${args.environment}/"
+    try {
+        sh "aws s3 ${args.service_name} --endpoint-url ${args.spaces_url} s3://binary-build/${args.application_name}/${args.environment}/${args.service_name}-latest ./${args.service_name}-${args.dstVersion}"
+        sh "aws s3 ${args.service_name} --endpoint-url ${args.spaces_url} ./${args.service_name}-${args.dstVersion} s3://binary-build/${args.application_name}/${args.environment}/"
+        sh "rm ${args.service_name}-${args.dstVersion}"
+
+    } catch (e) {
+        echo "first time push binary build service to do spaces"
+    } finally {
+        sh "aws s3 cp ${args.service_name} --endpoint-url ${args.spaces_url} s3://binary-build/${args.application_name}/${args.environment}/"
+    }
 }
