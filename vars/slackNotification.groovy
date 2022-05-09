@@ -6,7 +6,10 @@
 def call(String buildStatus = 'STARTED') {
   // build status of null means successful
   buildStatus = buildStatus ?: 'SUCCESS'
+  def test = unitTest()
 
+  echo "${test.unitTest_score}"
+  
   // Default values
   def colorName = 'RED'
   def colorCode = '#FF0000'
