@@ -39,9 +39,11 @@ def call() {
                 }
              }
 
-             def test.unitTestGetValue = sh(returnStdout: true, script: 'go tool cover -func=coverage.out | grep total | sed "s/[[:blank:]]*$//;s/.*[[:blank:]]//"')
-             def unitTest_score   = "Your score is ${test.unitTestGetValue}"
+             def unitTestGetValue = sh(returnStdout: true, script: 'go tool cover -func=coverage.out | grep total | sed "s/[[:blank:]]*$//;s/.*[[:blank:]]//"')
+             def unitTest_score   = "Your score is ${unitTestGetValue}"
              echo "${unitTest_score}" 
+
+             test.score = "${unitTestGetValue}"
 
              return test
         }

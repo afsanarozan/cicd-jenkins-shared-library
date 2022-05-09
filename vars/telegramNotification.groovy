@@ -15,7 +15,7 @@ def call(String buildStatus) {
         } else if (buildStatus == 'SUCCESS'){
             echo "${buildStatus}"
             def test = unitTest()
-            sh "echo ${test.unitTestGetValue}"
+            sh "echo ${test.score}"
             notifications(buildStatus: buildStatus, telegram_chatid: telegram_chatid, telegram_url:telegram_url, JOB_NAME:env.JOB_NAME, BUILD_NUMBER:env.BUILD_NUMBER, BUILD_URL:env.BUILD_URL)
         }   else {
             notifications(buildStatus: buildStatus, telegram_chatid: telegram_chatid, telegram_url:telegram_url, JOB_NAME:env.JOB_NAME, BUILD_NUMBER:env.BUILD_NUMBER, BUILD_URL:env.BUILD_URL)
