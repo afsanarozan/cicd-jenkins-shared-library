@@ -5,7 +5,9 @@ def call(String buildStatus, String score) {
 
     def config = pipelineCfg()
     def unitTestGetValue = sh(returnStdout: true, script: 'go tool cover -func=coverage.out | grep total | sed "s/[[:blank:]]*$//;s/.*[[:blank:]]//"')
-    echo "${unitTestGetValue}"
+    def unitTest_score   = "Your score is ${unitTestGetValue}"
+    echo "${unitTest_score}" 
+    sh "cat coverage.out"
 
     def telegram_chatid = -784775712
     def telegram_url    = "https://api.telegram.org/bot5117336515:AAFGksphWynQnpMlsF9dbqruHgFGRiM9-pw/sendMessage"
