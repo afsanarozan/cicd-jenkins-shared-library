@@ -6,6 +6,7 @@
 def call(String buildStatus = 'STARTED') {
   // build status of null means successful
   buildStatus = buildStatus ?: 'SUCCESS'
+  echo "${buildStatus}"
 
   def root = tool type: 'go', name: 'Go'
     withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
