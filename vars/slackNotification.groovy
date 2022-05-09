@@ -9,8 +9,11 @@ def call(String buildStatus = 'STARTED') {
 
   def root = tool type: 'go', name: 'Go'
     withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
-        sh "touch coverage.out"
+      try {
         def unitTestGetValue = sh(returnStdout: true, script: 'go tool cover -func=coverage.out | grep total | sed "s/[[:blank:]]*$//;s/.*[[:blank:]]//"')
+      } catch {
+        def unitTestGetValue = 0.0%
+      }
         // Default values
         def colorName = 'RED'
         def colorCode = '#FF0000'
