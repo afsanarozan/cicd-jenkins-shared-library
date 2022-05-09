@@ -2,7 +2,7 @@ def call() {
 //  def envar = checkoutTagging()
   sh 'echo Runnning Unit Testing'
   sh 'ls'
-
+  def test = [:]
   def root = tool type: 'go', name: 'Go'
   withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
         sh 'go version'
@@ -39,9 +39,11 @@ def call() {
                 }
              }
 
-             def unitTestGetValue = sh(returnStdout: true, script: 'go tool cover -func=coverage.out | grep total | sed "s/[[:blank:]]*$//;s/.*[[:blank:]]//"')
-             def unitTest_score   = "Your score is ${unitTestGetValue}"
-             echo "${unitTest_score}"
+             def test.unitTestGetValue = sh(returnStdout: true, script: 'go tool cover -func=coverage.out | grep total | sed "s/[[:blank:]]*$//;s/.*[[:blank:]]//"')
+             def unitTest_score   = "Your score is ${test.unitTestGetValue}"
+             echo "${unitTest_score}" 
+
+             return test
         }
 }
 
