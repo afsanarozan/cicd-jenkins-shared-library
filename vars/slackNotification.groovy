@@ -31,7 +31,7 @@ def call(String buildStatus = 'STARTED') {
       if (buildStatus == 'STARTED') {
         color = 'YELLOW'
         colorCode = '#FFFF00'
-      } else if (}buildStatus == 'SUCCESS') {
+      } else if (buildStatus == 'SUCCESS') {
         color = 'GREEN'
         colorCode = '#00FF00'
         echo "${score}"
