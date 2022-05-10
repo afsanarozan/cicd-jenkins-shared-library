@@ -11,9 +11,12 @@ def call(String buildStatus = 'STARTED') {
   def root = tool type: 'go', name: 'Go'
     withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
       try {
-        sh "go tool cover -func=coverage.out"
-        def unitTestGetValue = sh(returnStdout: true, script: 'go tool cover -func=coverage.out | grep total | sed "s/[[:blank:]]*$//;s/.*[[:blank:]]//"')
-        slackSend (color: '#FFFF00', message: "unit test : ${unitTestGetValue}")
+        if (fileExists('coverage.out')) {
+          def unitTestGetValue = sh(returnStdout: true, script: 'go tool cover -func=coverage.out | grep total | sed "s/[[:blank:]]*$//;s/.*[[:blank:]]//"')
+          slackSend (color: '#00FF00', message: "unit test : ${unitTestGetValue}")
+        } else (
+          error
+        )
       } catch (e) {
         def unitTestGetValue = '0.0%'
         // echo "${unitTestGetValue}"
