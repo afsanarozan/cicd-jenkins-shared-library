@@ -35,16 +35,16 @@ def merge(source,target,repo){
                             ],
                                      [
                                     $class: 'UserIdentity',
-                                    email: 'adekuniawan1999@gmail.com',
-                                    name: 'adekurniawan1999'
+                                    email: 'automation@klik.digital',
+                                    name: 'automation-labs'
                                 ]
                         ],
                                 
-                        userRemoteConfigs: [[credentialsId: 'gitlab-auth-token', url: "${repo}"]]
+                        userRemoteConfigs: [[credentialsId: 'automation-auth-token', url: "${repo}"]]
                     ])
 
 
-                withCredentials([usernamePassword(credentialsId: 'gitlab-auth-token', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'automation-auth-token', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     sh "git pull https://${USERNAME}:${PASSWORD}@${repository} main"
                     sh "git remote set-url origin https://${USERNAME}:${PASSWORD}@${repository}; git push origin HEAD:main"
    }
