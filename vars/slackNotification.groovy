@@ -14,11 +14,11 @@ def call(String buildStatus = 'STARTED') {
         sh "go tool cover -func=coverage.out"
         def unitTestGetValue = sh(returnStdout: true, script: 'go tool cover -func=coverage.out | grep total | sed "s/[[:blank:]]*$//;s/.*[[:blank:]]//"')
       } catch (e) {
-        unitTestGetValue = "0.0%"
+        def unitTestGetValue = "0.0%"
         // echo "${unitTestGetValue}"
         // def score = "${unitTestGetValue}"
         // echo "your score is ${score}"
-        throw e 
+        echo "${unitTestGetValue}"
       } // finally {
         // Default values
         def colorName = 'RED'
