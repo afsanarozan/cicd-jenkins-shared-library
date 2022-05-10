@@ -41,7 +41,7 @@ def call(String buildStatus = 'STARTED') {
         }
 
         // Send notifications
-        echo "${unitTestGetValue}"
+        // echo "${unitTestGetValue}"
         slackSend (color: colorCode, message: summary)
       }
     }
