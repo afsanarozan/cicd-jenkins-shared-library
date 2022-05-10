@@ -18,6 +18,7 @@ def call(String buildStatus = 'STARTED') {
         echo "${unitTestGetValue}"
         def score = "${unitTestGetValue}"
         echo "your score is ${score}"
+        throw e 
       } finally {
         // Default values
         def colorName = 'RED'
