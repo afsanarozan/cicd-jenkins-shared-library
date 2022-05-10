@@ -14,10 +14,10 @@ def call(String buildStatus = 'STARTED') {
         sh "go tool cover -func=coverage.out"
         def unitTestGetValue = sh(returnStdout: true, script: 'go tool cover -func=coverage.out | grep total | sed "s/[[:blank:]]*$//;s/.*[[:blank:]]//"')
       } catch (e) {
-        def unitTestGetValue = "0.0%"
-        echo "${unitTestGetValue}"
-        def score = "${unitTestGetValue}"
-        echo "your score is ${score}"
+        unitTestGetValue = "0.0%"
+        // echo "${unitTestGetValue}"
+        // def score = "${unitTestGetValue}"
+        // echo "your score is ${score}"
         throw e 
       } finally {
         // Default values
@@ -41,7 +41,7 @@ def call(String buildStatus = 'STARTED') {
         }
 
         // Send notifications
-        echo "${score}"
+        echo "${unitTestGetValue}"
         slackSend (color: colorCode, message: summary)
       }
     }
