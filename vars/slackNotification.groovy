@@ -19,7 +19,7 @@ def call(String buildStatus = 'STARTED') {
         // def score = "${unitTestGetValue}"
         // echo "your score is ${score}"
         throw e 
-      } finally {
+      } // finally {
         // Default values
         def colorName = 'RED'
         def colorCode = '#FF0000'
@@ -43,6 +43,6 @@ def call(String buildStatus = 'STARTED') {
         // Send notifications
         // echo "${unitTestGetValue}"
         slackSend (color: colorCode, message: summary)
-      }
+      // }
     }
 }
