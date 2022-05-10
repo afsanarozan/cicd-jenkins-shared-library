@@ -34,13 +34,13 @@ def call(String buildStatus = 'STARTED') {
       } else if (buildStatus == 'SUCCESS') {
         color = 'GREEN'
         colorCode = '#00FF00'
-        echo "${score}"
       } else {
         color = 'RED'
         colorCode = '#FF0000'
       }
 
       // Send notifications
+      echo "${score}"
       slackSend (color: colorCode, message: summary)
     }
 }
