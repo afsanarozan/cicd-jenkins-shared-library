@@ -10,10 +10,23 @@ def call(String buildStatus = 'STARTED') {
 
   def root = tool type: 'go', name: 'Go'
     withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
+
+    // Override default values based on build status
+      if (buildStatus == 'STARTED') {
+        color = 'YELLOW'
+        colorCode = '#FFFF00'
+      } else if (buildStatus == 'SUCCESS') {
+        color = 'GREEN'
+        colorCode = '#00FF00'
+      } else {
+        color = 'RED'
+        colorCode = '#FF0000'
+      }
+
       try {
         if (fileExists('coverage.out')) {
           def unitTestGetValue = sh(returnStdout: true, script: 'go tool cover -func=coverage.out | grep total | sed "s/[[:blank:]]*$//;s/.*[[:blank:]]//"')
-          slackSend (color: '#00FF00', message: "unit test : ${unitTestGetValue}")
+          slackSend (color: colorCode, message: "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) unit test : ${unitTestGetValue}")
         } else (
           error
         )
@@ -23,7 +36,7 @@ def call(String buildStatus = 'STARTED') {
         // def score = "${unitTestGetValue}"
         // echo "your score is ${score}"
         echo "${unitTestGetValue}"
-        slackSend (color: '#FFFF00', message: "unit test : ${unitTestGetValue}")
+        slackSend (color: colorCode, message: "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) unit test : ${unitTestGetValue}")
       } // finally {
         // Default values
         def colorName = 'RED'
