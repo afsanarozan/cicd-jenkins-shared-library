@@ -40,11 +40,11 @@ def merge(source,target,repo){
                                 ]
                         ],
                                 
-                        userRemoteConfigs: [[credentialsId: 'automation-auth-token', url: "${repo}"]]
+                        userRemoteConfigs: [[credentialsId: 'gitlab-auth-automation', url: "${repo}"]]
                     ])
 
 
-                withCredentials([usernamePassword(credentialsId: 'automation-auth-token', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'gitlab-auth-automation', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     sh "git pull https://${USERNAME}:${PASSWORD}@${repository} main"
                     sh "git remote set-url origin https://${USERNAME}:${PASSWORD}@${repository}; git push origin HEAD:main"
    }
