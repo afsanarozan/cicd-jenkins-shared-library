@@ -12,9 +12,9 @@ def call() {
     //     error "This pipeline stops here!"
     // }
   } catch (e) {
-      echo "${env.STAGE_NAME}"
-      return env
+      echo "This is Stage : ${env.STAGE_NAME}"
       error "This pipeline stops here!"
+      return env
   }
  
         
