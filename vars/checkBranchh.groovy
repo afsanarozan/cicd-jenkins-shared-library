@@ -10,7 +10,7 @@ def call() {
         echo "job success"
         error "This pipeline stops here!"
     }
-  } catch {
+  } catch (e) {
       echo "${env.STAGE_NAME}"
       return env
   }
