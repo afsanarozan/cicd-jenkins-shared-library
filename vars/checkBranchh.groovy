@@ -6,8 +6,8 @@ def call() {
         echo "passed"
     } else {
         echo "job success"
-        return env
         error "This pipeline stops here!"
+        return env
     }
         
 }
