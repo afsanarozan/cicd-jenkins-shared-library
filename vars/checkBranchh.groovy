@@ -4,7 +4,7 @@ def call() {
 
   try {
     print("ini :" + envar)
-    if (envar.branch == '*/development'){
+    if (envar.branch == '*/devopment'){
         echo "passed"
     } else {
         echo "job success"
@@ -13,6 +13,7 @@ def call() {
   } catch (e) {
       echo "${env.STAGE_NAME}"
       return env
+      error "This pipeline stops here!"
   }
  
         
