@@ -3,10 +3,11 @@ def call() {
   def env = [:]
 
   try {
-    print("ini :" + envar)
-    if (envar.branch == '*/devopment'){
-        echo "passed"
-    } 
+    error "This pipeline stops here!"
+    // print("ini :" + envar)
+    // if (envar.branch == '*/devopment'){
+    //     echo "passed"
+    // } 
     // else {
     //     echo "job success"
     //     error "This pipeline stops here!"
