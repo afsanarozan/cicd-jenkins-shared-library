@@ -1,6 +1,5 @@
 def call() {
   def envar = checkoutCode()
-  def res = [:]
 
   try {
     error "This pipeline stops here!"
@@ -14,8 +13,7 @@ def call() {
     // }
   } catch (e) {
       echo "This is Stage : ${env.STAGE_NAME}"
-      def res.STAGE_ERROR = "${env.STAGE_NAME}"
-      echo "${res.STAGE_ERROR}"
+      return env.STAGE_NAME
       error "This pipeline stops here!"
       
   }
