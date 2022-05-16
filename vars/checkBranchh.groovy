@@ -1,6 +1,6 @@
 def call() {
   def envar = checkoutCode()
-  def res : [:]
+  def res = [:]
 
   try {
     error "This pipeline stops here!"
