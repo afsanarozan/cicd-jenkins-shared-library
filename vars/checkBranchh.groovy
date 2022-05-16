@@ -1,6 +1,5 @@
 def call() {
   def envar = checkoutCode()
-  def env = [:]
 
   try {
     error "This pipeline stops here!"
