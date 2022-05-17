@@ -16,7 +16,7 @@ def call() {
       echo "This is Stage : ${env.STAGE_NAME}"
       test.testing = "${env.STAGE_NAME}"
       echo "${test.testing}"
-      return test
+      return test.testing
   } finally {
       error "This pipeline stops here!"
   }
