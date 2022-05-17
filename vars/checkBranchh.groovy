@@ -13,7 +13,7 @@ def call() {
     // }
   } catch (e) {
       echo "This is Stage : ${env.STAGE_NAME}"
-      stageName(stage_name: env.STAGE_NAME)
+      stageName()
   } finally {
       error "This pipeline stops here!"
   }
