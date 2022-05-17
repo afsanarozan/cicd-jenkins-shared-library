@@ -1,11 +1,8 @@
 def call (String stage_name = 'Checkout Code') {
-    //def stg = [:]
-    def stage = "${stage_name}"
+    def stg = [:]
+    stg.error = "${stage_name}"
+    echo "error on stage ${stg.error}"
 
-    echo "${stage}"
-    // stg.error = "${args.stage_name}"
-    // echo "error on stage ${stg.error}"
-
-    // return stg 
+    return stg 
 
 }
