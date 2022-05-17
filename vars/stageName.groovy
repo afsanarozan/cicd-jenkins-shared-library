@@ -1,6 +1,6 @@
 def call (Map args) {
 
-    echo "${args.nameStage}"
+    echo "fix iki seko kene : ${args.nameStage}"
     // def stage_name = "${test}"
     // echo "error on stage ${stage_name}" 
 
