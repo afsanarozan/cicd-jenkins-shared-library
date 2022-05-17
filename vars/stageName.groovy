@@ -1,4 +1,4 @@
-def call (String stage = 'Checkout Code') {
+def call (String stage) {
     def stg = [:]
 
     stg.error = "${stage}"
