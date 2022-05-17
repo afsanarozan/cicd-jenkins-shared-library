@@ -1,6 +1,6 @@
 def call() {
   def envar = checkoutCode()
-  stageName.call(stage_name: env.STAGE_NAME)
+  def stage = stageName(stage_name: env.STAGE_NAME)
   
   try {
     error "This pipeline stops here!"
