@@ -1,13 +1,10 @@
 def call(String buildStatus = 'STARTED') {
     // build status of null means successful
     buildStatus = buildStatus ?: 'SUCCESS'
-
+    
+    sh "printenv | sort"
     echo "${env.STAGE_NAME}"
     def config = pipelineCfg() 
-
-    def stage_error = context.checkBranchh.getPropertyValue('env.STAGE_NAME') 
-
-    echo "${stage_error}"
 
     def telegram_chatid = -784775712
     def telegram_url    = "https://api.telegram.org/bot5117336515:AAFGksphWynQnpMlsF9dbqruHgFGRiM9-pw/sendMessage"
