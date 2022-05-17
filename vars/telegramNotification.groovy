@@ -2,6 +2,7 @@ def call(String buildStatus = 'STARTED') {
     // build status of null means successful
     buildStatus = buildStatus ?: 'SUCCESS'
     def config = pipelineCfg() 
+    sh "cat pipeline.yaml"
     // sh "touch stageName.yaml"
     // def stg = readYaml(file: "${WORKSPACE}/stageName.yaml")
     // def stg = stageName()
