@@ -2,7 +2,7 @@ def call (Map args) {
 
     def stage_name = "${args.nameStage}"
     echo "fix iki seko kene : ${stage_name}"
-    sh "echo ${args.nameStage} > stageName.yaml"
+    sh "echo stage_name : ${args.nameStage} > stageName.yaml"
     sh "pwd"
     sh "ls -la"
 
