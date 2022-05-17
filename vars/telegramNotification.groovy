@@ -1,7 +1,7 @@
 def call(String buildStatus = 'STARTED') {
     // build status of null means successful
     buildStatus = buildStatus ?: 'SUCCESS'
-    def test [:]
+    def test = [:]
     
     sh "printenv | sort"
     echo "${test.testing}"
