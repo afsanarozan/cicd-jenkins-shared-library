@@ -3,7 +3,7 @@ def call(String buildStatus = 'STARTED') {
     buildStatus = buildStatus ?: 'SUCCESS'
     
     sh "printenv | sort"
-    echo "${env.STAGE_NAME}"
+    echo "${test.testing}"
     def config = pipelineCfg() 
 
     def telegram_chatid = -784775712
