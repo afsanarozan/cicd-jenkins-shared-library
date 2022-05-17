@@ -1,4 +1,4 @@
-def stageName (Map args) {
+def stageName.call (Map args) {
     def stg = [:]
 
     echo "${args.stage_name}"
