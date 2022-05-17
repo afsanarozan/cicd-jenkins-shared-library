@@ -13,7 +13,7 @@ public void generalTemplate(body) {
             containerTemplate(name: 'base', image: 'dgrlabs/base-runner:latest', command: 'cat', ttyEnabled: true),
             containerTemplate(name: 'golang', image: 'golang:1.18.0', command: 'cat', ttyEnabled: true),
             containerTemplate(name: 'ubuntu', image: 'ubuntu', command: 'cat', ttyEnabled: true),
-            containerTemplate(name: 's3cmd', image: 's3cmd/s3cmd', command: 'cat', ttyEnabled: true),
+            containerTemplate(name: 'yq', image: 'mikefarah/yq', command: 'cat', ttyEnabled: true),
             // containerTemplate(
             //   name: "s3cmd", 
             //   image: 'hochzehn/s3cmd',
