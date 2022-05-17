@@ -1,7 +1,8 @@
 def call (Map args) {
     def stg = [:]
-
-    stg.error = "${args.STAGE_NAME}"
+    
+    echo "${args.stage_name}"
+    stg.error = "${args.stage_name}"
     echo "error on stage ${stg.error}"
 
     return stg 
