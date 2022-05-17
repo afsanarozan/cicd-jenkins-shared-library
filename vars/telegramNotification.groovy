@@ -2,8 +2,8 @@ def call(String buildStatus = 'STARTED') {
     // build status of null means successful
     buildStatus = buildStatus ?: 'SUCCESS'
     def config = pipelineCfg() 
-    def stage = stageName()
-    echo "${stage}"
+    // def stage = stageName()
+    // echo "${stage}"
 
     def telegram_chatid = -784775712
     def telegram_url    = "https://api.telegram.org/bot5117336515:AAFGksphWynQnpMlsF9dbqruHgFGRiM9-pw/sendMessage"
