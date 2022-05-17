@@ -16,6 +16,10 @@ def call (Map args) {
 }
 
 def installCli(){
+    sh """
+        sudo apt-get upgrade && sudo apt-get update 
+        sudo apt-get install wget -y
+    """
     sh "wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64"
     sh "chmod a+x /usr/local/bin/yq"
     sh "yq --version" 
