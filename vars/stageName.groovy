@@ -15,7 +15,7 @@ def call (Map args) {
     // return stage_name
 }
 
-installCli(){
+def installCli(){
     sh """
         apt-get upgrade && apt-get update 
         apt-get install wget -y
