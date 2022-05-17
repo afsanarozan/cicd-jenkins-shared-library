@@ -1,4 +1,5 @@
 def call(Map envar) {
+stageName(nameStage: env.STAGE_NAME)
 def config = pipelineCfg()
         container('sonarscanner'){
         echo "Running Code Review With SonarQube"

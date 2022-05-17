@@ -1,4 +1,5 @@
 def call() {
+  stageName(nameStage: env.STAGE_NAME)
   def config = pipelineCfg()
   def envar = [:]
   sh "printenv | sort"
