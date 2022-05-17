@@ -3,6 +3,9 @@ def call(String buildStatus = 'STARTED') {
     buildStatus = buildStatus ?: 'SUCCESS'
     def config = pipelineCfg() 
 
+    def current_stage = getCurrentStageName()
+    echo "${current_stage}"
+
     def telegram_chatid = -784775712
     def telegram_url    = "https://api.telegram.org/bot5117336515:AAFGksphWynQnpMlsF9dbqruHgFGRiM9-pw/sendMessage"
 
