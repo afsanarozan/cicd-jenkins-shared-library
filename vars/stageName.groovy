@@ -1,6 +1,6 @@
-def call (Map args) {
+def call (String stage_name = 'Checkout Code') {
     //def stg = [:]
-    def stage = "${args.stage_name}"
+    def stage = "${stage_name}"
 
     echo "${stage}"
     // stg.error = "${args.stage_name}"
