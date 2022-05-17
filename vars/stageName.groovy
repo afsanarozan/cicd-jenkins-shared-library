@@ -1,6 +1,6 @@
-def call () {
-    def stage_name = "${env.STAGE_NAME}"
-    echo "error on stage ${env.STAGE_NAME}"
+def call (String test) {
+    def stage_name = "${test}"
+    echo "error on stage ${test}"
     echo "error on stage ${stage_name}"
 
     // return stg 
