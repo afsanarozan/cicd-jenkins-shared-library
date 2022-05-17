@@ -2,11 +2,11 @@ def call(String buildStatus = 'STARTED') {
     // build status of null means successful
     buildStatus = buildStatus ?: 'SUCCESS'
     def config = pipelineCfg() 
+    def stg    = stageName()
 
     def telegram_chatid = -784775712
     def telegram_url    = "https://api.telegram.org/bot5117336515:AAFGksphWynQnpMlsF9dbqruHgFGRiM9-pw/sendMessage"
 
-    echo "Job Success"
     echo "${buildStatus}"
     container('curl'){  
         if (buildStatus == 'STARTED') {
@@ -16,13 +16,13 @@ def call(String buildStatus = 'STARTED') {
             def root = tool type: 'go', name: 'Go'
             withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
                 def unitTestGetValue = sh(returnStdout: true, script: 'go tool cover -func=coverage.out | grep total | sed "s/[[:blank:]]*$//;s/.*[[:blank:]]//"')
-                notifications(buildStatus: buildStatus, telegram_chatid: telegram_chatid, telegram_url:telegram_url, JOB_NAME:env.JOB_NAME, BUILD_NUMBER:env.BUILD_NUMBER, BUILD_URL:env.BUILD_URL, score:unitTestGetValue, STAGE_NAME: env.STAGE_NAME)
+                notifications(buildStatus: buildStatus, telegram_chatid: telegram_chatid, telegram_url:telegram_url, JOB_NAME:env.JOB_NAME, BUILD_NUMBER:env.BUILD_NUMBER, BUILD_URL:env.BUILD_URL, score:unitTestGetValue, STAGE_NAME: stg.error)
             }
         }   else {
             def root = tool type: 'go', name: 'Go'
             withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
                 def unitTestGetValue = sh(returnStdout: true, script: 'go tool cover -func=coverage.out | grep total | sed "s/[[:blank:]]*$//;s/.*[[:blank:]]//"')
-                notifications(buildStatus: buildStatus, telegram_chatid: telegram_chatid, telegram_url:telegram_url, JOB_NAME:env.JOB_NAME, BUILD_NUMBER:env.BUILD_NUMBER, BUILD_URL:env.BUILD_URL, score:unitTestGetValue, STAGE_NAME: env.STAGE_NAME)
+                notifications(buildStatus: buildStatus, telegram_chatid: telegram_chatid, telegram_url:telegram_url, JOB_NAME:env.JOB_NAME, BUILD_NUMBER:env.BUILD_NUMBER, BUILD_URL:env.BUILD_URL, score:unitTestGetValue, STAGE_NAME: stg.error)
             }
         }
     }
