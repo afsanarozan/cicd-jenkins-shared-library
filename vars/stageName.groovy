@@ -17,6 +17,7 @@ def call (Map args) {
 
 def installCli(){
     sh """
+        whoami
         sudo apt-get upgrade && sudo apt-get update 
         sudo apt-get install wget -y
     """
