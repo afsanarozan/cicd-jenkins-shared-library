@@ -1,6 +1,8 @@
-def call (String test = "init") {
-    def stage_name = "${test}"
-    echo "error on stage ${stage_name}" 
+def call (Map args) {
 
-    return stage_name
+    echo "${args.nameStage}"
+    // def stage_name = "${test}"
+    // echo "error on stage ${stage_name}" 
+
+    // return stage_name
 }
