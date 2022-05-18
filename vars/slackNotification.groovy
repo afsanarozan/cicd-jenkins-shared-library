@@ -21,16 +21,18 @@ def call(String buildStatus = 'STARTED') {
         colorCode = '#FF0000'
       }
 
-      try {
-        if (fileExists('coverage.out')) {
-          def unitTestGetValue = sh(returnStdout: true, script: 'go tool cover -func=coverage.out | grep total | sed "s/[[:blank:]]*$//;s/.*[[:blank:]]//"')
+      if (buildStatus != 'STARTED'){
+        try {
+          if (fileExists('coverage.out')) {
+            def unitTestGetValue = sh(returnStdout: true, script: 'go tool cover -func=coverage.out | grep total | sed "s/[[:blank:]]*$//;s/.*[[:blank:]]//"')
+            slackSend (color: colorCode, message: "${buildStatus}: on stage [${stg.stage_name}], Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) unit-test : ${unitTestGetValue}")
+          } else (
+            error
+          )
+        } catch (e) {
+          def unitTestGetValue = '0.0%'
           slackSend (color: colorCode, message: "${buildStatus}: on stage [${stg.stage_name}], Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) unit-test : ${unitTestGetValue}")
-        } else (
-          error
-        )
-      } catch (e) {
-        def unitTestGetValue = '0.0%'
-        slackSend (color: colorCode, message: "${buildStatus}: on stage [${stg.stage_name}], Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) unit-test : ${unitTestGetValue}")
-      } 
+        } 
+      }
     }
 }
