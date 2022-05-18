@@ -1,4 +1,5 @@
 def call() {
+stageName(nameStage: env.STAGE_NAME)
    def config = pipelineCfg()
    def envar = checkoutCode()
     envar.tag = sh(script: 'git tag | grep $(date +%d%m%y) | tail -1', returnStdout: true)

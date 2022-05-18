@@ -1,5 +1,5 @@
 def call(){
-
+    stageName(nameStage: env.STAGE_NAME)
     def envar = checkoutCode()
     sh "printenv | sort"
 

@@ -1,4 +1,5 @@
 def call(Map envar) {
+    stageName(nameStage: env.STAGE_NAME)
     def config = pipelineCfg()
     echo "Running Helm Package"
     dir('Charts') {

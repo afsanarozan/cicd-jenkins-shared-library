@@ -1,4 +1,5 @@
 def call(Map args) {
+    stageName(nameStage: env.STAGE_NAME)
     def config = pipelineCfg()
     def envar = checkoutCode()
     echo "Running Helm Push"

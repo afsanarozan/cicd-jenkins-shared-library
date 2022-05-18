@@ -1,5 +1,5 @@
 def call() {
-//  def envar = checkoutTagging()
+  stageName(nameStage: env.STAGE_NAME)
   sh 'echo Runnning Unit Testing'
   sh 'ls'
   def test = [:]
