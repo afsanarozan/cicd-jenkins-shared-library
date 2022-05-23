@@ -28,11 +28,11 @@ def call(Map args){
 def buildBinary(Map args) {
     sh """
         go version
-        // git config --global url."https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kds-platform/plugin.git".insteadOf "https://gitlab.com/kds-platform/plugin.git"
-        // git config --global url."https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kds-platform/library".insteadOf "https://gitlab.com/kds-platform/library"
-        // git config --global url."https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kds-platform/apim/notification-service".insteadOf "https://gitlab.com/kds-platform/apim/notification-service.git"
-        // git config --global url."https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kliklab/jose-ported.git".insteadOf "https://gitlab.com/kliklab/jose-ported.git"
-        // git config --global url."https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kliklab/libs.git".insteadOf "https://gitlab.com/kliklab/libs.git"
+        git config --global url."https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kds-platform/plugin.git".insteadOf "https://gitlab.com/kds-platform/plugin.git"
+        git config --global url."https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kds-platform/library".insteadOf "https://gitlab.com/kds-platform/library"
+        git config --global url."https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kds-platform/apim/notification-service".insteadOf "https://gitlab.com/kds-platform/apim/notification-service.git"
+        git config --global url."https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kliklab/jose-ported.git".insteadOf "https://gitlab.com/kliklab/jose-ported.git"
+        git config --global url."https://afsanarozanaufal:glpat-fhyFdTnzjm-sQJ4epsXK@gitlab.com/kliklab/libs.git".insteadOf "https://gitlab.com/kliklab/libs.git"
         git config --global url."https://automation-labs:glpat-7BrmVPQpz-Dy9VbuxXbB@gitlab.com".insteadOf "https://gitlab.com"
         go mod verify
         go mod tidy -e 
