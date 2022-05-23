@@ -16,12 +16,20 @@ def call(String buildStatus = 'STARTED') {
       } else if (buildStatus == 'SUCCESS') {
         color = 'GREEN'
         colorCode = '#00FF00'
+        try {
+          if (fileExists('coverage.out')) {
+            def unitTestGetValue = sh(returnStdout: true, script: 'go tool cover -func=coverage.out | grep total | sed "s/[[:blank:]]*$//;s/.*[[:blank:]]//"')
+            slackSend (color: colorCode, message: "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) \n unit-test : ${unitTestGetValue} \n Total Time : ${currentBuild.durationString}")
+          } else (
+            error
+          )
+        } catch (e) {
+          def unitTestGetValue = '0.0%'
+          slackSend (color: colorCode, message: "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) \n unit-test : ${unitTestGetValue} \n Total Time : ${currentBuild.durationString}")
+        }
       } else {
         color = 'RED'
         colorCode = '#FF0000'
-      }
-
-      if (buildStatus != 'STARTED'){
         try {
           if (fileExists('coverage.out')) {
             def unitTestGetValue = sh(returnStdout: true, script: 'go tool cover -func=coverage.out | grep total | sed "s/[[:blank:]]*$//;s/.*[[:blank:]]//"')
@@ -32,7 +40,21 @@ def call(String buildStatus = 'STARTED') {
         } catch (e) {
           def unitTestGetValue = '0.0%'
           slackSend (color: colorCode, message: "${buildStatus}: on stage [${stg.stage_name}], Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) \n unit-test : ${unitTestGetValue} \n Total Time : ${currentBuild.durationString}")
-        } 
+        }
       }
+
+      // if (buildStatus != 'STARTED'){
+      //   try {
+      //     if (fileExists('coverage.out')) {
+      //       def unitTestGetValue = sh(returnStdout: true, script: 'go tool cover -func=coverage.out | grep total | sed "s/[[:blank:]]*$//;s/.*[[:blank:]]//"')
+      //       slackSend (color: colorCode, message: "${buildStatus}: on stage [${stg.stage_name}], Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) \n unit-test : ${unitTestGetValue} \n Total Time : ${currentBuild.durationString}")
+      //     } else (
+      //       error
+      //     )
+      //   } catch (e) {
+      //     def unitTestGetValue = '0.0%'
+      //     slackSend (color: colorCode, message: "${buildStatus}: on stage [${stg.stage_name}], Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) \n unit-test : ${unitTestGetValue} \n Total Time : ${currentBuild.durationString}")
+      //   } 
+      // }
     }
 }
