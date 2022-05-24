@@ -13,8 +13,6 @@ def call(Map envar) {
 
 def helmLint(Map args) {
     echo "Running helm lint"
-    sh "ls"
-    sh "pwd"
     sh "helm lint ${args.service_name}"
 }
 
