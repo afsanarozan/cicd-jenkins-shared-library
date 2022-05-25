@@ -2,6 +2,7 @@ def call(String buildStatus = 'STARTED') {
   // build status of null means successful
   buildStatus = buildStatus ?: 'SUCCESS'
   echo "${buildStatus}"
+  sh "touch stageName.yaml"
   def stg = readYaml(file: "${WORKSPACE}/stageName.yaml")
 
   def root = tool type: 'go', name: 'Go'
