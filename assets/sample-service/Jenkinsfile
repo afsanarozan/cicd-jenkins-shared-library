@@ -1,0 +1,132 @@
+@Library('jenkins-shared-library') _
+import com.shared.utils.PodTemplates
+
+agentTemplates = new PodTemplates()
+
+agentTemplates.generalTemplate {
+  node(POD_LABEL) { 
+ 
+    checkout scm   
+
+      if (env.gitlabActionType == 'TAG_PUSH') {
+          runPipeline = 'production'
+      } else if (env.gitlabActionType == 'MERGE' ) {
+          runPipeline = 'staging'
+      } else { 
+          runPipeline = 'sit'   
+      }
+
+      //PRODUCTION   
+      if (runPipeline == 'production') {
+       try{ 
+           slackNotification('STARTED') 
+           telegramNotification('STARTED')
+
+        stage ('CheckoutCode') {
+          checkoutCode()
+        }
+        stage('Build Container') {
+          dockerBuild()
+        }
+        stage ('Push Container') {
+          dockerPush()
+        }
+        stage ('Deployment') {
+          helmDeploy()
+        } 
+        }catch (e) {
+          currentBuild.result = "FAILED"
+          throw e
+        } finally {
+          slackNotification(currentBuild.result)
+          telegramNotification(currentBuild.result)
+        } 
+      }
+      //STAGING
+      else if (runPipeline == 'staging') {
+        try{
+            slackNotification('STARTED')
+            telegramNotification('STARTED')
+            
+            stage ('Merge Code') {
+              mergeCode()
+            }
+            stage ('CheckoutCode') {
+              checkoutCode()
+            }
+            stage ('UnitTest') {
+              unitTest()
+            }
+            stage ('Scanning Code') {
+              sonarqubeScanner()
+            }
+            stage ('Build Binary') {
+              binaryBuild()
+            }
+            stage ('Build Container') {
+              dockerBuild()
+            }
+            stage ('Push Container') {
+              dockerPush()
+            }
+            stage ('Helm Package') {
+              helmPackage()
+            }
+            stage ('Helm Push') {
+             pushChart()
+            }
+            stage ('Deployment') {
+              helmDeploy()
+            }
+        }catch (e) {
+          currentBuild.result = "FAILED"
+          throw e
+        } finally {
+          slackNotification(currentBuild.result)
+          telegramNotification(currentBuild.result)
+        }      
+      }  
+      //SIT
+      else if (runPipeline == 'sit') {
+        try {
+            slackNotification('STARTED')
+            telegramNotification('STARTED')
+
+            stage ('CheckoutCode') {
+              checkoutCode()
+            }
+            stage ('UnitTest') {
+              unitTest()
+            }
+            stage ('Scanning Code') {
+              sonarqubeScanner()
+            }
+              checkBranch()
+            stage ('Packaging') {
+              helmPackage()
+            }
+            stage ('Push Chart') {
+             pushChart()
+            }
+            stage ('Build and Push Binary') {
+              binaryBuild()
+            }
+            stage ('Build Container') {
+              dockerBuild()
+            }
+            stage ('Push Container') {
+              dockerPush()
+            }
+            stage ('Deployment') {
+              helmDeploy()
+            }
+        } catch (e) {
+          currentBuild.result = "FAILED"
+          throw e
+        } finally {
+          slackNotification(currentBuild.result)
+          telegramNotification(currentBuild.result)
+        }
+      }        
+  }
+}

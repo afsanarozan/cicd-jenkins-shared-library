@@ -1,0 +1,17 @@
+service_name        : example-service
+application_name    : example
+git_url             : https://gitlab.com/afsanarozanaufal/example-service.git
+name_space_alpha    : example-demo
+name_space_beta     : example-demo-staging 
+name_space_release  : example -demo
+credential_sonarqube  : sonarqube-token
+sonarSrc              : .    
+url_images_registry   : registry.digitalocean.com/labs-registry
+token                 : token_registry
+credential            : nonprod-cluster
+credential_prod       : BRI-prod-cluster
+credential_prod_monitoring : prod-monitoring-cluster 
+credential_prod_demo  : prod-demo-cluster 
+DO_nonprod_cluster    : do-sgp1-labs-nonproduction
+spaces_url            : https://labs-storage.sgp1.digitaloceanspaces.com
+image_latest          : latest
